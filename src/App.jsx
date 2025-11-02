@@ -1,8 +1,17 @@
-export default function App() {
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+const App = () => {
   return (
-    <>
-      <h1 className="bg-red-500">Hello world!</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aliquid quaerat dicta consectetur dolore suscipit tempora explicabo eum reiciendis aspernatur?</p>
-    </>
-  )
-}
+    <div>
+      <Header />
+      <Outlet />
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
+export { App };
