@@ -10,7 +10,6 @@ import Services from "./pages/Services.jsx";
 import Pricing from "./pages/Pricing.jsx";
 import Projects from "./pages/Projects.jsx";
 import Blog from "./pages/Blog.jsx";
-import Areas from "./pages/Areas.jsx";
 import Contact from "./pages/Contact.jsx";
 import Legal from "./pages/Legal.jsx";
 import Dubai from "./pages/Dubai.jsx";
@@ -27,7 +26,6 @@ const router = createBrowserRouter([
       { path: "/pricing", element: <Pricing /> },
       { path: "/projects", element: <Projects /> },
       { path: "/blog", element: <Blog /> },
-      { path: "/areas", element: <Areas /> },
       { path: "/contact", element: <Contact /> },
       { path: "/legal", element: <Legal /> },
       { path: "/dubai", element: <Dubai /> },

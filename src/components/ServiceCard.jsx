@@ -1,8 +1,30 @@
-﻿export default function ServiceCard({ title, desc }) {
+﻿export default function ServiceCard({ image, title, desc }) {
   return (
-    <div className="rounded-xl border p-5 hover:shadow-sm transition">
-      <h3 className="font-semibold text-gray-900">{title}</h3>
-      <p className="text-gray-600 mt-2 text-sm">{desc}</p>
+    <div
+      className="group relative bg-white rounded-2xl shadow-md overflow-hidden 
+                 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-emerald-100"
+    >
+      {/* Image Section */}
+      <div className="h-56 overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        />
+      </div>
+
+      {/* Text Section */}
+      <div className="p-6 relative z-10">
+        <h3 className="text-xl font-semibold text-emerald-800 mb-2">
+          {title}
+        </h3>
+        <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+          {desc}
+        </p>
+      </div>
+
+      {/* Hover Glow Overlay (Fixed) */}
+      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-20 bg-gradient-to-r from-lime-500 to-emerald-600 transition-opacity duration-500 rounded-2xl"></div>
     </div>
   );
 }

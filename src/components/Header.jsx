@@ -26,9 +26,8 @@ export default function Header() {
 
   return (
     <>
-      {/* 🌿 TOP BAR - reduced left spacing */}
+      {/* 🌿 TOP BAR */}
       <div className="bg-gradient-to-r from-green-800 via-emerald-800 to-green-700 text-white text-sm py-2 w-full shadow-md">
-        {/* ✅ changed: no default horizontal padding, added internal margin manually */}
         <div className="max-w-6xl mx-auto flex justify-between items-center flex-wrap gap-2 pl-2 pr-4">
           {/* ✅ CONTACT SECTION */}
           <div className="flex items-center flex-wrap gap-3">
@@ -51,25 +50,6 @@ export default function Header() {
               </a>
             </div>
           </div>
-
-          {/* ✅ FACEBOOK ICON */}
-          <a
-            href="https://www.facebook.com/"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:scale-110 transition-transform"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="white"
-              viewBox="0 0 24 24"
-              className="hover:fill-lime-300"
-            >
-              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.093 4.388 23.093 10.125 24v-8.437H7.078V12.07h3.047V9.412c0-3.007 1.793-4.669 4.533-4.669 1.312 0 2.686.234 2.686.234v2.953h-1.513c-1.49 0-1.953.928-1.953 1.878v2.263h3.328l-.532 3.492h-2.796V24C19.612 23.093 24 18.093 24 12.073z" />
-            </svg>
-          </a>
         </div>
       </div>
 

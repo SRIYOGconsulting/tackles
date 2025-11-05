@@ -1,17 +1,20 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <div>
+    <>
+      <ScrollToTop />
       <Header />
-      <Outlet />
+      <main>
+        <Outlet /> {/* 👈 This is where child pages (Home, About, etc.) render */}
+      </main>
       <Footer />
-    </div>
+    </>
   );
 };
 
 export default App;
-export { App };
