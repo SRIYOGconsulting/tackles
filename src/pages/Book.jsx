@@ -1,137 +1,170 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import bookingImg from "../assets/images/booking.png"; // 👈 original logo/image
 
 export default function Book() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    customerName: "",
-    customerPhone: "",
-    customerEmail: "",
+    fullName: "",
+    email: "",
+    startDate: "",
+    endDate: "",
+    shifts: "",
+    priority: "",
     location: "",
-    services: [],
-    preferredDate: "",
-    preferredTime: "",
-    password: "",
-    confirmPassword: "",
-    message: "",
+    requiredService: "",
+    phone: "",
+    budget: "",
+    emirates: "",
+    description: "",
   });
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const servicesList = [
-    "AC Maintenance & Servicing",
-    "Electrical Repairs",
-    "Plumbing",
-    "Painting & Decorating",
-    "Carpentry",
-    "Flooring & Surface Fixes",
-    "Gutter & Roof Cleaning",
-    "Pressure Washing",
-    "Smart Home & Fixture Installations",
-  ];
-
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-
-  const handleServiceSelect = (service) => {
-    setForm((prev) => {
-      const alreadySelected = prev.services.includes(service);
-      const updatedServices = alreadySelected
-        ? prev.services.filter((s) => s !== service)
-        : [...prev.services, service];
-      return { ...prev, services: updatedServices };
-    });
-  };
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (form.password !== form.confirmPassword) {
-      alert("❌ Passwords do not match!");
-      return;
-    }
-
-    if (form.services.length === 0) {
-      alert("Please select at least one service.");
-      return;
-    }
-
-    setLoading(true);
-    setTimeout(() => {
-      console.log("📋 Booking Data:", form);
-      alert("✅ Booking submitted successfully! (Frontend only)");
-      setLoading(false);
-      navigate("/results"); // optional redirect
-    }, 1000);
+    console.log("📋 Appointment Data:", form);
+    alert("✅ Appointment booked successfully! (Frontend only)");
+    setLoading(false);
+    navigate("/results");
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center py-20 px-6 bg-gradient-to-br from-[#041739] via-[#0A2C70] to-[#133E97]">
-      <div className="w-full max-w-3xl bg-white/95 rounded-2xl shadow-2xl p-8 border border-[#C8D6FF] backdrop-blur-sm">
-        <h1 className="text-4xl font-extrabold text-center text-[#021138] mb-8">
-          Book an Appointment
-        </h1>
+    <section className="min-h-screen bg-gradient-to-b from-emerald-900 via-emerald-800 to-emerald-700 flex flex-col items-center justify-center py-20 px-6">
+      {/* 🌿 Header section with title + image side-by-side */}
+      <div className="flex flex-col sm:flex-row items-center justify-between w-full max-w-5xl mb-10">
+        <div className="text-left sm:text-left w-full sm:w-1/2 mb-6 sm:mb-0">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-wide leading-tight">
+            Book An Appointment
+          </h1>
+          <p className="text-emerald-100 text-sm sm:text-base mt-3 max-w-md">
+            Schedule your service at your convenience — fast, reliable, and professional.
+          </p>
+        </div>
 
+        {/* Image on the right (full shape, no crop) */}
+        <div className="w-full sm:w-1/2 flex justify-center">
+          <img
+            src={bookingImg}
+            alt="Book Appointment"
+            className="w-64 sm:w-80 object-contain drop-shadow-2xl"
+          />
+        </div>
+      </div>
+
+      {/* 🌿 Form Container */}
+      <div className="max-w-5xl w-full bg-white/95 rounded-2xl shadow-2xl p-8 sm:p-10 border border-emerald-200 backdrop-blur-md">
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 sm:grid-cols-2 gap-6"
         >
           {/* Full Name */}
           <div>
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Full Name
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Full Name *
             </label>
             <input
               type="text"
-              name="customerName"
-              value={form.customerName}
+              name="fullName"
+              value={form.fullName}
               onChange={handleChange}
               required
-              className="w-full border border-[#C8D6FF] rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-[#1778F2]"
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
               placeholder="Enter your name"
-            />
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              name="customerPhone"
-              value={form.customerPhone}
-              onChange={handleChange}
-              required
-              className="w-full border border-[#C8D6FF] rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-[#1778F2]"
-              placeholder="Enter your phone number"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Email Address
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              eMail
             </label>
             <input
               type="email"
-              name="customerEmail"
-              value={form.customerEmail}
+              name="email"
+              value={form.email}
               onChange={handleChange}
-              required
-              className="w-full border border-[#C8D6FF] rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-[#1778F2]"
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
               placeholder="example@email.com"
             />
           </div>
 
+          {/* Start Date */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Start Date *
+            </label>
+            <input
+              type="date"
+              name="startDate"
+              value={form.startDate}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+
+          {/* End Date */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              End Date *
+            </label>
+            <input
+              type="date"
+              name="endDate"
+              value={form.endDate}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+
+          {/* Shifts */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Shifts *
+            </label>
+            <select
+              name="shifts"
+              value={form.shifts}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              <option value="">Select shift</option>
+              <option value="Morning">Morning</option>
+              <option value="Evening">Evening</option>
+              <option value="Night">Night</option>
+            </select>
+          </div>
+
+          {/* Priority */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Priority *
+            </label>
+            <select
+              name="priority"
+              value={form.priority}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              <option value="">Select priority</option>
+              <option value="Normal">Normal</option>
+              <option value="Urgent">Urgent</option>
+              <option value="Emergency">Emergency</option>
+            </select>
+          </div>
+
           {/* Location */}
           <div>
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Location
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Location *
             </label>
             <input
               type="text"
@@ -139,152 +172,121 @@ export default function Book() {
               value={form.location}
               onChange={handleChange}
               required
-              className="w-full border border-[#C8D6FF] rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-[#1778F2]"
-              placeholder="e.g. Kathmandu, Chabahil, near OM hospital"
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Enter your location"
             />
           </div>
 
-          {/* Choose Services */}
-          <div className="relative sm:col-span-2">
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Choose Service(s)
+          {/* Required Service */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Required Service *
             </label>
-            <button
-              type="button"
-              onClick={toggleDropdown}
-              className="w-full bg-white border border-[#C8D6FF] rounded-lg px-4 py-2 text-left text-gray-700 font-medium flex justify-between items-center focus:ring-2 focus:ring-[#1778F2]"
+            <select
+              name="requiredService"
+              value={form.requiredService}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
             >
-              {form.services.length > 0
-                ? form.services.join(", ")
-                : "Select your services"}
-              <span className="ml-2 text-[#1778F2] font-bold text-lg">▼</span>
-            </button>
-
-            {dropdownOpen && (
-              <div className="absolute z-10 mt-2 w-full bg-white border border-[#C8D6FF] rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                {servicesList.map((service) => (
-                  <label
-                    key={service}
-                    className="flex items-center px-4 py-2 hover:bg-[#EAF0FF] cursor-pointer text-[#021138]"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={form.services.includes(service)}
-                      onChange={() => handleServiceSelect(service)}
-                      className="mr-3 accent-[#1778F2]"
-                    />
-                    {service}
-                  </label>
-                ))}
-              </div>
-            )}
+              <option value="">Select service</option>
+              <option>AC Maintenance & Servicing</option>
+              <option>Electrical Repairs</option>
+              <option>Plumbing</option>
+              <option>Painting & Decorating</option>
+              <option>Carpentry</option>
+              <option>Flooring & Surface Fixes</option>
+              <option>Gutter & Roof Cleaning</option>
+              <option>Pressure Washing</option>
+              <option>Smart Home & Fixture Installations</option>
+            </select>
           </div>
 
-          {/* Date */}
+          {/* Phone */}
           <div>
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Preferred Date
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Phone Number *
             </label>
             <input
-              type="date"
-              name="preferredDate"
-              value={form.preferredDate}
+              type="tel"
+              name="phone"
+              value={form.phone}
               onChange={handleChange}
               required
-              className="w-full border border-[#C8D6FF] rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-[#1778F2]"
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Enter phone number"
             />
           </div>
 
-          {/* Time */}
+          {/* Budget */}
           <div>
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Preferred Time
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Budget *
             </label>
             <input
-              type="time"
-              name="preferredTime"
-              value={form.preferredTime}
+              type="text"
+              name="budget"
+              value={form.budget}
               onChange={handleChange}
               required
-              className="w-full border border-[#C8D6FF] rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-[#1778F2]"
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Enter your budget"
             />
           </div>
 
-          {/* Password */}
+          {/* Emirates */}
           <div>
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Password
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Emirates *
             </label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
+            <select
+              name="emirates"
+              value={form.emirates}
               onChange={handleChange}
               required
-              className="w-full border border-[#C8D6FF] rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-[#1778F2]"
-              placeholder="Enter password"
-            />
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              <option value="">Select Emirates</option>
+              <option>Dubai</option>
+              <option>Abu Dhabi</option>
+              <option>Sharjah</option>
+              <option>Ajman</option>
+              <option>Ras Al Khaimah</option>
+              <option>Umm Al Quwain</option>
+              <option>Fujairah</option>
+            </select>
           </div>
 
-          {/* Confirm Password */}
-          <div>
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              required
-              className="w-full border border-[#C8D6FF] rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-[#1778F2]"
-              placeholder="Confirm password"
-            />
-          </div>
-
-          {/* Message */}
+          {/* Description */}
           <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold text-[#021138] mb-1">
-              Additional Message
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Description
             </label>
             <textarea
-              name="message"
+              name="description"
               rows="4"
-              value={form.message}
+              value={form.description}
               onChange={handleChange}
-              className="w-full border border-[#C8D6FF] rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-[#1778F2]"
-              placeholder="Describe your problem or request..."
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Write about your requirement or special note..."
             ></textarea>
           </div>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <div className="sm:col-span-2 flex justify-center mt-4">
             <button
               type="submit"
               disabled={loading}
-              className="bg-gradient-to-r from-[#021138] via-[#0A2C70] to-[#1778F2]
-              hover:from-[#010B2E] hover:via-[#0A2C70] hover:to-[#1C4BF2]
+              className="bg-gradient-to-r from-emerald-700 via-green-700 to-lime-600 
+              hover:from-emerald-800 hover:via-green-800 hover:to-lime-700 
               text-white px-10 py-3 rounded-lg text-lg font-semibold shadow-lg
-              hover:shadow-[0_0_15px_rgba(23,120,242,0.6)] transition-all duration-300
+              hover:shadow-emerald-400/40 transition-all duration-300 
               disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {loading ? "Submitting..." : "Submit Booking"}
+              {loading ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>
-
-        {/* Logout Button */}
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={() => {
-              localStorage.clear();
-              window.location.href = "/";
-            }}
-            className="px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold"
-          >
-            Logout
-          </button>
-        </div>
       </div>
     </section>
   );

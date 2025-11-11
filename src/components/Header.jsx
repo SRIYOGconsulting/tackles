@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../assets/images/logo.png"; // ✅ make sure this path is correct
+import { useLocation } from "../context/LocationContext.jsx"; // ✅ added
+import logo from "../assets/images/logo.png";
 
 const link = ({ isActive }) =>
   `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
@@ -11,6 +12,7 @@ const link = ({ isActive }) =>
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const { location, setLocation } = useLocation(); // ✅ now shared globally
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,12 +31,17 @@ export default function Header() {
     navigate("/book");
   };
 
+  const handleLocationClick = (loc) => {
+    setLocation(loc); // ✅ updates context, reflects in Home.jsx instantly
+  };
+
   return (
     <>
       {/* 🌿 TOP BAR */}
-      <div className="bg-gradient-to-r from-green-800 via-emerald-800 to-green-700 text-white text-sm py-2 w-full shadow-md">
-        <div className="max-w-6xl mx-auto flex justify-between items-center flex-wrap gap-2 pl-2 pr-4">
-          <div className="flex items-center flex-wrap gap-3">
+      <div className="bg-gradient-to-r from-green-800 via-emerald-800 to-green-700 text-white text-sm py-2 w-full shadow-md relative z-50">
+        <div className="max-w-6xl mx-auto flex justify-between items-center flex-wrap gap-2 px-4">
+          {/* ✅ CONTACT SECTION */}
+          <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
               <button className="px-2 py-1 text-xs rounded-full bg-gradient-to-r from-green-500 via-emerald-500 to-lime-400 text-white font-medium shadow-md hover:shadow-lg hover:scale-105 transition-all">
                 📞
@@ -54,13 +61,30 @@ export default function Header() {
               </a>
             </div>
           </div>
+
+          {/* ✅ LOCATION BUTTONS */}
+          <div className="flex items-center gap-3">
+            {["Dubai", "SanFrancisco", "Sydney"].map((loc) => (
+              <button
+                key={loc}
+                onClick={() => handleLocationClick(loc)}
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                  location === loc
+                    ? "bg-white text-green-800 shadow-md"
+                    : "text-white hover:bg-white/20"
+                }`}
+              >
+                {loc}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* 🌿 MAIN NAVBAR */}
       <div
         className={`w-full bg-gradient-to-r from-emerald-50 via-white to-emerald-50 border-b shadow-md transition-all duration-500 ${
-          scrolled ? "fixed top-0 left-0 z-50" : "relative"
+          scrolled ? "fixed top-0 left-0 z-40" : "relative"
         }`}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between h-16 px-4">
@@ -94,7 +118,6 @@ export default function Header() {
               Gallery
             </NavLink>
 
-            {/* ✅ Book button: clean default, green only on hover */}
             <button
               onClick={handleBookClick}
               className="px-4 py-2 rounded-full text-sm font-medium text-emerald-900 transition-all duration-300 
