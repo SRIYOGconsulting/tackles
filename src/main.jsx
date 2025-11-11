@@ -15,6 +15,7 @@ import Legal from "./pages/Legal.jsx";
 import Dubai from "./pages/Dubai.jsx";
 import Sydney from "./pages/Sydney.jsx";
 import SanFrancisco from "./pages/SanFrancisco.jsx";
+import Book from "./pages/Book.jsx"; // ✅ Added Book page
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: "/dubai", element: <Dubai /> },
       { path: "/sydney", element: <Sydney /> },
       { path: "/san-francisco", element: <SanFrancisco /> },
+      { path: "/book", element: <Book /> }, // ✅ New route added
     ],
   },
 ]);
@@ -40,4 +42,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
-

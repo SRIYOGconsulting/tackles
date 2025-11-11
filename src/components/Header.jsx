@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../assets/images/logo.png"; // adjust path if needed
+import logo from "../assets/images/logo.png"; // ✅ make sure this path is correct
 
 const link = ({ isActive }) =>
   `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
@@ -24,12 +24,16 @@ export default function Header() {
     navigate("/");
   };
 
+  const handleBookClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate("/book");
+  };
+
   return (
     <>
       {/* 🌿 TOP BAR */}
       <div className="bg-gradient-to-r from-green-800 via-emerald-800 to-green-700 text-white text-sm py-2 w-full shadow-md">
         <div className="max-w-6xl mx-auto flex justify-between items-center flex-wrap gap-2 pl-2 pr-4">
-          {/* ✅ CONTACT SECTION */}
           <div className="flex items-center flex-wrap gap-3">
             <div className="flex items-center gap-1.5">
               <button className="px-2 py-1 text-xs rounded-full bg-gradient-to-r from-green-500 via-emerald-500 to-lime-400 text-white font-medium shadow-md hover:shadow-lg hover:scale-105 transition-all">
@@ -60,7 +64,7 @@ export default function Header() {
         }`}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between h-16 px-4">
-          {/* ✅ Tackles left of logo */}
+          {/* ✅ Tackles + Logo */}
           <button
             onClick={handleLogoClick}
             className="flex items-center gap-2 hover:opacity-90 transition-all focus:outline-none"
@@ -89,9 +93,16 @@ export default function Header() {
             <NavLink to="/gallery" className={link}>
               Gallery
             </NavLink>
-            <NavLink to="/book" className={link}>
+
+            {/* ✅ Book button: clean default, green only on hover */}
+            <button
+              onClick={handleBookClick}
+              className="px-4 py-2 rounded-full text-sm font-medium text-emerald-900 transition-all duration-300 
+              hover:text-white hover:bg-gradient-to-r hover:from-green-700 hover:via-emerald-700 hover:to-green-600 hover:shadow-md"
+            >
               Book an Appointment
-            </NavLink>
+            </button>
+
             <NavLink to="/contact" className={link}>
               Contact
             </NavLink>
