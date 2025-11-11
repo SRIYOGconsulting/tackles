@@ -22,7 +22,7 @@ export default function Footer() {
           <p className="text-sm leading-relaxed text-gray-300">
             Tackles is a leading A-grade handyman company providing reliable
             repair and decoration services. Whether it’s plumbing, painting,
-            air-conditioning, flooring, or wall fixing — Tackles is there for
+            air-conditioning, flooring, or wall fixing, Tackles is there for
             you.
           </p>
         </div>

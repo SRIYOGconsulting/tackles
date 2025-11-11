@@ -18,7 +18,7 @@ export default function Services() {
           Our Services
         </h1>
         <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
-          We provide reliable, professional, and efficient handyman services —
+          We provide reliable, professional, and efficient handyman services
           from maintenance and renovation to complete home solutions.
         </p>
       </div>

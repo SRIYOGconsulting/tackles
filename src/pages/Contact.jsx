@@ -10,7 +10,7 @@ export default function Contact() {
           We Wanna Hear From You!
         </h1>
         <p className="text-lg sm:text-xl text-gray-600">
-          Contact us — we're always here to help you out.
+          Contact us, we're always here to help you out.
         </p>
       </div>
 
@@ -112,7 +112,7 @@ export default function Contact() {
           <p className="text-gray-700 text-lg leading-relaxed">
             Visit our{" "}
             <span className="text-emerald-700 font-semibold">Business Bay</span>{" "}
-            office — a comfortable and professional space designed for our
+            office, a comfortable and professional space designed for our
             clients. We’re located inside Ontario Tower, easily accessible and
             welcoming to everyone.
           </p>

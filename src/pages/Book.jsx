@@ -42,7 +42,7 @@ export default function Book() {
             Book An Appointment
           </h1>
           <p className="text-emerald-100 text-sm sm:text-base mt-3 max-w-md">
-            Schedule your service at your convenience — fast, reliable, and professional.
+            Schedule your service at your convenience, fast, reliable, and professional.
           </p>
         </div>
 
