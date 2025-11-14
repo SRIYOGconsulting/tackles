@@ -5,6 +5,7 @@ import { LocationProvider } from "./context/LocationContext.jsx"; // ✅ Added
 import "./index.css";
 import App from "./App.jsx";
 
+
 // 🌍 Pages
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
@@ -12,7 +13,7 @@ import Services from "./pages/Services.jsx";
 import Contact from "./pages/Contact.jsx";
 import Book from "./pages/Book.jsx";
 import Gallery from "./pages/Gallery.jsx"; // ✅ added
-
+import Team from "./pages/Team.jsx";
 // 🧭 Router setup
 const router = createBrowserRouter([
   {
@@ -24,6 +25,8 @@ const router = createBrowserRouter([
       { path: "/contact", element: <Contact /> },
       { path: "/book", element: <Book /> },
       { path: "/gallery", element: <Gallery /> }, // ✅ new route added here
+      { path: "/team", element: <Team /> },
+
     ],
   },
 ]);

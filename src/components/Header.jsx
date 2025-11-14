@@ -22,6 +22,15 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ⭐ FIX: Reset menu when resizing desktop → mobile and back
+  useEffect(() => {
+    const resetMenu = () => {
+      if (window.innerWidth >= 640) setMenuOpen(false);
+    };
+    window.addEventListener("resize", resetMenu);
+    return () => window.removeEventListener("resize", resetMenu);
+  }, []);
+
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     navigate("/");
@@ -120,66 +129,44 @@ export default function Header() {
               transition-all duration-300 
               shadow-md sm:shadow-none z-40
 
-              ${
-                menuOpen
-                  ? "top-16 opacity-100 pointer-events-auto"
-                  : "top-[-500px] opacity-0 pointer-events-none sm:pointer-events-auto"
-              }
+              ${menuOpen ? "top-16 opacity-100" : "top-[-500px] opacity-0 sm:opacity-100"}
             `}
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 w-full">
 
-              <NavLink
-                to="/"
-                className={link}
-                onClick={() => setMenuOpen(false)}
-              >
+              <NavLink to="/" className={link} onClick={() => setMenuOpen(false)}>
                 Home
               </NavLink>
 
-              <NavLink
-                to="/about"
-                className={link}
-                onClick={() => setMenuOpen(false)}
-              >
+              <NavLink to="/about" className={link} onClick={() => setMenuOpen(false)}>
                 About Us
               </NavLink>
 
-              <NavLink
-                to="/services"
-                className={link}
-                onClick={() => setMenuOpen(false)}
-              >
+              <NavLink to="/services" className={link} onClick={() => setMenuOpen(false)}>
                 Services
               </NavLink>
 
-              <NavLink
-                to="/gallery"
-                className={link}
-                onClick={() => setMenuOpen(false)}
-              >
+              <NavLink to="/gallery" className={link} onClick={() => setMenuOpen(false)}>
                 Gallery
               </NavLink>
 
+              {/* ⭐ FIX BOOK BUTTON ALIGNMENT */}
               <button
                 onClick={() => {
                   handleBookClick();
                   setMenuOpen(false);
                 }}
-                className="block w-full text-center sm:w-auto px-4 py-3 sm:py-2 rounded-full text-sm font-medium text-emerald-900 
+                className="px-4 py-2 rounded-full text-sm font-medium text-emerald-900 text-left sm:text-center 
                 hover:text-white hover:bg-gradient-to-r hover:from-green-700 hover:via-emerald-700 hover:to-green-600 
                 hover:shadow-md transition-all duration-300"
               >
                 Book an Appointment
               </button>
 
-              <NavLink
-                to="/contact"
-                className={link}
-                onClick={() => setMenuOpen(false)}
-              >
+              <NavLink to="/contact" className={link} onClick={() => setMenuOpen(false)}>
                 Contact
               </NavLink>
+
             </div>
           </nav>
         </div>
