@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "../context/LocationContext";
-import aboutImg from "../assets/images/about.png";
 
-// 🌆 Background images
+// 🌆 Background / section images
+import aboutImg from "../assets/images/about.png";
 import dubaiImg from "../assets/images/dubai.png";
 import sanfranciscoImg from "../assets/images/sanfrancisco.avif";
 import sydneyImg from "../assets/images/sydney.avif";
@@ -19,6 +19,7 @@ import plumbingImg from "../assets/images/services/plumbing.png";
 import whatsappIcon from "../assets/images/whatsapp.png";
 import facebookIcon from "../assets/images/facebook.png";
 import playstoreIcon from "../assets/images/playstore.png";
+import appleStoreIcon from "../assets/images/apple.png";
 
 // 👤 Testimonial images
 import sameerImg from "../assets/images/testimonials/sameer.png";
@@ -34,11 +35,14 @@ const Home = () => {
   const { location } = useLocation();
   const [activeSection, setActiveSection] = useState("about");
 
+  const displayLocation =
+    location === "SanFrancisco" ? "San Francisco" : location || "Dubai";
+
   // 🌇 Slides depending on location
   const slides = [
     {
       id: 1,
-      title: `Hire a Plumber in ${location}`,
+      title: `Hire a Plumber in ${displayLocation}`,
       subtitle: "Professional service marketplace",
       image:
         location === "Dubai"
@@ -49,14 +53,14 @@ const Home = () => {
     },
     {
       id: 2,
-      title: `AC Maintenance in ${location}`,
+      title: `AC Maintenance in ${displayLocation}`,
       subtitle: "Repair, Shifting & Cleaning",
       image: acBgImg,
     },
     {
       id: 3,
-      title: `Painting Services in ${location}`,
-      subtitle: "Color Therapy",
+      title: `Painting Services in ${displayLocation}`,
+      subtitle: "Color Therapy for your space",
       image: paintImg,
     },
   ];
@@ -64,7 +68,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 7000);
+    }, 10000);
     return () => clearInterval(timer);
   }, [slides.length]);
 
@@ -84,6 +88,11 @@ const Home = () => {
       title: "Our Goals",
       desc:
         "Tackles focuses on providing the best service possible to make clients’ lives convenient and comfortable. Any work related to plumbing, painting, plastering, or AC installation is our responsibility.",
+    },
+    vision: {
+      title: "Our Vision",
+      desc:
+        "To redefine home and commercial maintenance by creating a reliable, modern, and accessible service network that brings convenience and quality workmanship to every customer’s doorstep.",
     },
   };
 
@@ -111,116 +120,117 @@ const Home = () => {
 
   return (
     <>
-      {/* 🌆 HERO BACKGROUND SECTION */}
-      <div className="relative w-full h-[85vh] overflow-hidden">
-        {slides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${
-              index === current ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ backgroundImage: `url(${slide.image})` }}
-          ></div>
-        ))}
+      {/* 🌆 HERO SECTION */}
+      <section className="w-full bg-white text-emerald-900">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 flex flex-col md:flex-row items-center gap-12 md:gap-16">
+          
+          {/* LEFT */}
+          <div className="w-full md:w-1/2 space-y-6">
+            <p className="uppercase tracking-[0.25em] text-emerald-900 text-xs sm:text-sm">
+              Handyman Services · {displayLocation}
+            </p>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/10 to-transparent"></div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-emerald-900">
+              {slides[current].title}
+            </h1>
 
-        <div className="absolute top-[6vh] left-1/2 transform -translate-x-1/2 text-center z-10">
-          <h1
-            className="text-3xl sm:text-5xl font-extrabold text-white mb-2"
-            style={{
-              WebkitTextStroke: "1.2px black",
-              textShadow: "0 3px 6px rgba(0,0,0,0.7)",
-            }}
-          >
-            {slides[current].title}
-          </h1>
-          <p className="text-base sm:text-lg text-white font-medium">
-            {slides[current].subtitle}
-          </p>
-        </div>
+            <p className="text-base sm:text-lg text-emerald-900 font-medium">
+              {slides[current].subtitle}
+            </p>
 
-        <div className="absolute bottom-[6vh] left-0 right-0 flex flex-col items-center justify-center z-10">
-          <div className="flex items-center justify-center gap-8 sm:gap-12 mb-4">
-            <button
-              onClick={() =>
-                setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
-              }
-              className="bg-white/25 hover:bg-white/35 text-white text-3xl sm:text-4xl px-5 py-3 rounded-full transition-all duration-300 shadow-md"
-            >
-              &#8592;
-            </button>
+            <p className="text-sm sm:text-base text-gray-900 max-w-md">
+              From urgent repairs to planned upgrades, our verified professionals in{" "}
+              <span className="font-semibold text-emerald-900">
+                {displayLocation}
+              </span>{" "}
+              handle it all on time with clean finishing and clear pricing.
+            </p>
 
-            <button
-              onClick={() => navigate("/book")}
-              className="relative bg-gradient-to-r from-green-800 via-emerald-700 to-green-600
-              hover:from-green-900 hover:via-emerald-800 hover:to-green-700
-              text-white px-8 py-3 sm:px-10 sm:py-3.5 rounded-md text-sm sm:text-base font-bold shadow-xl
-              transition-all duration-300 animate-pulse-soft"
-            >
-              Book a Service
-            </button>
+            {/* ❌ REMOVED FEATURE PILLS */}
 
-            <button
-              onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-              className="bg-white/25 hover:bg-white/35 text-white text-3xl sm:text-4xl px-5 py-3 rounded-full transition-all duration-300 shadow-md"
-            >
-              &#8594;
-            </button>
+            <div className="flex flex-wrap items-center gap-3 pt-3">
+              <button
+                onClick={() => navigate("/book")}
+                className="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700
+                  text-emerald-50 font-semibold px-6 sm:px-8 py-2.5 rounded-full 
+                  shadow-lg hover:shadow-emerald-400/60 transition-all duration-300
+                  hover:-translate-y-[1px] animate-pulse-soft"
+              >
+                Book an Appointment
+              </button>
+
+              <button
+                onClick={() => navigate("/services")}
+                className="border border-emerald-700 text-emerald-900 font-medium 
+                  px-6 sm:px-7 py-2.5 rounded-full hover:bg-emerald-50 
+                  hover:shadow-md transition-all duration-300"
+              >
+                More Services
+              </button>
+            </div>
           </div>
 
-          <button
-            onClick={() => navigate("/services")}
-            className="bg-gradient-to-r from-lime-700 via-green-800 to-emerald-700
-            hover:from-lime-800 hover:via-green-900 hover:to-emerald-800
-            text-white px-6 py-1.5 rounded-md text-xs sm:text-sm font-semibold shadow-md
-            hover:shadow-emerald-400/40 transition-all duration-300"
-          >
-            More Services
-          </button>
+          {/* RIGHT IMAGE */}
+          <div className="w-full md:w-1/2">
+            <div className="group relative w-full h-64 sm:h-80 md:h-[420px] rounded-3xl overflow-hidden shadow-2xl border border-emerald-100 bg-emerald-50">
+              <div
+                key={slides[current].id}
+                className="w-full h-full bg-cover bg-center animate-slideFade"
+                style={{ backgroundImage: `url(${slides[current].image})` }}
+              ></div>
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+              <button
+                onClick={() => navigate("/book")}
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 
+                  px-6 sm:px-8 py-2.5 rounded-full text-sm sm:text-base font-semibold 
+                  bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700
+                  text-emerald-50 shadow-lg hover:shadow-emerald-300/60
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                Book
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Floating Social Buttons */}
+        {/* Floating Social Icons */}
         <div className="fixed right-6 bottom-[5%] flex flex-col items-center gap-3 z-50">
-          <a href="https://wa.me/971551234567" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/971551234567" target="_blank">
             <img
               src={whatsappIcon}
-              alt="WhatsApp"
-              className="w-8 h-8 sm:w-9 sm:h-9 cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_5px_rgba(16,185,129,0.8)]"
+              className="w-8 h-8 sm:w-9 sm:h-9 hover:scale-110 transition-transform drop-shadow-[0_0_5px_rgba(16,185,129,0.8)]"
             />
           </a>
-          <a href="https://www.facebook.com/YourPageName" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.facebook.com/YourPageName" target="_blank">
             <img
               src={facebookIcon}
-              alt="Facebook"
-              className="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_5px_rgba(59,89,152,0.8)]"
+              className="w-7 h-7 sm:w-8 sm:h-8 hover:scale-110 transition-transform drop-shadow-[0_0_5px_rgba(59,89,152,0.8)]"
             />
           </a>
         </div>
-      </div>
+      </section>
 
-      {/* 📱 DOWNLOAD OUR APP BUTTON */}
+      {/* APP DOWNLOAD */}
       <div className="w-full bg-gradient-to-r from-emerald-50 via-white to-emerald-50 py-10 flex justify-center">
         <a
-          href="https://play.google.com/store/apps/details?id=your.app.id"
+          href="#"
           target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-4 bg-gradient-to-r from-green-700 via-emerald-700 to-green-600 
-          hover:from-green-800 hover:via-emerald-800 hover:to-green-700 text-white 
-          px-8 py-3 rounded-lg shadow-lg hover:shadow-emerald-400/40 transition-all duration-300"
+          className="flex items-center gap-5 sm:gap-6 bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 
+          hover:via-emerald-900 text-white px-8 sm:px-10 py-3 rounded-lg shadow-lg hover:shadow-emerald-400/40 transition-all duration-300"
         >
-          <img
-            src={playstoreIcon}
-            alt="Play Store"
-            className="h-12 sm:h-14 w-auto transform scale-y-120"
-          />
+          <div className="flex items-center gap-3 sm:gap-4">
+            <img src={playstoreIcon} className="h-12 sm:h-14" />
+            <img src={appleStoreIcon} className="h-16 sm:h-20 scale-150" />
+          </div>
           <span className="text-base sm:text-lg font-bold tracking-wide">
             Download Our App
           </span>
         </a>
       </div>
 
-      {/* 💡 WHAT CAN WE DO SECTION */}
+      {/* SERVICES */}
       <section className="bg-white py-20 px-6 sm:px-12 lg:px-20 text-center">
         <h2 className="text-4xl font-extrabold text-emerald-900 mb-4">
           What Can We Do?
@@ -229,7 +239,6 @@ const Home = () => {
           Our top services : quick, professional, and trusted across everywhere.
         </p>
 
-        {/* Top 3 Services */}
         <div className="max-w-7xl mx-auto grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <ServiceCard
             image={acImg}
@@ -244,30 +253,29 @@ const Home = () => {
           <ServiceCard
             image={plumbingImg}
             title="Plumbing"
-            desc="Leaks, faucet and pipe fixes, shower or toilet repairs, and drain unclogging."
+            desc="Leaks, faucet fixes, drain repairs, and clog removal."
           />
         </div>
 
-        {/* View All Services Button */}
         <div className="mt-16">
           <button
             onClick={() => navigate("/services")}
-            className="bg-gradient-to-r from-green-700 via-emerald-700 to-green-600 
-            hover:from-green-800 hover:via-emerald-800 hover:to-green-700 text-white 
-            px-8 py-3 rounded-lg shadow-lg hover:shadow-emerald-400/40 transition-all duration-300 text-lg font-semibold"
+            className="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700
+            hover:via-emerald-900 text-white px-8 py-3 rounded-lg shadow-lg 
+            hover:shadow-emerald-400/40 transition-all duration-300 text-lg font-semibold"
           >
             View All Services
           </button>
         </div>
       </section>
 
-      {/* 🧱 ABOUT US SECTION */}
+      {/* ALL ABOUT US */}
       <section className="bg-gradient-to-b from-white via-emerald-50 to-white py-20 px-6 sm:px-12 lg:px-20">
         <div className="text-center mb-14">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-emerald-900 mb-4 tracking-wide">
             All About Us
           </h1>
-        <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
             Hard labour works like plumbing, AC installation, and plastering require not only
             strength but skill. That’s where our team comes in, to take your problems off your shoulders.
           </p>
@@ -284,7 +292,7 @@ const Home = () => {
                 <button
                   className={`w-full text-left px-5 py-3 rounded-lg transition-all duration-300 font-semibold text-lg ${
                     activeSection === key
-                      ? "bg-gradient-to-r from-green-700 via-emerald-700 to-green-600 text-white shadow-md"
+                      ? "bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 text-white shadow-md"
                       : "bg-white border border-emerald-100 text-emerald-900 hover:bg-emerald-50"
                   }`}
                 >
@@ -292,7 +300,7 @@ const Home = () => {
                 </button>
 
                 {activeSection === key && (
-                  <div className="mt-3 ml-2 border-l-4 border-emerald-500 pl-4 bg-white rounded-r-xl shadow-sm py-3 px-2 animate-fadeIn">
+                  <div className="mt-3 ml-2 border-l-4 border-emerald-600 pl-4 bg-white rounded-r-xl shadow-sm py-3 px-2 animate-fadeIn">
                     <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
                       {sections[key].desc}
                     </p>
@@ -312,7 +320,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 💬 TESTIMONIALS SECTION */}
+      {/* TESTIMONIALS */}
       <section className="bg-gradient-to-r from-emerald-50 via-white to-emerald-50 py-20 px-6 sm:px-12 lg:px-20 text-center">
         <h2 className="text-4xl font-extrabold text-emerald-900 mb-10">
           What People Say?
@@ -324,11 +332,7 @@ const Home = () => {
               className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300 border border-emerald-100"
             >
               <div className="w-24 h-24 mb-4 rounded-full bg-gray-100 overflow-hidden shadow-md ring-4 ring-emerald-200">
-                <img
-                  src={t.image}
-                  alt={t.name}
-                  className="w-full h-full object-cover"
-                />
+                <img src={t.image} className="w-full h-full object-cover" />
               </div>
               <p className="text-gray-700 italic mb-4 leading-relaxed">“{t.feedback}”</p>
               <h4 className="text-emerald-800 font-bold text-lg">{t.name}</h4>
@@ -337,7 +341,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 🌟 Animations */}
+      {/* ANIMATIONS */}
       <style>
         {`
           @keyframes fadeIn {
@@ -347,12 +351,21 @@ const Home = () => {
           .animate-fadeIn {
             animation: fadeIn 0.4s ease-in-out;
           }
+
           @keyframes pulse-soft {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(34,197,94,0.6); }
-            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(34,197,94,0.9); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(6,95,70,0.6); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(6,95,70,0.9); }
           }
           .animate-pulse-soft {
             animation: pulse-soft 2.2s ease-in-out infinite;
+          }
+
+          @keyframes slideFade {
+            from { opacity: 0; transform: scale(0.97); }
+            to { opacity: 1; transform: scale(1); }
+          }
+          .animate-slideFade {
+            animation: slideFade 0.9s ease-out;
           }
         `}
       </style>

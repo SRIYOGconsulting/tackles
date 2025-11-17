@@ -22,7 +22,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ⭐ FIX: Reset menu when resizing desktop → mobile and back
   useEffect(() => {
     const resetMenu = () => {
       if (window.innerWidth >= 640) setMenuOpen(false);
@@ -54,22 +53,38 @@ export default function Header() {
           {/* CONTACT */}
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-1.5">
-              <button className="px-2 py-1 text-xs rounded-full bg-gradient-to-r from-green-500 via-emerald-500 to-lime-400 text-white shadow-md hover:scale-105 transition-all">
+
+              {/* PHONE ICON */}
+              <button className="px-2 py-1 text-xs rounded-full bg-white text-green-800 border border-emerald-300 shadow-sm 
+              hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
                 📞
               </button>
-              <span className="font-medium">055-6185029</span>
+
+              {/* ✅ Phone number is now clickable */}
+              <a
+                href="tel:0556185029"
+                className="font-medium hover:text-lime-300 transition-colors"
+              >
+                055-6185029
+              </a>
             </div>
 
             <div className="flex items-center gap-1.5">
-              <button className="px-2 py-1 text-xs rounded-full bg-gradient-to-r from-lime-500 via-green-500 to-emerald-500 text-white shadow-md hover:scale-105 transition-all">
+
+              {/* EMAIL ICON */}
+              <button className="px-2 py-1 text-xs rounded-full bg-white text-green-800 border border-emerald-300 shadow-sm 
+              hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
                 ✉️
               </button>
+
+              {/* EMAIL (clickable, no underline) */}
               <a
                 href="mailto:info@tackles.pro"
-                className="underline underline-offset-2 hover:text-lime-300 transition-colors font-medium"
+                className="text-white hover:text-lime-300 transition-colors font-medium"
               >
                 info@tackles.pro
               </a>
+
             </div>
           </div>
 
@@ -111,7 +126,7 @@ export default function Header() {
             <img src={logo} alt="Tackles Logo" className="h-10 w-auto object-contain" />
           </button>
 
-          {/* HAMBURGER MENU */}
+          {/* HAMBURGER */}
           <button
             className="sm:hidden text-green-800 text-3xl font-bold"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -150,7 +165,7 @@ export default function Header() {
                 Gallery
               </NavLink>
 
-              {/* ⭐ FIX BOOK BUTTON ALIGNMENT */}
+              {/* BOOK BUTTON */}
               <button
                 onClick={() => {
                   handleBookClick();
