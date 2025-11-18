@@ -1,136 +1,298 @@
-import React from "react";
-import contactImg from "../assets/images/contact.png"; // ✅ make sure this image exists
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import bookingImg from "../assets/images/booking.png";
 
-export default function Contact() {
+export default function Book() {
+  const navigate = useNavigate();
+
+  // ⭐ Set tab title
+  useEffect(() => {
+    document.title = "Book Appointment | Tackles";
+  }, []);
+
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    startDate: "",
+    endDate: "",
+    shifts: "",
+    priority: "",
+    location: "",
+    requiredService: "",
+    phone: "",
+    budget: "",
+    emirates: "",
+    description: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("📋 Appointment Data:", form);
+    alert("✅ Appointment booked successfully! (Frontend only)");
+    setLoading(false);
+    navigate("/results");
+  };
+
   return (
-    <section className="min-h-screen bg-white py-20 px-6 flex flex-col items-center text-gray-800">
-      {/* 🌿 Header */}
-      <div className="max-w-6xl w-full text-center mb-16">
-        <h1 className="text-5xl sm:text-6xl font-extrabold text-emerald-900 tracking-tight mb-3">
-          We Wanna Hear From You!
-        </h1>
-        <p className="text-lg sm:text-xl text-gray-600">
-          Contact us, we're always here to help you out.
-        </p>
-      </div>
-
-      {/* 🌿 Contact Boxes */}
-      <div className="max-w-6xl w-full grid sm:grid-cols-3 gap-8 mb-20">
-        {/* Visit */}
-        <div className="bg-gradient-to-br from-[#064E3B] via-[#036B49] to-[#048B57] text-white rounded-xl p-6 text-center shadow-[0_0_20px_rgba(6,95,70,0.25)] border border-emerald-300 hover:shadow-[0_0_30px_rgba(6,95,70,0.45)] hover:scale-[1.04] transition-all duration-500">
-          <h2 className="text-lg font-semibold mb-2 flex justify-center items-center gap-1">
-            📍 Visit Us
-          </h2>
-          <p className="text-sm leading-relaxed opacity-95">
-            G 01 Ontario Tower <br /> Business Bay
+    <section className="min-h-screen bg-gradient-to-b from-emerald-900 via-emerald-800 to-emerald-700 flex flex-col items-center justify-center py-20 px-6">
+      
+      {/* 🌿 Header section */}
+      <div className="flex flex-col sm:flex-row items-center justify-between w-full max-w-5xl mb-10">
+        <div className="text-left sm:text-left w-full sm:w-1/2 mb-6 sm:mb-0">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-wide leading-tight">
+            Book An Appointment
+          </h1>
+          <p className="text-emerald-100 text-sm sm:text-base mt-3 max-w-md">
+            Schedule your service at your convenience, fast, reliable, and professional.
           </p>
         </div>
 
-        {/* Email */}
-        <a
-          href="mailto:info@tackles.pro"
-          className="bg-gradient-to-br from-[#065F46] via-[#047857] to-[#059669] text-white rounded-xl p-6 text-center shadow-[0_0_20px_rgba(6,95,70,0.25)] border border-emerald-300 hover:shadow-[0_0_30px_rgba(6,95,70,0.45)] hover:scale-[1.04] transition-all duration-500"
-        >
-          <h2 className="text-lg font-semibold mb-2 flex justify-center items-center gap-1">
-            ✉️ Email Us
-          </h2>
-          <p className="text-sm leading-relaxed opacity-95">info@tackles.pro</p>
-        </a>
-
-        {/* Call */}
-        <a
-          href="tel:+971556165029"
-          className="bg-gradient-to-br from-[#064E3B] via-[#036B49] to-[#048B57] text-white rounded-xl p-6 text-center shadow-[0_0_20px_rgba(6,95,70,0.25)] border border-emerald-300 hover:shadow-[0_0_30px_rgba(6,95,70,0.45)] hover:scale-[1.04] transition-all duration-500"
-        >
-          <h2 className="text-lg font-semibold mb-2 flex justify-center items-center gap-1">
-            📞 Call Us
-          </h2>
-          <p className="text-sm leading-relaxed opacity-95">+971-55-6165029</p>
-        </a>
-      </div>
-
-      {/* 🌿 Form + Image */}
-      <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-12 items-center mb-20">
-        {/* Form */}
-        <div className="bg-white rounded-2xl shadow-[0_0_25px_rgba(6,95,70,0.25)] border border-emerald-200 hover:shadow-[0_0_40px_rgba(6,95,70,0.4)] transition-all duration-500 p-8 sm:p-10">
-          <h2 className="text-3xl font-bold text-emerald-900 mb-6 text-center">
-            Get in Touch
-          </h2>
-
-          <form className="grid gap-5">
-            <input
-              className="border border-emerald-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-600 text-gray-700 shadow-inner"
-              placeholder="Full Name"
-              required
-            />
-            <input
-              className="border border-emerald-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-600 text-gray-700 shadow-inner"
-              placeholder="Email Address"
-              type="email"
-              required
-            />
-            <input
-              className="border border-emerald-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-600 text-gray-700 shadow-inner"
-              placeholder="City (Dubai / Sydney / San Francisco)"
-              required
-            />
-            <textarea
-              className="border border-emerald-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-600 text-gray-700 shadow-inner"
-              rows="4"
-              placeholder="Service needed & message"
-              required
-            ></textarea>
-
-            <button
-              type="submit"
-              className="bg-gradient-to-r from-[#064E3B] via-[#047857] to-[#059669]
-              hover:from-[#036A48] hover:via-[#047B5A] hover:to-[#06A272]
-              text-white px-8 py-3 rounded-lg text-base font-semibold shadow-[0_0_20px_rgba(6,95,70,0.35)]
-              hover:shadow-[0_0_30px_rgba(6,95,70,0.5)] transition-all duration-500"
-            >
-              Send Message ✉️
-            </button>
-          </form>
-        </div>
-
         {/* Image */}
-        <div className="flex justify-center">
+        <div className="w-full sm:w-1/2 flex justify-center">
           <img
-            src={contactImg}
-            alt="Contact Illustration"
-            className="w-full max-w-md object-contain drop-shadow-[0_0_25px_rgba(6,95,70,0.4)] hover:scale-105 transition-all duration-500"
+            src={bookingImg}
+            alt="Book Appointment"
+            className="w-64 sm:w-80 object-contain drop-shadow-2xl"
           />
         </div>
       </div>
 
-      {/* 🌍 Location Section */}
-      <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-10 items-center">
-        <div className="text-left">
-          <h2 className="text-4xl font-extrabold text-emerald-900 mb-5">
-            Our Location
-          </h2>
-          <p className="text-gray-700 text-lg leading-relaxed">
-            Visit our{" "}
-            <span className="text-emerald-700 font-semibold">Business Bay</span>{" "}
-            office, a comfortable and professional space designed for our
-            clients. We’re located inside Ontario Tower, easily accessible and
-            welcoming to everyone.
-          </p>
-        </div>
+      {/* 🌿 Form Container */}
+      <div className="max-w-5xl w-full bg-white/95 rounded-2xl shadow-2xl p-8 sm:p-10 border border-emerald-200 backdrop-blur-md">
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+        >
+          {/* Full Name */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Full Name *
+            </label>
+            <input
+              type="text"
+              name="fullName"
+              value={form.fullName}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Enter your name"
+            />
+          </div>
 
-        {/* Map */}
-        <div className="rounded-2xl overflow-hidden shadow-[0_0_25px_rgba(6,95,70,0.3)] border border-emerald-400 hover:shadow-[0_0_40px_rgba(6,95,70,0.45)] transition-all duration-500 h-[420px]">
-          <iframe
-            src="https://maps.google.com/maps?q=G%2001%20Ontario%20Tower%20Business%20Bay&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            width="100%"
-            height="100%"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="border-0"
-            title="Tackles Location"
-          ></iframe>
-        </div>
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              eMail
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="example@email.com"
+            />
+          </div>
+
+          {/* Start Date */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Start Date *
+            </label>
+            <input
+              type="date"
+              name="startDate"
+              value={form.startDate}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+
+          {/* End Date */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              End Date *
+            </label>
+            <input
+              type="date"
+              name="endDate"
+              value={form.endDate}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+
+          {/* Shifts */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Shifts *
+            </label>
+            <select
+              name="shifts"
+              value={form.shifts}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              <option value="">Select shift</option>
+              <option value="Morning">Morning</option>
+              <option value="Evening">Evening</option>
+              <option value="Night">Night</option>
+            </select>
+          </div>
+
+          {/* Priority */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Priority *
+            </label>
+            <select
+              name="priority"
+              value={form.priority}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              <option value="">Select priority</option>
+              <option value="Normal">Normal</option>
+              <option value="Urgent">Urgent</option>
+              <option value="Emergency">Emergency</option>
+            </select>
+          </div>
+
+          {/* Location */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Location *
+            </label>
+            <input
+              type="text"
+              name="location"
+              value={form.location}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Enter your location"
+            />
+          </div>
+
+          {/* Required Service */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Required Service *
+            </label>
+            <select
+              name="requiredService"
+              value={form.requiredService}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              <option value="">Select service</option>
+              <option>AC Maintenance & Servicing</option>
+              <option>Electrical Repairs</option>
+              <option>Plumbing</option>
+              <option>Painting & Decorating</option>
+              <option>Carpentry</option>
+              <option>Flooring & Surface Fixes</option>
+              <option>Gutter & Roof Cleaning</option>
+              <option>Pressure Washing</option>
+              <option>Smart Home & Fixture Installations</option>
+            </select>
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Phone Number *
+            </label>
+            <input
+              type="tel"
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Enter phone number"
+            />
+          </div>
+
+          {/* Budget */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Budget *
+            </label>
+            <input
+              type="text"
+              name="budget"
+              value={form.budget}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Enter your budget"
+            />
+          </div>
+
+          {/* Emirates */}
+          <div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Emirates *
+            </label>
+            <select
+              name="emirates"
+              value={form.emirates}
+              onChange={handleChange}
+              required
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              <option value="">Select Emirates</option>
+              <option>Dubai</option>
+              <option>Abu Dhabi</option>
+              <option>Sharjah</option>
+              <option>Ajman</option>
+              <option>Ras Al Khaimah</option>
+              <option>Umm Al Quwain</option>
+              <option>Fujairah</option>
+            </select>
+          </div>
+
+          {/* Description */}
+          <div className="sm:col-span-2">
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Description
+            </label>
+            <textarea
+              name="description"
+              rows="4"
+              value={form.description}
+              onChange={handleChange}
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Write about your requirement or special note..."
+            ></textarea>
+          </div>
+
+          {/* Submit */}
+          <div className="sm:col-span-2 flex justify-center mt-4">
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-gradient-to-r from-emerald-700 via-green-700 to-lime-600 
+              hover:from-emerald-800 hover:via-green-800 hover:to-lime-700 
+              text-white px-10 py-3 rounded-lg text-lg font-semibold shadow-lg
+              hover:shadow-emerald-400/40 transition-all duration-300 
+              disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {loading ? "Submitting..." : "Submit"}
+            </button>
+          </div>
+        </form>
       </div>
     </section>
   );

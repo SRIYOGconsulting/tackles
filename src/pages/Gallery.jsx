@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import image1 from "../assets/gallery/image1.png";
 import image2 from "../assets/gallery/image2.png";
 import image3 from "../assets/gallery/image3.png";
@@ -13,6 +13,12 @@ import image11 from "../assets/gallery/image11.png";
 import image12 from "../assets/gallery/image12.png";
 
 export default function Gallery() {
+
+  // ⭐ Set tab title
+  useEffect(() => {
+    document.title = "Gallery | Tackles";
+  }, []);
+
   const images = [
     {
       src: image1,
@@ -36,8 +42,7 @@ export default function Gallery() {
     },
     {
       src: image6,
-      desc:
-        "AC cleaning and servicing performed by trained professionals.",
+      desc: "AC cleaning and servicing performed by trained professionals.",
     },
     {
       src: image7,
@@ -102,7 +107,7 @@ export default function Gallery() {
                 className="w-full h-64 object-cover transition-all duration-300 group-hover:opacity-90"
               />
 
-              {/* DESCRIPTION BAR (BOTTOM) */}
+              {/* DESCRIPTION BAR */}
               <div
                 className="absolute bottom-0 left-0 w-full px-5 py-3 
                 bg-gradient-to-t from-emerald-900 via-emerald-800/90 to-transparent

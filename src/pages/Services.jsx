@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import ServiceCard from "../components/ServiceCard.jsx";
 import acImg from "../assets/images/services/ac-service.png";
 import electricalImg from "../assets/images/services/electrical.png";
@@ -10,8 +11,14 @@ import pressureImg from "../assets/images/services/pressure.png";
 import smartHomeImg from "../assets/images/services/smart-home.png";
 
 export default function Services() {
+  // ⭐ Set tab title
+  useEffect(() => {
+    document.title = "Services | Tackles";
+  }, []);
+
   return (
     <section className="bg-gradient-to-b from-white via-emerald-50 to-white py-20 px-6 sm:px-12 lg:px-20">
+      
       {/* Header */}
       <div className="text-center mb-16">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-emerald-900 mb-4 tracking-wide">

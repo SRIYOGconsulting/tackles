@@ -3,6 +3,10 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useLocation } from "../context/LocationContext.jsx";
 import logo from "../assets/images/logo.png";
 
+// ⭐ NEW: Import SVG icons
+import phoneIcon from "../assets/icons/phone.svg";
+import mailIcon from "../assets/icons/mail.svg";
+
 const link = ({ isActive }) =>
   `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
     isActive
@@ -54,13 +58,13 @@ export default function Header() {
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-1.5">
 
-              {/* PHONE ICON */}
+              {/* ⭐ PHONE SVG ICON */}
               <button className="px-2 py-1 text-xs rounded-full bg-white text-green-800 border border-emerald-300 shadow-sm 
               hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
-                📞
+                <img src={phoneIcon} alt="Phone" className="w-4 h-4" />
               </button>
 
-              {/* ✅ Phone number is now clickable */}
+              {/* PHONE NUMBER */}
               <a
                 href="tel:0556185029"
                 className="font-medium hover:text-lime-300 transition-colors"
@@ -71,13 +75,13 @@ export default function Header() {
 
             <div className="flex items-center gap-1.5">
 
-              {/* EMAIL ICON */}
+              {/* ⭐ MAIL SVG ICON */}
               <button className="px-2 py-1 text-xs rounded-full bg-white text-green-800 border border-emerald-300 shadow-sm 
               hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
-                ✉️
+                <img src={mailIcon} alt="Email" className="w-4 h-4" />
               </button>
 
-              {/* EMAIL (clickable, no underline) */}
+              {/* EMAIL */}
               <a
                 href="mailto:info@tackles.pro"
                 className="text-white hover:text-lime-300 transition-colors font-medium"

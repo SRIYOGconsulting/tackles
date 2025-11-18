@@ -34,7 +34,9 @@ const Home = () => {
   const navigate = useNavigate();
   const { location } = useLocation();
   const [activeSection, setActiveSection] = useState("about");
-
+  useEffect(() => {
+    document.title = "Home | Tackles";
+  }, []);
   const displayLocation =
     location === "SanFrancisco" ? "San Francisco" : location || "Dubai";
 
@@ -366,11 +368,13 @@ const Home = () => {
           }
           .animate-slideFade {
             animation: slideFade 0.9s ease-out;
-          }
+          } 
         `}
       </style>
     </>
   );
 };
 
-export default Home;
+export default Home;   
+
+

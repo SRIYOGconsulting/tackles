@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import aboutImg from "../assets/images/about.png"; // ✅ make sure the path & image exist
-import { ShieldCheck, Users, Leaf, Handshake } from "lucide-react"; // ✅ install via npm install lucide-react
+import React, { useState, useEffect } from "react";
+import aboutImg from "../assets/images/about.png"; 
+import { ShieldCheck, Users, Leaf, Handshake } from "lucide-react";
 
 export default function About() {
+  useEffect(() => {
+    document.title = "About | Tackles";
+  }, []);
+
   const [activeSection, setActiveSection] = useState("about");
 
   const sections = {
@@ -25,7 +29,7 @@ export default function About() {
 
   return (
     <section className="bg-gradient-to-b from-white via-emerald-50 to-white py-20 px-6 sm:px-12 lg:px-20">
-      {/* ---------- Page Title ---------- */}
+      {/* PAGE TITLE */}
       <div className="text-center mb-14">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-emerald-900 mb-4 tracking-wide">
           All About Us
@@ -36,13 +40,13 @@ export default function About() {
         </p>
       </div>
 
-      {/* ---------- Interactive About / Mission / Goals ---------- */}
+      {/* LEFT SECTIONS + RIGHT IMAGE */}
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
-        {/* Left side sections */}
+        {/* LEFT SIDE */}
         <div className="space-y-6">
           {Object.keys(sections).map((key) => (
             <div key={key} className="relative">
-              {/* Heading Button */}
+              {/* BUTTON */}
               <button
                 onMouseEnter={() => setActiveSection(key)}
                 onClick={() => setActiveSection(key)}
@@ -55,7 +59,7 @@ export default function About() {
                 {sections[key].title}
               </button>
 
-              {/* Description appears directly below the button */}
+              {/* DESCRIPTION */}
               {activeSection === key && (
                 <div className="mt-3 ml-2 border-l-4 border-emerald-500 pl-4 bg-white rounded-r-xl shadow-sm py-3 px-2 animate-fadeIn">
                   <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
@@ -67,7 +71,7 @@ export default function About() {
           ))}
         </div>
 
-        {/* Right side image */}
+        {/* RIGHT IMAGE */}
         <div className="flex justify-center">
           <img
             src={aboutImg}
@@ -77,7 +81,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* ---------- Certifications Section ---------- */}
+      {/* CERTIFICATIONS */}
       <div className="max-w-6xl mx-auto mt-24 text-center">
         <h2 className="text-3xl font-bold text-emerald-800 mb-6">
           Internationally Trusted Certifications
@@ -87,7 +91,6 @@ export default function About() {
           We’re trusted by clients for our integrity and craftsmanship.
         </p>
 
-        {/* 4 certification badges */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           <div className="flex flex-col items-center justify-center bg-gradient-to-r from-green-700 via-emerald-700 to-green-600 text-white rounded-xl shadow-lg py-6 hover:scale-105 transition-transform duration-300">
             <ShieldCheck size={36} className="mb-2" />
@@ -111,7 +114,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* Simple fade animation */}
+      {/* ANIMATION */}
       <style>
         {`
           @keyframes fadeIn {
