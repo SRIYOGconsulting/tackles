@@ -18,8 +18,8 @@ import plumbingImg from "../assets/images/services/plumbing.png";
 // 🌐 Icons
 import whatsappIcon from "../assets/images/whatsapp.png";
 import facebookIcon from "../assets/images/facebook.png";
-import playstoreIcon from "../assets/images/playstore.png";
-import appleStoreIcon from "../assets/images/apple.png";
+import playstoreIcon from "../assets/images/playstore.svg";
+import appleStoreIcon from "../assets/images/apple.svg";
 
 // 👤 Testimonial images
 import sameerImg from "../assets/images/testimonials/sameer.png";
@@ -34,13 +34,15 @@ const Home = () => {
   const navigate = useNavigate();
   const { location } = useLocation();
   const [activeSection, setActiveSection] = useState("about");
+
   useEffect(() => {
     document.title = "Home | Tackles";
   }, []);
-  const displayLocation =
-    location === "SanFrancisco" ? "San Francisco" : location || "Dubai";
 
-  // 🌇 Slides depending on location
+  const displayLocation =
+    location === "San Francisco" ? "San Francisco" : location || "Dubai";
+
+  // 🌇 Slides
   const slides = [
     {
       id: 1,
@@ -74,7 +76,7 @@ const Home = () => {
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  // 🧭 About Us (hover logic)
+  // 🧭 About Section
   const sections = {
     about: {
       title: "About Tackles",
@@ -98,7 +100,7 @@ const Home = () => {
     },
   };
 
-  // 💬 Testimonials data
+  // 💬 Testimonials
   const testimonials = [
     {
       name: "Sameer Azeem Shadid",
@@ -119,6 +121,17 @@ const Home = () => {
         "I’m very pleased with the plaster and cladding work done by TACKLES. The attention to detail and quality of materials used were top-notch. Our home looks fantastic!",
     },
   ];
+
+  // ⭐ Book Button Component (small, white, green border)
+  const BookButton = () => (
+    <button
+      onClick={() => navigate("/book")}
+      className="mt-4 px-4 py-1 text-emerald-700 border border-emerald-700 rounded-full bg-white 
+      text-sm font-semibold transition-transform duration-200 hover:scale-105"
+    >
+      Book
+    </button>
+  );
 
   return (
     <>
@@ -147,8 +160,6 @@ const Home = () => {
               </span>{" "}
               handle it all on time with clean finishing and clear pricing.
             </p>
-
-            {/* ❌ REMOVED FEATURE PILLS */}
 
             <div className="flex flex-wrap items-center gap-3 pt-3">
               <button
@@ -214,25 +225,44 @@ const Home = () => {
         </div>
       </section>
 
-      {/* APP DOWNLOAD */}
-      <div className="w-full bg-gradient-to-r from-emerald-50 via-white to-emerald-50 py-10 flex justify-center">
-        <a
-          href="#"
-          target="_blank"
-          className="flex items-center gap-5 sm:gap-6 bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 
-          hover:via-emerald-900 text-white px-8 sm:px-10 py-3 rounded-lg shadow-lg hover:shadow-emerald-400/40 transition-all duration-300"
-        >
-          <div className="flex items-center gap-3 sm:gap-4">
-            <img src={playstoreIcon} className="h-12 sm:h-14" />
-            <img src={appleStoreIcon} className="h-16 sm:h-20 scale-150" />
-          </div>
-          <span className="text-base sm:text-lg font-bold tracking-wide">
-            Download Our App
-          </span>
-        </a>
+      {/* ⭐ APP DOWNLOAD */}
+      <div className="w-full bg-gradient-to-r from-emerald-50 via-white to-emerald-50 py-14 flex justify-center">
+        <div className="flex flex-wrap items-center gap-6 sm:gap-10 px-8 py-6 rounded-2xl 
+                        bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 
+                        shadow-lg hover:shadow-emerald-400/40 transition-all duration-300">
+
+          {/* PLAY STORE BUTTON */}
+          <a
+            href="#"
+            target="_blank"
+            className="flex items-center gap-4 bg-white text-emerald-900 
+                       px-5 py-3 rounded-xl shadow-md hover:shadow-lg 
+                       transition-all duration-300 hover:scale-[1.02]"
+          >
+            <img src={playstoreIcon} className="w-9 h-9 object-contain" />
+            <span className="font-semibold text-base tracking-wide">
+              Get it on Play Store
+            </span>
+          </a>
+
+          {/* APPLE STORE BUTTON */}
+          <a
+            href="#"
+            target="_blank"
+            className="flex items-center gap-4 bg-white text-emerald-900 
+                       px-5 py-3 rounded-xl shadow-md hover:shadow-lg 
+                       transition-all duration-300 hover:scale-[1.02]"
+          >
+            <img src={appleStoreIcon} className="w-9 h-9 object-contain" />
+            <span className="font-semibold text-base tracking-wide">
+              Download on Apple Store
+            </span>
+          </a>
+
+        </div>
       </div>
 
-      {/* SERVICES */}
+      {/* SERVICES SECTION — UPDATED WITH BOOK BUTTON */}
       <section className="bg-white py-20 px-6 sm:px-12 lg:px-20 text-center">
         <h2 className="text-4xl font-extrabold text-emerald-900 mb-4">
           What Can We Do?
@@ -246,16 +276,19 @@ const Home = () => {
             image={acImg}
             title="AC Maintenance & Servicing"
             desc="Filter cleaning, gas refilling, indoor/outdoor unit checks, and cooling efficiency testing."
+            extra={<BookButton />}
           />
           <ServiceCard
             image={electricalImg}
             title="Electrical Repairs"
             desc="Switches, sockets, lighting fixtures, ceiling fans, and short-circuit safety checks."
+            extra={<BookButton />}
           />
           <ServiceCard
             image={plumbingImg}
             title="Plumbing"
             desc="Leaks, faucet fixes, drain repairs, and clog removal."
+            extra={<BookButton />}
           />
         </div>
 
@@ -375,6 +408,4 @@ const Home = () => {
   );
 };
 
-export default Home;   
-
-
+export default Home;

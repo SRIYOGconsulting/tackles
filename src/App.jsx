@@ -4,17 +4,22 @@ import ScrollToTop from "./components/ScrollToTop";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const App = () => {
+export default function App() {
   return (
     <>
+      {/* Scrolls to top whenever the route changes */}
       <ScrollToTop />
+
+      {/* Main navigation header */}
       <Header />
-      <main>
-        <Outlet /> {/* 👈 This is where child pages (Home, About, etc.) render */}
+
+      {/* Page content rendered here */}
+      <main className="min-h-screen">
+        <Outlet />
       </main>
+
+      {/* Footer */}
       <Footer />
     </>
   );
-};
-
-export default App;
+}

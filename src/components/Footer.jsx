@@ -5,6 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-green-900 text-gray-200 pt-12 pb-6">
       <div className="max-w-6xl mx-auto px-6 grid gap-10 sm:grid-cols-3">
+
         {/* Logo + Description */}
         <div>
           <div className="flex items-center gap-3 mb-3">
@@ -19,11 +20,18 @@ export default function Footer() {
               Tackles
             </h3>
           </div>
+
+          {/* ⭐ UPDATED DESCRIPTION ONLY */}
           <p className="text-sm leading-relaxed text-gray-300">
-            Tackles is a leading A-grade handyman company providing reliable
-            repair and decoration services. Whether it’s plumbing, painting,
-            air-conditioning, flooring, or wall fixing, Tackles is there for
-            you.
+            Tackles is an A-grade handyman company built on skill, reliability, 
+            and trust. Our team handles everything from small repairs to complete 
+            home and workplace improvements. We take care of plumbing, painting, 
+            electrical upgrades, AC installation, flooring, and general maintenance 
+            with the same level of attention and care. 
+            <br/> <br/>
+            Our goal is to make every space safer, cleaner, and more comfortable
+            while giving customers a service they can rely on any day of the
+            week.
           </p>
         </div>
 

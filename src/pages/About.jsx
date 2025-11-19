@@ -25,10 +25,16 @@ export default function About() {
       desc:
         "Tackles focuses on providing the best service possible to make clients’ lives convenient and comfortable. Any work related to plumbing, painting, plastering, or AC installation is our responsibility.",
     },
+    vision: {
+      title: "Our Vision",
+      desc:
+        "We aim to become the most trusted and accessible handyman brand by building long-term relationships and delivering services that feel professional, reliable, and effortless.",
+    },
   };
 
   return (
     <section className="bg-gradient-to-b from-white via-emerald-50 to-white py-20 px-6 sm:px-12 lg:px-20">
+
       {/* PAGE TITLE */}
       <div className="text-center mb-14">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-emerald-900 mb-4 tracking-wide">
@@ -42,10 +48,12 @@ export default function About() {
 
       {/* LEFT SECTIONS + RIGHT IMAGE */}
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
+
         {/* LEFT SIDE */}
         <div className="space-y-6">
           {Object.keys(sections).map((key) => (
             <div key={key} className="relative">
+
               {/* BUTTON */}
               <button
                 onMouseEnter={() => setActiveSection(key)}

@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import bookingImg from "../assets/images/booking.png"; // 👈 original logo/image
 
 export default function Book() {
   const navigate = useNavigate();
+
+  // ⭐ Tab title for the page
+  useEffect(() => {
+    document.title = "Book Appointment | Tackles";
+  }, []);
 
   const [form, setForm] = useState({
     fullName: "",

@@ -39,11 +39,6 @@ export default function Header() {
     navigate("/");
   };
 
-  const handleBookClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    navigate("/book");
-  };
-
   const handleLocationClick = (loc) => {
     setLocation(loc);
   };
@@ -57,14 +52,11 @@ export default function Header() {
           {/* CONTACT */}
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-1.5">
-
-              {/* ⭐ PHONE SVG ICON */}
               <button className="px-2 py-1 text-xs rounded-full bg-white text-green-800 border border-emerald-300 shadow-sm 
               hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
                 <img src={phoneIcon} alt="Phone" className="w-4 h-4" />
               </button>
 
-              {/* PHONE NUMBER */}
               <a
                 href="tel:0556185029"
                 className="font-medium hover:text-lime-300 transition-colors"
@@ -74,27 +66,23 @@ export default function Header() {
             </div>
 
             <div className="flex items-center gap-1.5">
-
-              {/* ⭐ MAIL SVG ICON */}
               <button className="px-2 py-1 text-xs rounded-full bg-white text-green-800 border border-emerald-300 shadow-sm 
               hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
                 <img src={mailIcon} alt="Email" className="w-4 h-4" />
               </button>
 
-              {/* EMAIL */}
               <a
                 href="mailto:info@tackles.pro"
                 className="text-white hover:text-lime-300 transition-colors font-medium"
               >
                 info@tackles.pro
               </a>
-
             </div>
           </div>
 
           {/* LOCATION BUTTONS */}
           <div className="flex gap-2 sm:gap-3">
-            {["Dubai", "SanFrancisco", "Sydney"].map((loc) => (
+            {["Dubai", "San Francisco", "Sydney"].map((loc) => (
               <button
                 key={loc}
                 onClick={() => handleLocationClick(loc)}
@@ -119,15 +107,12 @@ export default function Header() {
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between h-16 px-4">
 
-          {/* LOGO */}
+          {/* LOGO ONLY */}
           <button
             onClick={handleLogoClick}
             className="flex items-center gap-2 hover:opacity-90 transition-all focus:outline-none"
           >
-            <span className="text-2xl font-semibold text-green-800 tracking-wide">
-              Tackles
-            </span>
-            <img src={logo} alt="Tackles Logo" className="h-10 w-auto object-contain" />
+            <img src={logo} alt="Tackles Logo" className="h-12 w-auto object-contain" />
           </button>
 
           {/* HAMBURGER */}
@@ -147,42 +132,64 @@ export default function Header() {
               px-6 sm:px-0 py-4 sm:py-0 
               transition-all duration-300 
               shadow-md sm:shadow-none z-40
-
               ${menuOpen ? "top-16 opacity-100" : "top-[-500px] opacity-0 sm:opacity-100"}
             `}
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 w-full">
 
-              <NavLink to="/" className={link} onClick={() => setMenuOpen(false)}>
+              <NavLink
+                to="/"
+                className={link}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  setMenuOpen(false);
+                }}
+              >
                 Home
               </NavLink>
 
-              <NavLink to="/about" className={link} onClick={() => setMenuOpen(false)}>
+              <NavLink
+                to="/about"
+                className={link}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  setMenuOpen(false);
+                }}
+              >
                 About Us
               </NavLink>
 
-              <NavLink to="/services" className={link} onClick={() => setMenuOpen(false)}>
-                Services
-              </NavLink>
-
-              <NavLink to="/gallery" className={link} onClick={() => setMenuOpen(false)}>
+              <NavLink
+                to="/gallery"
+                className={link}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  setMenuOpen(false);
+                }}
+              >
                 Gallery
               </NavLink>
 
-              {/* BOOK BUTTON */}
-              <button
+              {/* ⭐ FIXED — BOOK BUTTON AS NavLink */}
+              <NavLink
+                to="/book"
+                className={link}
                 onClick={() => {
-                  handleBookClick();
+                  window.scrollTo(0, 0);
                   setMenuOpen(false);
                 }}
-                className="px-4 py-2 rounded-full text-sm font-medium text-emerald-900 text-left sm:text-center 
-                hover:text-white hover:bg-gradient-to-r hover:from-green-700 hover:via-emerald-700 hover:to-green-600 
-                hover:shadow-md transition-all duration-300"
               >
                 Book an Appointment
-              </button>
+              </NavLink>
 
-              <NavLink to="/contact" className={link} onClick={() => setMenuOpen(false)}>
+              <NavLink
+                to="/contact"
+                className={link}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  setMenuOpen(false);
+                }}
+              >
                 Contact
               </NavLink>
 

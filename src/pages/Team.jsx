@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // 👉 Replace these with your actual images
 import raju from "../assets/images/team/raju.png";
@@ -23,6 +23,12 @@ const LinkedIn = () => (
 );
 
 export default function Team() {
+
+  // ⭐ Set tab title
+  useEffect(() => {
+    document.title = "Teams | Tackles";
+  }, []);
+
   const members = [
     { name: "Raju Khatri", role: "Founder", img: raju },
     { name: "Pritambar Ghimire", role: "Electrician", img: pritambar },
