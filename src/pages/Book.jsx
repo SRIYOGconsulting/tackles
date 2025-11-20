@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import bookingImg from "../assets/images/booking.png"; // 👈 original logo/image
+import bookingImg from "../assets/images/booking.png"; 
 
 export default function Book() {
   const navigate = useNavigate();
 
-  // ⭐ Tab title for the page
   useEffect(() => {
     document.title = "Book Appointment | Tackles";
   }, []);
@@ -26,20 +25,46 @@ export default function Book() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  // ⭐ All 9 services
+  const servicesList = [
+    "AC Maintenance & Servicing",
+    "Electrical Repairs",
+    "Plumbing",
+    "Painting & Decorating",
+    "Carpentry",
+    "Flooring & Surface Fixes",
+    "Gutter & Roof Cleaning",
+    "Pressure Washing",
+    "Smart Home & Fixture Installations",
+  ];
+
+  // ⭐ Filter logic for autocomplete
+  const filteredServices = form.requiredService
+    ? servicesList.filter((s) =>
+        s.toLowerCase().includes(form.requiredService.toLowerCase())
+      )
+    : servicesList;
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
+
+  const selectService = (service) => {
+    setForm({ ...form, requiredService: service });
+    setShowSuggestions(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("📋 Appointment Data:", form);
     alert("✅ Appointment booked successfully! (Frontend only)");
-    setLoading(false);
     navigate("/results");
   };
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-emerald-900 via-emerald-800 to-emerald-700 flex flex-col items-center justify-center py-20 px-6">
+
       {/* 🌿 Header section with title + image side-by-side */}
       <div className="flex flex-col sm:flex-row items-center justify-between w-full max-w-5xl mb-10">
         <div className="text-left sm:text-left w-full sm:w-1/2 mb-6 sm:mb-0">
@@ -182,29 +207,47 @@ export default function Book() {
             />
           </div>
 
-          {/* Required Service */}
-          <div>
+          {/* ⭐ REQUIRED SERVICE — AUTOCOMPLETE FIELD */}
+          <div className="relative">
             <label className="block text-sm font-semibold text-emerald-900 mb-1">
               Required Service *
             </label>
-            <select
+
+            <input
+              type="text"
               name="requiredService"
               value={form.requiredService}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                setShowSuggestions(true);
+              }}
+              onFocus={() => setShowSuggestions(true)}   
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
               required
+              placeholder="Type or choose a service"
               className="w-full border border-emerald-200 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500"
-            >
-              <option value="">Select service</option>
-              <option>AC Maintenance & Servicing</option>
-              <option>Electrical Repairs</option>
-              <option>Plumbing</option>
-              <option>Painting & Decorating</option>
-              <option>Carpentry</option>
-              <option>Flooring & Surface Fixes</option>
-              <option>Gutter & Roof Cleaning</option>
-              <option>Pressure Washing</option>
-              <option>Smart Home & Fixture Installations</option>
-            </select>
+            />
+
+            {/* Suggestions dropdown */}
+            {showSuggestions && (
+              <div className="absolute z-20 w-full bg-white border border-emerald-200 rounded-lg shadow-md mt-1 max-h-48 overflow-y-auto">
+                {filteredServices.length === 0 ? (
+                  <div className="px-4 py-2 text-gray-500 text-sm">
+                    No matching services
+                  </div>
+                ) : (
+                  filteredServices.map((service, i) => (
+                    <div
+                      key={i}
+                      onMouseDown={() => selectService(service)}
+                      className="px-4 py-2 text-sm cursor-pointer hover:bg-emerald-50"
+                    >
+                      {service}
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
           </div>
 
           {/* Phone */}
@@ -283,9 +326,9 @@ export default function Book() {
               type="submit"
               disabled={loading}
               className="bg-gradient-to-r from-emerald-700 via-green-700 to-lime-600 
-              hover:from-emerald-800 hover:via-green-800 hover:to-lime-700 
+              hover:from-emerald-800 hover:via-green-800 hover:to-lime-700
               text-white px-10 py-3 rounded-lg text-lg font-semibold shadow-lg
-              hover:shadow-emerald-400/40 transition-all duration-300 
+              hover:shadow-emerald-400/40 transition-all duration-300
               disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {loading ? "Submitting..." : "Submit"}

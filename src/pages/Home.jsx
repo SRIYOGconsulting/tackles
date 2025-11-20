@@ -51,7 +51,7 @@ const Home = () => {
       image:
         location === "Dubai"
           ? dubaiImg
-          : location === "SanFrancisco"
+          : location === "San Francisco"   // ✅ FIX APPLIED HERE
           ? sanfranciscoImg
           : sydneyImg,
     },
@@ -122,7 +122,7 @@ const Home = () => {
     },
   ];
 
-  // ⭐ Book Button Component (small, white, green border)
+  // ⭐ Book Button Component
   const BookButton = () => (
     <button
       onClick={() => navigate("/book")}
