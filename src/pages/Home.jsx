@@ -18,8 +18,10 @@ import plumbingImg from "../assets/images/services/plumbing.png";
 // 🌐 Icons
 import whatsappIcon from "../assets/images/whatsapp.png";
 import facebookIcon from "../assets/images/facebook.png";
-import playstoreIcon from "../assets/images/playstore.svg";
-import appleStoreIcon from "../assets/images/apple.svg";
+
+// ⭐ NEW REPLACEMENT PNG BUTTONS
+import playstoreBtn from "../assets/images/playstore.png";
+import appleBtn from "../assets/images/apple.png";
 
 // 👤 Testimonial images
 import sameerImg from "../assets/images/testimonials/sameer.png";
@@ -51,7 +53,7 @@ const Home = () => {
       image:
         location === "Dubai"
           ? dubaiImg
-          : location === "San Francisco"   // ✅ FIX APPLIED HERE
+          : location === "San Francisco"
           ? sanfranciscoImg
           : sydneyImg,
     },
@@ -225,38 +227,30 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ⭐ APP DOWNLOAD */}
+      {/* ⭐ UPDATED APP DOWNLOAD SECTION (ONLY THIS PART CHANGED) */}
       <div className="w-full bg-gradient-to-r from-emerald-50 via-white to-emerald-50 py-14 flex justify-center">
         <div className="flex flex-wrap items-center gap-6 sm:gap-10 px-8 py-6 rounded-2xl 
                         bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 
                         shadow-lg hover:shadow-emerald-400/40 transition-all duration-300">
 
-          {/* PLAY STORE BUTTON */}
+          {/* PLAY STORE IMAGE BUTTON */}
           <a
             href="#"
             target="_blank"
-            className="flex items-center gap-4 bg-white text-emerald-900 
-                       px-5 py-3 rounded-xl shadow-md hover:shadow-lg 
-                       transition-all duration-300 hover:scale-[1.02]"
+            className="rounded-xl border-2 border-emerald-700 bg-white overflow-hidden 
+                       shadow-md hover:shadow-lg hover:scale-[1.05] transition-all duration-300"
           >
-            <img src={playstoreIcon} className="w-9 h-9 object-contain" />
-            <span className="font-semibold text-base tracking-wide">
-              Get it on Play Store
-            </span>
+            <img src={playstoreBtn} className="w-40 sm:w-48 h-auto object-contain" />
           </a>
 
-          {/* APPLE STORE BUTTON */}
+          {/* APP STORE IMAGE BUTTON */}
           <a
             href="#"
             target="_blank"
-            className="flex items-center gap-4 bg-white text-emerald-900 
-                       px-5 py-3 rounded-xl shadow-md hover:shadow-lg 
-                       transition-all duration-300 hover:scale-[1.02]"
+            className="rounded-xl border-2 border-emerald-700 bg-white overflow-hidden 
+                       shadow-md hover:shadow-lg hover:scale-[1.05] transition-all duration-300"
           >
-            <img src={appleStoreIcon} className="w-9 h-9 object-contain" />
-            <span className="font-semibold text-base tracking-wide">
-              Download on Apple Store
-            </span>
+            <img src={appleBtn} className="w-40 sm:w-48 h-auto object-contain" />
           </a>
 
         </div>

@@ -44,7 +44,7 @@ export default function Footer() {
             {[
               { name: "Team", href: "/team" },
               { name: "Testimonials", href: "/testimonials" },
-              { name: "FAQs", href: "/faqs" },
+              { name: "FAQs", href: "/faq" },
               { name: "Privacy Policy", href: "/privacy-policy" },
               { name: "Terms of Service", href: "/terms" },
               { name: "Disclaimer", href: "/disclaimer" },

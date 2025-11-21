@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useLocation } from "../context/LocationContext.jsx";
 import logo from "../assets/images/logo.png";
 
-// ⭐ NEW: Import SVG icons
+// SVG icons
 import phoneIcon from "../assets/icons/phone.svg";
 import mailIcon from "../assets/icons/mail.svg";
 
@@ -45,7 +45,7 @@ export default function Header() {
 
   return (
     <>
-      {/* 🌿 TOP BAR */}
+      {/* TOP BAR */}
       <div className="bg-gradient-to-r from-green-800 via-emerald-800 to-green-700 text-white text-xs sm:text-sm py-2 w-full shadow-md relative z-50">
         <div className="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2 px-4">
 
@@ -57,10 +57,7 @@ export default function Header() {
                 <img src={phoneIcon} alt="Phone" className="w-4 h-4" />
               </button>
 
-              <a
-                href="tel:0556185029"
-                className="font-medium hover:text-lime-300 transition-colors"
-              >
+              <a href="tel:0556185029" className="font-medium hover:text-lime-300 transition-colors">
                 055-6185029
               </a>
             </div>
@@ -71,10 +68,7 @@ export default function Header() {
                 <img src={mailIcon} alt="Email" className="w-4 h-4" />
               </button>
 
-              <a
-                href="mailto:info@tackles.pro"
-                className="text-white hover:text-lime-300 transition-colors font-medium"
-              >
+              <a href="mailto:info@tackles.pro" className="text-white hover:text-lime-300 transition-colors font-medium">
                 info@tackles.pro
               </a>
             </div>
@@ -99,7 +93,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 🌿 MAIN NAVBAR */}
+      {/* MAIN NAVBAR */}
       <div
         className={`w-full bg-gradient-to-r from-emerald-50 via-white to-emerald-50 border-b shadow-md transition-all duration-500 ${
           scrolled ? "fixed top-0 left-0 z-40" : "relative"
@@ -107,7 +101,7 @@ export default function Header() {
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between h-16 px-4">
 
-          {/* LOGO ONLY */}
+          {/* LOGO */}
           <button
             onClick={handleLogoClick}
             className="flex items-center gap-2 hover:opacity-90 transition-all focus:outline-none"
@@ -115,7 +109,7 @@ export default function Header() {
             <img src={logo} alt="Tackles Logo" className="h-12 w-auto object-contain" />
           </button>
 
-          {/* HAMBURGER */}
+          {/* HAMBURGER MENU */}
           <button
             className="sm:hidden text-green-800 text-3xl font-bold"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -124,77 +118,89 @@ export default function Header() {
           </button>
 
           {/* NAVIGATION */}
-          <nav
-            className={`
-              sm:flex gap-3 
-              absolute sm:static left-0 w-full sm:w-auto 
-              bg-white sm:bg-transparent 
-              px-6 sm:px-0 py-4 sm:py-0 
-              transition-all duration-300 
-              shadow-md sm:shadow-none z-40
-              ${menuOpen ? "top-16 opacity-100" : "top-[-500px] opacity-0 sm:opacity-100"}
-            `}
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 w-full">
+          <div className="flex items-center gap-4">
 
-              <NavLink
-                to="/"
-                className={link}
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  setMenuOpen(false);
-                }}
-              >
-                Home
-              </NavLink>
+            <nav
+              className={`
+                sm:flex gap-3 
+                absolute sm:static left-0 w-full sm:w-auto 
+                bg-white sm:bg-transparent 
+                px-6 sm:px-0 py-4 sm:py-0 
+                transition-all duration-300 
+                shadow-md sm:shadow-none z-40
+                ${menuOpen ? "top-16 opacity-100" : "top-[-500px] opacity-0 sm:opacity-100"}
+              `}
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 w-full">
 
-              <NavLink
-                to="/about"
-                className={link}
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  setMenuOpen(false);
-                }}
-              >
-                About Us
-              </NavLink>
+                <NavLink
+                  to="/"
+                  className={link}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setMenuOpen(false);
+                  }}
+                >
+                  Home
+                </NavLink>
 
-              <NavLink
-                to="/gallery"
-                className={link}
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  setMenuOpen(false);
-                }}
-              >
-                Gallery
-              </NavLink>
+                <NavLink
+                  to="/about"
+                  className={link}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setMenuOpen(false);
+                  }}
+                >
+                  About Us
+                </NavLink>
 
-              {/* ⭐ FIXED — BOOK BUTTON AS NavLink */}
-              <NavLink
-                to="/book"
-                className={link}
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  setMenuOpen(false);
-                }}
-              >
-                Book an Appointment
-              </NavLink>
+                <NavLink
+                  to="/gallery"
+                  className={link}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setMenuOpen(false);
+                  }}
+                >
+                  Gallery
+                </NavLink>
 
-              <NavLink
-                to="/contact"
-                className={link}
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  setMenuOpen(false);
-                }}
-              >
-                Contact
-              </NavLink>
+                <NavLink
+                  to="/contact"
+                  className={link}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setMenuOpen(false);
+                  }}
+                >
+                  Contact
+                </NavLink>
+              </div>
+            </nav>
 
-            </div>
-          </nav>
+            {/* ⭐ NEW — BOOK A SERVICE BUTTON (WHITE, BORDER GREEN, GLOW) */}
+            <button
+              onClick={() => {
+                navigate("/book");
+                setMenuOpen(false);
+                window.scrollTo(0, 0);
+              }}
+              className="
+                hidden sm:inline-block
+                px-5 py-2
+                rounded-full font-semibold text-green-800
+                bg-white border-2 border-green-700
+                shadow-[0_0_8px_rgba(0,100,0,0.3)]
+                hover:shadow-[0_0_12px_rgba(0,120,0,0.45)]
+                hover:scale-105 active:scale-95
+                transition-all duration-300
+              "
+            >
+              Book a Service
+            </button>
+
+          </div>
         </div>
       </div>
     </>
