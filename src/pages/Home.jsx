@@ -131,7 +131,7 @@ const Home = () => {
       className="mt-4 px-4 py-1 text-emerald-700 border border-emerald-700 rounded-full bg-white 
       text-sm font-semibold transition-transform duration-200 hover:scale-105"
     >
-      Book
+      Book a Service
     </button>
   );
 
@@ -171,7 +171,7 @@ const Home = () => {
                   shadow-lg hover:shadow-emerald-400/60 transition-all duration-300
                   hover:-translate-y-[1px] animate-pulse-soft"
               >
-                Book an Appointment
+                Book a Service
               </button>
 
               <button
@@ -204,7 +204,7 @@ const Home = () => {
                   text-emerald-50 shadow-lg hover:shadow-emerald-300/60
                   opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
-                Book
+                Book a Service
               </button>
             </div>
           </div>
@@ -227,7 +227,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ⭐ UPDATED APP DOWNLOAD SECTION (ONLY THIS PART CHANGED) */}
+      {/* ⭐ UPDATED APP DOWNLOAD SECTION */}
       <div className="w-full bg-gradient-to-r from-emerald-50 via-white to-emerald-50 py-14 flex justify-center">
         <div className="flex flex-wrap items-center gap-6 sm:gap-10 px-8 py-6 rounded-2xl 
                         bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 

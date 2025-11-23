@@ -1,109 +1,144 @@
 import React from "react";
 import logo from "../assets/images/logo.png";
 
+// SVG Icons
+import iconX from "../assets/icons/x.svg";
+import iconFacebook from "../assets/icons/facebook.svg";
+import iconLinkedIn from "../assets/icons/linkedin.svg";
+import iconYouTube from "../assets/icons/youtube.svg";
+import iconTwitch from "../assets/icons/twitch.svg";
+import iconGithub from "../assets/icons/github.svg";
+
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-green-900 text-gray-200 pt-12 pb-6">
-      <div className="max-w-6xl mx-auto px-6 grid gap-10 sm:grid-cols-3">
+    <footer className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-green-900 text-gray-200 pt-16 pb-12">
 
-        {/* Logo + Description */}
-        <div>
-          <div className="flex items-center gap-3 mb-3">
-            <div className="bg-white/10 backdrop-blur-sm rounded-md p-2 flex items-center justify-center">
-              <img
-                src={logo}
-                alt="Tackles Logo"
-                className="h-10 w-auto object-contain"
-              />
+      {/* MAIN GRID */}
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_1fr] gap-4">
+
+        {/* LEFT COLUMN */}
+        <div className="flex flex-col justify-between">
+
+          {/* LOGO */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="bg-white p-2 rounded-md shadow-sm">
+              <img src={logo} alt="Tackles Logo" className="h-12 w-auto" />
             </div>
-            <h3 className="text-2xl font-semibold text-white tracking-wide">
+            <h3 className="text-3xl font-semibold tracking-wide text-white">
               Tackles
             </h3>
           </div>
 
-          {/* ⭐ UPDATED DESCRIPTION ONLY */}
-          <p className="text-sm leading-relaxed text-gray-300">
-            Tackles is an A-grade handyman company built on skill, reliability, 
-            and trust. Our team handles everything from small repairs to complete 
-            home and workplace improvements. We take care of plumbing, painting, 
-            electrical upgrades, AC installation, flooring, and general maintenance 
-            with the same level of attention and care. 
-            <br/> <br/>
-            Our goal is to make every space safer, cleaner, and more comfortable
-            while giving customers a service they can rely on any day of the
-            week.
-          </p>
-        </div>
+          {/* DESCRIPTION — THE REAL FIX: max-w-lg (WIDER) */}
+          <div className="text-[15px] leading-relaxed text-gray-300 max-w-lg space-y-4 mb-6">
+            <p>
+              Tackles provides reliable handyman and maintenance services for homes and workplaces. 
+              Our team focuses on clean work and steady support so your tasks feel easy to manage 
+              without unnecessary hassle or confusion.
+            </p>
 
-        {/* Browse More */}
-        <div>
-          <h4 className="text-lg font-semibold text-white mb-3">
-            Browse More
-          </h4>
-          <ul className="space-y-2">
-            {[
-              { name: "Team", href: "/team" },
-              { name: "Testimonials", href: "/testimonials" },
-              { name: "FAQs", href: "/faq" },
-              { name: "Privacy Policy", href: "/privacy-policy" },
-              { name: "Terms of Service", href: "/terms" },
-              { name: "Disclaimer", href: "/disclaimer" },
-            ].map((item) => (
-              <li key={item.name}>
+            <p>
+              From AC servicing and electrical work to plumbing, painting, flooring, and routine 
+              maintenance, we keep your space organised, safe, and comfortable with service you can 
+              depend on every single day.
+            </p>
+          </div>
+
+          {/* SOCIAL ICONS */}
+          <div className="flex items-center gap-5">
+            {[iconX, iconFacebook, iconLinkedIn, iconYouTube, iconTwitch, iconGithub].map(
+              (icon, i) => (
                 <a
-                  href={item.href}
-                  className="relative inline-block w-full px-3 py-1.5 text-gray-300 text-sm rounded-md
-                             hover:text-white transition-all duration-300
-                             before:absolute before:inset-0 before:rounded-md before:bg-gradient-to-r before:from-lime-600 before:to-emerald-700
-                             before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
-                             hover:shadow-lg hover:-translate-y-0.5 overflow-hidden"
+                  key={i}
+                  href="#"
+                  className="bg-white/10 p-2 rounded-full hover:bg-white/20 shadow-sm transition"
                 >
-                  <span className="relative z-10">{item.name}</span>
+                  <img src={icon} className="w-5 h-5" />
                 </a>
-              </li>
-            ))}
-          </ul>
+              )
+            )}
+          </div>
+
         </div>
 
-        {/* Services */}
-        <div>
-          <h4 className="text-lg font-semibold text-white mb-3">Services</h4>
-          <ul className="space-y-2">
-            {[
-              "Air Conditioning",
-              "Air Filtration",
-              "Electromechanical Equipment",
-              "Carpentry & Flooring",
-              "Engraving & Ornamentation",
-              "Plaster & Cladding",
-            ].map((service) => (
-              <li key={service}>
-                <span
-                  className="relative inline-block w-full px-3 py-1.5 text-gray-300 text-sm rounded-md
-                             hover:text-white transition-all duration-300
-                             before:absolute before:inset-0 before:rounded-md before:bg-gradient-to-r before:from-emerald-700 before:to-green-600
-                             before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
-                             hover:shadow-lg hover:-translate-y-0.5 overflow-hidden cursor-default"
-                >
-                  <span className="relative z-10">{service}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
+        {/* RIGHT GRID */}
+        <div className="grid grid-cols-2 gap-10">
+
+          {/* BROWSE MORE */}
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-4">Browse More</h4>
+            <ul className="space-y-2">
+              {[
+                { name: "Team", href: "/team" },
+                { name: "Testimonials", href: "/testimonials" },
+                { name: "FAQs", href: "/faq" },
+                { name: "Privacy Policy", href: "/privacy-policy" },
+                { name: "Terms of Service", href: "/terms" },
+                { name: "Disclaimer", href: "/disclaimer" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <a
+                    href={item.href}
+                    className="block text-sm px-2 py-1 rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* SERVICES */}
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-4">Services</h4>
+            <ul className="space-y-2">
+              {[
+                "Air Conditioning",
+                "Air Filtration",
+                "Electromechanical Equipment",
+                "Carpentry & Flooring",
+                "Engraving & Ornamentation",
+                "Plaster & Cladding",
+              ].map((service) => (
+                <li key={service}>
+                  <span
+                    className="block text-sm px-2 py-1 rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition cursor-default"
+                  >
+                    {service}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* SUBSCRIBE */}
+          <div className="col-span-2 mt-4 flex items-center gap-3">
+            <input
+              type="email"
+              placeholder="Enter your eMail address"
+              className="bg-white text-gray-700 text-sm px-4 py-2 rounded-md w-full outline-none"
+            />
+            <button className="px-5 py-2 bg-white text-emerald-900 font-semibold rounded-md hover:bg-emerald-100 transition">
+              Subscribe
+            </button>
+          </div>
+
         </div>
       </div>
 
-      {/* Divider */}
-      <div className="border-t border-emerald-800 mt-10 mb-6 mx-6"></div>
+      {/* DIVIDER */}
+      <div className="border-t border-emerald-800 mt-12 mb-6 mx-6 opacity-60"></div>
 
-      {/* Bottom Bar */}
+      {/* COPYRIGHT */}
       <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400">
         <p>© 2018 - 2024 Tackles Technical LLC. All Rights Reserved.</p>
+
         <p className="mt-2 sm:mt-0">
-          Technology Partner :{" "}
-          <span className="text-emerald-300 font-medium">Sriyog</span>
+          Technology Partner:{" "}
+          <span className="text-emerald-300 font-semibold tracking-wide">SRIYOG</span>
         </p>
       </div>
+
     </footer>
   );
 }
