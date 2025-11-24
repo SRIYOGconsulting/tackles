@@ -29,7 +29,7 @@ export default function Footer() {
             </h3>
           </div>
 
-          {/* DESCRIPTION — THE REAL FIX: max-w-lg (WIDER) */}
+          {/* DESCRIPTION */}
           <div className="text-[15px] leading-relaxed text-gray-300 max-w-lg space-y-4 mb-6">
             <p>
               Tackles provides reliable handyman and maintenance services for homes and workplaces. 
@@ -135,7 +135,14 @@ export default function Footer() {
 
         <p className="mt-2 sm:mt-0">
           Technology Partner:{" "}
-          <span className="text-emerald-300 font-semibold tracking-wide">SRIYOG</span>
+          <a
+            href="https://sriyognextjs.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-emerald-300 font-semibold tracking-wide hover:underline"
+          >
+            SRIYOG
+          </a>
         </p>
       </div>
 
