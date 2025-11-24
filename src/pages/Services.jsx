@@ -21,7 +21,7 @@ export default function Services() {
       className="mt-4 px-4 py-1 text-emerald-700 border border-emerald-700 rounded-full bg-white 
       text-sm font-semibold transition-transform duration-200 hover:scale-105"
     >
-      Book
+      Book a Service
     </button>
   );
 

@@ -50,10 +50,7 @@ export default function FAQ() {
             Frequently Asked Questions
           </h1>
 
-          {/* Placeholder for your logo — add image if needed */}
-          <div className="w-20 h-20 bg-emerald-100 rounded-xl flex items-center justify-center border border-emerald-300 text-emerald-700 font-bold">
-            Logo
-          </div>
+          
         </div>
 
         {/* FAQ BOXES */}
