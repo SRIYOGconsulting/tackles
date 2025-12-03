@@ -53,7 +53,7 @@ export default function Header() {
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-1.5">
               <button className="px-2 py-1 text-xs rounded-full bg-white text-green-800 border border-emerald-300 shadow-sm 
-              hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
+                hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
                 <img src={phoneIcon} alt="Phone" className="w-4 h-4" />
               </button>
 
@@ -64,7 +64,7 @@ export default function Header() {
 
             <div className="flex items-center gap-1.5">
               <button className="px-2 py-1 text-xs rounded-full bg-white text-green-800 border border-emerald-300 shadow-sm 
-              hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
+                hover:shadow-md hover:scale-105 hover:border-emerald-500 hover:bg-emerald-50 transition-all duration-300">
                 <img src={mailIcon} alt="Email" className="w-4 h-4" />
               </button>
 
@@ -119,19 +119,18 @@ export default function Header() {
 
           {/* NAVIGATION */}
           <div className="flex items-center gap-4">
-
             <nav
               className={`
                 sm:flex gap-3 
                 absolute sm:static left-0 w-full sm:w-auto 
                 bg-white sm:bg-transparent 
-                px-6 sm:px-0 py-4 sm:py-0 
+                px-6 sm:px-0 py-6 sm:py-0 
                 transition-all duration-300 
-                shadow-md sm:shadow-none z-40
-                ${menuOpen ? "top-16 opacity-100" : "top-[-500px] opacity-0 sm:opacity-100"}
+                shadow-lg sm:shadow-none z-40 rounded-b-2xl
+                ${menuOpen ? "top-16 opacity-100" : "top-[-450px] opacity-0 sm:opacity-100"}
               `}
             >
-              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 w-full">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 w-full text-center sm:text-left">
 
                 <NavLink
                   to="/"
@@ -176,10 +175,32 @@ export default function Header() {
                 >
                   Contact
                 </NavLink>
+
+                {/* BOOK A SERVICE INSIDE MENU FOR MOBILE */}
+                <button
+                  onClick={() => {
+                    navigate("/book");
+                    setMenuOpen(false);
+                    window.scrollTo(0, 0);
+                  }}
+                  className="
+                    sm:hidden 
+                    mt-4 px-5 py-2
+                    rounded-full font-semibold text-green-800
+                    bg-white border-2 border-green-700
+                    shadow-[0_0_8px_rgba(0,100,0,0.3)]
+                    hover:shadow-[0_0_12px_rgba(0,120,0,0.45)]
+                    hover:scale-105 active:scale-95
+                    transition-all duration-300
+                  "
+                >
+                  Book a Service
+                </button>
+
               </div>
             </nav>
 
-            {/* ⭐ NEW — BOOK A SERVICE BUTTON (WHITE, BORDER GREEN, GLOW) */}
+            {/* DESKTOP BOOK A SERVICE BUTTON */}
             <button
               onClick={() => {
                 navigate("/book");

@@ -14,7 +14,14 @@ export default function Footer() {
     <footer className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-green-900 text-gray-200 pt-16 pb-12">
 
       {/* MAIN GRID */}
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1fr_1fr] gap-4">
+      <div className="
+        max-w-7xl mx-auto px-6 
+        grid 
+        lg:grid-cols-[1fr_1fr] 
+        md:grid-cols-2 
+        grid-cols-1 
+        gap-10
+      ">
 
         {/* LEFT COLUMN */}
         <div className="flex flex-col justify-between">
@@ -30,7 +37,14 @@ export default function Footer() {
           </div>
 
           {/* DESCRIPTION */}
-          <div className="text-[15px] leading-relaxed text-gray-300 max-w-lg space-y-4 mb-6">
+          <div className="
+            text-[15px] 
+            leading-relaxed 
+            text-gray-300 
+            max-w-lg 
+            space-y-4 
+            mb-6
+          ">
             <p>
               Tackles provides reliable handyman and maintenance services for homes and workplaces. 
               Our team focuses on clean work and steady support so your tasks feel easy to manage 
@@ -45,7 +59,7 @@ export default function Footer() {
           </div>
 
           {/* SOCIAL ICONS */}
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4 flex-wrap">
             {[iconX, iconFacebook, iconLinkedIn, iconYouTube, iconTwitch, iconGithub].map(
               (icon, i) => (
                 <a
@@ -62,7 +76,12 @@ export default function Footer() {
         </div>
 
         {/* RIGHT GRID */}
-        <div className="grid grid-cols-2 gap-10">
+        <div className="
+          grid 
+          grid-cols-2 
+          sm:grid-cols-2 
+          gap-10
+        ">
 
           {/* BROWSE MORE */}
           <div>
@@ -79,7 +98,12 @@ export default function Footer() {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="block text-sm px-2 py-1 rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition"
+                    className="
+                      block text-sm px-2 py-1 
+                      rounded-md text-gray-300 
+                      hover:bg-white/10 hover:text-white 
+                      transition
+                    "
                   >
                     {item.name}
                   </a>
@@ -102,7 +126,12 @@ export default function Footer() {
               ].map((service) => (
                 <li key={service}>
                   <span
-                    className="block text-sm px-2 py-1 rounded-md text-gray-300 hover:bg-white/10 hover:text-white transition cursor-default"
+                    className="
+                      block text-sm px-2 py-1 
+                      rounded-md text-gray-300 
+                      hover:bg-white/10 hover:text-white 
+                      transition cursor-default
+                    "
                   >
                     {service}
                   </span>
@@ -112,13 +141,33 @@ export default function Footer() {
           </div>
 
           {/* SUBSCRIBE */}
-          <div className="col-span-2 mt-4 flex items-center gap-3">
+          <div className="
+            col-span-2 
+            mt-4 
+            flex 
+            flex-col 
+            sm:flex-row 
+            items-center 
+            gap-3
+          ">
             <input
               type="email"
               placeholder="Enter your eMail address"
-              className="bg-white text-gray-700 text-sm px-4 py-2 rounded-md w-full outline-none"
+              className="
+                bg-white text-gray-700 
+                text-sm px-4 py-2 
+                rounded-md w-full 
+                outline-none
+              "
             />
-            <button className="px-5 py-2 bg-white text-emerald-900 font-semibold rounded-md hover:bg-emerald-100 transition">
+            <button className="
+              px-5 py-2 
+              bg-white text-emerald-900 
+              font-semibold rounded-md 
+              hover:bg-emerald-100 
+              transition
+              w-full sm:w-auto
+            ">
               Subscribe
             </button>
           </div>
@@ -130,10 +179,18 @@ export default function Footer() {
       <div className="border-t border-emerald-800 mt-12 mb-6 mx-6 opacity-60"></div>
 
       {/* COPYRIGHT */}
-      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400">
-        <p>© 2018 - 2024 Tackles Technical LLC. All Rights Reserved.</p>
+      <div className="
+        max-w-6xl mx-auto px-6 
+        flex flex-col sm:flex-row 
+        justify-between items-center 
+        text-sm text-gray-400 
+        text-center sm:text-left
+      ">
+        <p className="leading-relaxed">
+          © 2018 - 2024 Tackles Technical LLC. All Rights Reserved.
+        </p>
 
-        <p className="mt-2 sm:mt-0">
+        <p className="mt-2 sm:mt-0 leading-relaxed">
           Technology Partner:{" "}
           <a
             href="https://sriyognextjs.vercel.app/"

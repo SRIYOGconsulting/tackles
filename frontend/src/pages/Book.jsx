@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // ⭐ ADDED
 import bookingImg from "../assets/images/booking.png";
 
 // ⭐ FLAG ICONS
@@ -13,6 +14,7 @@ export default function Book() {
   // Close dropdown when clicking outside
   const locationRef = useRef();
   const phoneRef = useRef();
+  const serviceRef = useRef();
 
   useEffect(() => {
     document.title = "Book Appointment | Tackles";
@@ -23,6 +25,9 @@ export default function Book() {
       }
       if (phoneRef.current && !phoneRef.current.contains(e.target)) {
         setShowPhoneFlags(false);
+      }
+      if (serviceRef.current && !serviceRef.current.contains(e.target)) {
+        setShowSuggestions(false);
       }
     };
 
@@ -40,8 +45,8 @@ export default function Book() {
     location: "",
     requiredService: "",
     phone: "",
+    budgetCurrency: "AED", // ⭐ UPDATED
     budget: "",
-    emirates: "",
     description: "",
     locationFlag: flagUAE,
     phoneFlag: flagUAE,
@@ -58,6 +63,13 @@ export default function Book() {
     { name: "UAE", icon: flagUAE },
     { name: "USA", icon: flagUSA },
     { name: "Australia", icon: flagAUS },
+  ];
+
+  // ⭐ Currency options with symbols
+  const currencyOptions = [
+    { code: "AED", symbol: "د.إ" },
+    { code: "USD", symbol: "$" },
+    { code: "AUD", symbol: "A$" }
   ];
 
   const servicesList = [
@@ -86,14 +98,33 @@ export default function Book() {
     setShowSuggestions(false);
   };
 
-  const handleSubmit = (e) => {
+  // ⭐ UPDATED handleSubmit
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Appointment booked successfully!");
-    navigate("/results");
+    setLoading("sending");
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/bookings", form);
+      console.log("Saved:", res.data);
+
+      alert("Appointment booked successfully!");
+      setLoading("done");
+    } catch (err) {
+      console.log(err);
+      alert("Failed to submit. Check console.");
+      setLoading(false);
+    }
   };
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-emerald-900 via-emerald-800 to-emerald-700 flex flex-col items-center justify-center py-20 px-6">
+      <style>{`
+        input[type="date"]::-webkit-calendar-picker-indicator {
+          position: absolute;
+          right: 0.5rem;
+          cursor: pointer;
+        }
+      `}</style>
 
       {/* HEADER */}
       <div className="flex flex-col sm:flex-row items-center justify-between w-full max-w-5xl mb-10">
@@ -146,7 +177,7 @@ export default function Book() {
             />
           </div>
 
-          {/* Start date */}
+          {/* Start Date */}
           <div>
             <label className="block text-sm font-semibold text-emerald-900 mb-1">Start Date *</label>
             <input
@@ -155,11 +186,11 @@ export default function Book() {
               value={form.startDate}
               onChange={handleChange}
               required
-              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 appearance-none relative"
             />
           </div>
 
-          {/* End date */}
+          {/* End Date */}
           <div>
             <label className="block text-sm font-semibold text-emerald-900 mb-1">End Date *</label>
             <input
@@ -168,7 +199,7 @@ export default function Book() {
               value={form.endDate}
               onChange={handleChange}
               required
-              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 appearance-none relative"
             />
           </div>
 
@@ -180,7 +211,15 @@ export default function Book() {
               value={form.shifts}
               onChange={handleChange}
               required
-              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 appearance-none bg-white"
+              style={{
+                paddingRight: "2.5rem",
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")",
+                backgroundPosition: "right 0.5rem center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "1.5em 1.5em",
+              }}
             >
               <option value="">Select shift</option>
               <option value="Morning">Morning</option>
@@ -197,7 +236,15 @@ export default function Book() {
               value={form.priority}
               onChange={handleChange}
               required
-              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 appearance-none bg-white"
+              style={{
+                paddingRight: "2.5rem",
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")",
+                backgroundPosition: "right 0.5rem center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "1.5em 1.5em",
+              }}
             >
               <option value="">Select priority</option>
               <option>Normal</option>
@@ -206,19 +253,26 @@ export default function Book() {
             </select>
           </div>
 
-          {/* LOCATION WITH FLAG — FIXED DROPDOWN */}
+          {/* LOCATION WITH FLAG */}
           <div ref={locationRef}>
             <label className="block text-sm font-semibold text-emerald-900 mb-1">Location *</label>
 
-            <div className="flex items-center gap-3 relative">
-
+            <div className="flex items-stretch gap-3 relative">
               {/* Flag Button */}
               <button
                 type="button"
                 onClick={() => setShowLocationFlags(!showLocationFlags)}
-                className="border border-emerald-300 rounded-lg px-3 py-2 bg-white flex items-center gap-2 shadow-sm hover:bg-emerald-50"
+                className="border border-emerald-300 rounded-lg px-3 py-2.5 bg-white flex items-center justify-center gap-1.5 shadow-sm hover:bg-emerald-50 min-h-[42px]"
               >
-                <img src={form.locationFlag} className="w-6 h-6" />
+                <img src={form.locationFlag} className="w-6 h-6" alt="Location flag" />
+                <svg
+                  className="w-3.5 h-3.5 text-emerald-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
               </button>
 
               {/* Dropdown */}
@@ -240,7 +294,7 @@ export default function Book() {
                 </div>
               )}
 
-              {/* Text input */}
+              {/* Text Input */}
               <input
                 type="text"
                 name="location"
@@ -253,30 +307,50 @@ export default function Book() {
             </div>
           </div>
 
-          {/* REQUIRED SERVICE AUTOCOMPLETE */}
-          <div className="relative">
+          {/* ⭐ REQUIRED SERVICE WITH DROPDOWN BUTTON ADDED */}
+          <div className="relative" ref={serviceRef}>
             <label className="block text-sm font-semibold text-emerald-900 mb-1">
               Required Service *
             </label>
 
-            <input
-              type="text"
-              name="requiredService"
-              value={form.requiredService}
-              onChange={(e) => {
-                handleChange(e);
-                setShowSuggestions(true);
-              }}
-              onFocus={() => setShowSuggestions(true)}
-              onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-              required
-              placeholder="Type or choose a service"
-              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
-            />
+            <div className="flex items-center gap-3 relative">
 
+              {/* Input */}
+              <input
+                type="text"
+                name="requiredService"
+                value={form.requiredService}
+                onChange={(e) => {
+                  handleChange(e);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+                placeholder="Type or choose a service"
+                required
+                className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+              />
+
+              {/* ⭐ NEW DROPDOWN BUTTON */}
+              <button
+                type="button"
+                onClick={() => setShowSuggestions(!showSuggestions)}
+                className="border border-emerald-300 rounded-lg px-3 py-2 bg-white shadow-sm hover:bg-emerald-50"
+              >
+                <svg
+                  className="w-4 h-4 text-emerald-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Suggestions */}
             {showSuggestions && (
               <div className="absolute z-20 w-full bg-white border border-emerald-200 rounded-lg shadow-md mt-1 max-h-48 overflow-y-auto">
-                {filteredServices.map((service, i) => (
+                {filteredServices.map((service, i) =>
                   <div
                     key={i}
                     onMouseDown={() => selectService(service)}
@@ -284,25 +358,32 @@ export default function Book() {
                   >
                     {service}
                   </div>
-                ))}
+                )}
               </div>
             )}
           </div>
 
-          {/* PHONE WITH FLAG — FIXED DROPDOWN */}
+          {/* PHONE WITH FLAG */}
           <div ref={phoneRef}>
             <label className="block text-sm font-semibold text-emerald-900 mb-1">
               Phone Number *
             </label>
 
-            <div className="flex items-center gap-3 relative">
-
+            <div className="flex items-stretch gap-3 relative">
               <button
                 type="button"
                 onClick={() => setShowPhoneFlags(!showPhoneFlags)}
-                className="border border-emerald-300 rounded-lg px-3 py-2 bg-white flex items-center gap-2 shadow-sm hover:bg-emerald-50"
+                className="border border-emerald-300 rounded-lg px-3 py-2.5 bg-white flex items-center justify-center gap-1.5 shadow-sm hover:bg-emerald-50 min-h-[42px]"
               >
-                <img src={form.phoneFlag} className="w-6 h-6" />
+                <img src={form.phoneFlag} className="w-6 h-6" alt="Phone flag" />
+                <svg
+                  className="w-3.5 h-3.5 text-emerald-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
               </button>
 
               {showPhoneFlags && (
@@ -335,39 +416,38 @@ export default function Book() {
             </div>
           </div>
 
-          {/* Budget */}
+          {/* ⭐ UPDATED BUDGET WITH CURRENCY & SYMBOLS */}
           <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Budget *</label>
-            <input
-              type="text"
-              name="budget"
-              value={form.budget}
-              onChange={handleChange}
-              required
-              placeholder="Enter your budget"
-              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
-            />
-          </div>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Budget *
+            </label>
 
-          {/* Emirates */}
-          <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Emirates *</label>
-            <select
-              name="emirates"
-              value={form.emirates}
-              onChange={handleChange}
-              required
-              className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
-            >
-              <option value="">Select Emirates</option>
-              <option>Dubai</option>
-              <option>Abu Dhabi</option>
-              <option>Sharjah</option>
-              <option>Ajman</option>
-              <option>Ras Al Khaimah</option>
-              <option>Umm Al Quwain</option>
-              <option>Fujairah</option>
-            </select>
+            <div className="flex gap-3">
+              {/* Currency Dropdown */}
+              <select
+                name="budgetCurrency"
+                value={form.budgetCurrency}
+                onChange={handleChange}
+                className="border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 bg-white"
+              >
+                {currencyOptions.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.code} ({c.symbol})
+                  </option>
+                ))}
+              </select>
+
+              {/* Amount Input */}
+              <input
+                type="text"
+                name="budget"
+                value={form.budget}
+                onChange={handleChange}
+                required
+                placeholder="Enter amount"
+                className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
+              />
+            </div>
           </div>
 
           {/* Description */}
@@ -389,7 +469,9 @@ export default function Book() {
               type="submit"
               className="bg-gradient-to-r from-emerald-700 via-green-700 to-lime-600 hover:from-emerald-800 hover:via-green-800 hover:to-lime-700 text-white px-10 py-3 rounded-lg text-lg font-semibold shadow-lg transition-all duration-300"
             >
-              {loading ? "Submitting..." : "Submit"}
+              {loading === "sending" && "Submitting..."}
+              {loading === "done" && "Submitted ✓"}
+              {loading === false && "Submit"}
             </button>
           </div>
 
