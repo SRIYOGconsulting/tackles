@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // ⭐ Import PNG images
 import p1 from "../assets/testimonials/p1.png";
@@ -45,8 +45,6 @@ const reviews = [
     country: "Brazil",
     img: p3,
   },
-
-  // continue rest (same structure)
   {
     place: "Dubai Mall",
     task: "Wall Paper Fixing",
@@ -158,8 +156,17 @@ const reviews = [
 ];
 
 export default function Testimonials() {
+  const [newTestimonials, setNewTestimonials] = useState([]);
+
   useEffect(() => {
     document.title = "Testimonials | Tackles";
+
+    fetch("http://localhost:5000/api/testimonials")
+      .then((res) => res.json())
+      .then((data) => {
+        setNewTestimonials(data);
+      })
+      .catch((err) => console.log("Error fetching testimonials:", err));
   }, []);
 
   return (
@@ -175,12 +182,13 @@ export default function Testimonials() {
         </p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
+
+          {/* STATIC REVIEWS */}
           {reviews.map((r, i) => (
             <div
               key={i}
               className="bg-white rounded-3xl p-8 shadow-xl border border-emerald-200 hover:shadow-emerald-300/50 hover:-translate-y-1 transition-all duration-300"
             >
-              {/* IMAGE IDENTIFICATION BLOCK */}
               <div className="flex flex-col items-center mb-6">
                 <img
                   src={r.img}
@@ -191,25 +199,60 @@ export default function Testimonials() {
                 <p className="text-gray-500 text-sm">{r.country}</p>
               </div>
 
-              {/* DIVIDER */}
               <div className="w-full h-px bg-gray-200 my-5"></div>
 
-              {/* WORK INFO BLOCK */}
               <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
                 <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-emerald-800">Place:</span> {r.place}
+                  <span className="font-semibold text-emerald-800">Place:</span>{" "}
+                  {r.place}
                 </p>
                 <p className="text-sm text-gray-700 mt-1">
-                  <span className="font-semibold text-emerald-800">Work Done:</span> {r.task}
+                  <span className="font-semibold text-emerald-800">Work Done:</span>{" "}
+                  {r.task}
                 </p>
               </div>
 
-              {/* REVIEW */}
               <p className="text-gray-800 text-center leading-relaxed italic">
                 “{r.review}”
               </p>
             </div>
           ))}
+
+          {/* BACKEND TESTIMONIALS */}
+          {newTestimonials.map((t, i) => (
+            <div
+              key={`db-${i}`}
+              className="bg-white rounded-3xl p-8 shadow-xl border border-emerald-200 hover:shadow-emerald-300/50 hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="flex flex-col items-center mb-6">
+                <img
+                  src={`http://localhost:5000${t.photoUrl}`}
+                  alt={t.name}
+                  className="w-28 h-28 rounded-full object-cover ring-4 ring-emerald-600 shadow-md mb-4"
+                />
+                <h3 className="text-xl font-bold text-emerald-800">{t.name}</h3>
+                <p className="text-gray-500 text-sm">{t.country}</p>
+              </div>
+
+              <div className="w-full h-px bg-gray-200 my-5"></div>
+
+              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
+                <p className="text-sm text-gray-700">
+                  <span className="font-semibold text-emerald-800">Place:</span>{" "}
+                  {t.place}
+                </p>
+                <p className="text-sm text-gray-700 mt-1">
+                  <span className="font-semibold text-emerald-800">Work Done:</span>{" "}
+                  {t.workDone}
+                </p>
+              </div>
+
+              <p className="text-gray-800 text-center leading-relaxed italic">
+                “{t.message}”
+              </p>
+            </div>
+          ))}
+
         </div>
       </div>
     </section>

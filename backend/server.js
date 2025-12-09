@@ -1,13 +1,21 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import bookingRoutes from './routes/booking.js';
+import testimonialRoutes from "./routes/testimonialRoutes.js";  // ✅ FIXED
 import connectDB from "./config/db.js";
 
-// Load environment variables FIRST
+// Fix __dirname in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables
 dotenv.config();
 
-// Connect to MongoDB AFTER environment variables are loaded
+// Connect to MongoDB
 connectDB();
 
 const app = express();
@@ -18,8 +26,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ⭐ IMPORTANT: Make uploads folder accessible
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Routes
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/testimonials', testimonialRoutes); // <-- Now works
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -37,7 +49,8 @@ app.get('/', (req, res) => {
         version: '1.0.0',
         endpoints: {
             health: '/api/health',
-            bookings: '/api/bookings'
+            bookings: '/api/bookings',
+            testimonials: '/api/testimonials'
         }
     });
 });
@@ -63,6 +76,7 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`);
     console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`📂 Uploads served from: http://localhost:${PORT}/uploads`);
     console.log(`✅ API endpoints available at http://localhost:${PORT}/api`);
 });
 

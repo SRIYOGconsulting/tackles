@@ -3,12 +3,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"; // ⭐ ADDED
 import bookingImg from "../assets/images/booking.png";
 
+
 // ⭐ FLAG ICONS
 import flagUAE from "../assets/icons/flags/uae.svg";
 import flagUSA from "../assets/icons/flags/usa.svg";
 import flagAUS from "../assets/icons/flags/australia.svg";
 
+import TestimonialForm from "../components/TestimonialForm";
+
 export default function Book() {
+
+
   const navigate = useNavigate();
 
   // Close dropdown when clicking outside
@@ -53,6 +58,8 @@ export default function Book() {
   });
 
   const [loading, setLoading] = useState(false);
+
+  const [bookingSubmitted, setBookingSubmitted] = useState(false);  // added
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   // ⭐ NEW — Dropdown toggles
@@ -109,6 +116,8 @@ export default function Book() {
 
       alert("Appointment booked successfully!");
       setLoading("done");
+
+      setBookingSubmitted(true); // added
     } catch (err) {
       console.log(err);
       alert("Failed to submit. Check console.");
@@ -477,6 +486,20 @@ export default function Book() {
 
         </form>
       </div>
-    </section>
+    
+      {bookingSubmitted && (
+        <div className="max-w-5xl w-full bg-white/95 rounded-2xl shadow-xl p-8 border border-emerald-200 mt-10">
+          <h3 className="text-2xl font-semibold text-emerald-900 mb-2">
+            Is your service completed?
+          </h3>
+          <p className="text-emerald-800 mb-6">
+            Fill out the testimonials form and share your experience with TACKLES.
+          </p>
+
+          <TestimonialForm />
+        </div>
+      )}
+
+    </section>  
   );
 }

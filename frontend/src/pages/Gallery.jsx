@@ -13,11 +13,12 @@ import image11 from "../assets/gallery/image11.png";
 import image12 from "../assets/gallery/image12.png";
 
 export default function Gallery() {
-
+  
   // ⭐ Set tab title
-  useEffect(() => {
+  useEffect(() => {   
     document.title = "Gallery | Tackles";
-  }, []);
+  }, []);  
+  
 
   const images = [
     {
