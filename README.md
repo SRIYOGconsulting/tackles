@@ -1,78 +1,54 @@
 Tackles – Full Stack Application
 
-Tackles is a complete home maintenance and service booking platform built with a React frontend and a Node.js/Express backend. The system handles service listings, booking submissions, testimonial uploads, and provides a clean architecture for future features.
+Tackles is a full stack home maintenance and service booking platform built with a React frontend and a Node.js/Express backend. The application allows users to submit service bookings and testimonials, while maintaining a modular and scalable code structure.
 
 Overview
 
-The goal of Tackles is to offer users a simple way to book home services like painting, cleaning, plumbing, AC maintenance, and more.
-On the admin side, the structure is ready for expansion into a dashboard where bookings, testimonials, and service data can be managed.
+The purpose of the Tackles application is to provide a simple and efficient way for users to book home services such as painting, cleaning, AC repair, plumbing, and more.
+The backend handles bookings, testimonials, and file uploads, while the frontend presents a clean UI for interacting with these features.
 
-📁 Project Structure
+Project Structure
 tackles/
-├── frontend/                  # React + Vite application (client)
-│   ├── src/                  # Components, pages, utils
-│   ├── public/               # Static assets (images, icons, etc.)
+├── frontend/                  # React + Vite application
+│   ├── src/                  # Components, pages, utilities
+│   ├── public/               # Static assets
 │   └── README.md             # Frontend-specific documentation
 │
 └── backend/                   # Node.js + Express API server
-    ├── routes/               # API route handlers
-    ├── models/               # Mongoose models (Bookings, Testimonials, etc.)
-    ├── uploads/              # Uploaded testimonial images
-    ├── server.js             # Main application entry point
+    ├── routes/               # API routes
+    ├── models/               # Mongoose models
+    ├── uploads/              # Uploaded images
+    ├── server.js             # Main server file
     └── README.md             # Backend-specific documentation
 
-🚀 Getting Started
-1. Frontend Setup
+Getting Started
+Frontend Setup
 cd frontend
 npm install
 npm run dev
 
 
-Frontend runs at:
+Frontend runs on:
 http://localhost:5173
 
-2. Backend Setup
+Backend Setup
 cd backend
 npm install
 npm run dev
 
 
-Backend runs at:
+Backend runs on:
 http://localhost:5000
 
-📚 Documentation
+Documentation
 
-This project contains dedicated documentation for both environments:
+Separate documentation files are included for clarity:
 
-📄 Frontend Documentation
-Located at:
-frontend/README.md
-Includes details for:
+Frontend documentation: frontend/README.md
 
-Folder structure
+Backend documentation: backend/README.md
 
-Environment variables
-
-Routes and components
-
-UI flow & usage
-
-📄 Backend Documentation
-Located at:
-backend/README.md
-Includes information on:
-
-API endpoints
-
-Models
-
-File uploads (Multer)
-
-MongoDB connection
-
-Environment configuration
-
-🔗 Tech Stack
+Tech Stack
 Frontend
 
 React
@@ -81,7 +57,7 @@ Vite
 
 React Router
 
-Tailwind CSS / CSS3
+CSS3 / Tailwind CSS
 
 Axios
 
@@ -99,25 +75,23 @@ CORS
 
 dotenv
 
-Multer (file uploads)
+Multer for file uploads
 
-🧩 Core Features
+Core Features
 
-Service booking form
+Service booking form system
 
-Photo uploads for testimonials
+Testimonial submission with image upload
 
-Admin-ready API routes
+REST API for handling bookings and testimonials
 
-Modular code structure (easy to expand)
+Organized folder structure for scalability
 
-Separate frontend & backend documentation
+Static file handling for uploaded images
 
-Static assets served from public and uploads directories
+Separate environment configurations for frontend and backend
 
-Local development support for both client and server
-
-📦 Installation (Full Project)
+Installation (Full Project)
 
 Clone the repository:
 
@@ -125,8 +99,8 @@ git clone https://github.com/yourusername/tackles.git
 cd tackles
 
 
-Then follow the frontend and backend setup instructions above.
+Then follow the setup steps for both the frontend and backend.
 
-📝 License
+License
 
-ISC License
+ISC
