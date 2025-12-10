@@ -1,76 +1,79 @@
-DashBoard
+Tackles – Full Stack Application
 
-Universal Dashboard
+Tackles is a complete home maintenance and service booking platform built with a React frontend and a Node.js/Express backend. The system handles service listings, booking submissions, testimonial uploads, and provides a clean architecture for future features.
 
-Universal Dashboard
+Overview
 
-A comprehensive home maintenance and service booking application built with a full MERN Stack architecture. This dashboard structure helps manage the project cleanly while keeping the frontend and backend organized.
-
-Features
-
-The system includes all core functionalities required to run a service-based application:
-
-Service Booking Management
-
-User Interface for Home Maintenance Services
-
-API Server for Handling Appointments, Testimonials, and Other Data
-
-Modular Structure for Easy Scalability
-
-Reusable Dashboard Layout for managing website data across multiple modules.
-
-Technology Stack
-
-The project is developed using the MERN Stack:
-
-MongoDB: Stores booking data, testimonials, and other backend collections.
-
-Express.js: Backend API framework used in the Tackles server.
-
-React.js (Vite): Frontend UI for the main application.
-
-Node.js: Server runtime environment for backend operations.
+The goal of Tackles is to offer users a simple way to book home services like painting, cleaning, plumbing, AC maintenance, and more.
+On the admin side, the structure is ready for expansion into a dashboard where bookings, testimonials, and service data can be managed.
 
 📁 Project Structure
 tackles/
-├── frontend/          # React + Vite frontend application
-│   ├── src/          # Source code
-│   ├── public/       # Static assets
-│   └── ...
-└── backend/          # Node.js + Express API server
-    ├── routes/       # API routes
-    ├── server.js     # Main server file
-    └── ...
+├── frontend/                  # React + Vite application (client)
+│   ├── src/                  # Components, pages, utils
+│   ├── public/               # Static assets (images, icons, etc.)
+│   └── README.md             # Frontend-specific documentation
+│
+└── backend/                   # Node.js + Express API server
+    ├── routes/               # API route handlers
+    ├── models/               # Mongoose models (Bookings, Testimonials, etc.)
+    ├── uploads/              # Uploaded testimonial images
+    ├── server.js             # Main application entry point
+    └── README.md             # Backend-specific documentation
 
 🚀 Getting Started
-Frontend Setup
+1. Frontend Setup
 cd frontend
 npm install
 npm run dev
 
 
-The frontend will run on:
+Frontend runs at:
 http://localhost:5173
 
-Backend Setup
+2. Backend Setup
 cd backend
 npm install
 npm run dev
 
 
-The backend API will run on:
+Backend runs at:
 http://localhost:5000
 
 📚 Documentation
 
-Frontend Documentation: frontend/README.md
+This project contains dedicated documentation for both environments:
 
-Backend API Documentation: backend/README.md
+📄 Frontend Documentation
+Located at:
+frontend/README.md
+Includes details for:
+
+Folder structure
+
+Environment variables
+
+Routes and components
+
+UI flow & usage
+
+📄 Backend Documentation
+Located at:
+backend/README.md
+Includes information on:
+
+API endpoints
+
+Models
+
+File uploads (Multer)
+
+MongoDB connection
+
+Environment configuration
 
 🔗 Tech Stack
-
-Frontend:
+Frontend
 
 React
 
@@ -78,25 +81,52 @@ Vite
 
 React Router
 
-CSS3
+Tailwind CSS / CSS3
 
-Backend:
+Axios
+
+Backend
 
 Node.js
 
 Express
 
+MongoDB
+
+Mongoose
+
 CORS
 
 dotenv
 
-Installation
+Multer (file uploads)
 
-Clone the repository
+🧩 Core Features
 
-git clone https://github.com/BroadPress/DashBoard
-cd universal-dashboard
+Service booking form
+
+Photo uploads for testimonials
+
+Admin-ready API routes
+
+Modular code structure (easy to expand)
+
+Separate frontend & backend documentation
+
+Static assets served from public and uploads directories
+
+Local development support for both client and server
+
+📦 Installation (Full Project)
+
+Clone the repository:
+
+git clone https://github.com/yourusername/tackles.git
+cd tackles
+
+
+Then follow the frontend and backend setup instructions above.
 
 📝 License
 
-ISC
+ISC License
