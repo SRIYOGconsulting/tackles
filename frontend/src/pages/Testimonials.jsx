@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // ⭐ Import PNG images
 import p1 from "../assets/testimonials/p1.png";
@@ -157,6 +158,7 @@ const reviews = [
 
 export default function Testimonials() {
   const [newTestimonials, setNewTestimonials] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Testimonials | Tackles";
@@ -177,7 +179,7 @@ export default function Testimonials() {
           What People Say?
         </h1>
 
-        <p className="text-center text-gray-700 text-lg mb-14">
+        <p className="text-center text-gray-700 text-lg mb-10">
           Trusted feedback from our clients across Dubai
         </p>
 
@@ -254,6 +256,17 @@ export default function Testimonials() {
           ))}
 
         </div>
+
+        {/* Feedback button */}
+        <div className="flex justify-center mt-16">
+          <button
+            onClick={() => navigate("/feedback")}
+            className="px-8 py-4 rounded-full bg-emerald-700 text-white font-semibold text-lg hover:bg-emerald-800 transition"
+          >
+            Give Your Feedback
+          </button>
+        </div>
+
       </div>
     </section>
   );

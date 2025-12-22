@@ -9,7 +9,6 @@ import flagUAE from "../assets/icons/flags/uae.svg";
 import flagUSA from "../assets/icons/flags/usa.svg";
 import flagAUS from "../assets/icons/flags/australia.svg";
 
-import TestimonialForm from "../components/TestimonialForm";
 
 export default function Book() {
 
@@ -60,6 +59,8 @@ export default function Book() {
   const [loading, setLoading] = useState(false);
 
   const [bookingSubmitted, setBookingSubmitted] = useState(false);  // added
+  const [serviceCompleted, setServiceCompleted] = useState(null); // ⭐ NEW
+
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   // ⭐ NEW — Dropdown toggles
@@ -493,10 +494,54 @@ export default function Book() {
             Is your service completed?
           </h3>
           <p className="text-emerald-800 mb-6">
-            Fill out the testimonials form and share your experience with TACKLES.
+            If your service is completed, you can share your experience in the Testimonials page.
           </p>
 
-          <TestimonialForm />
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <button
+              type="button"
+              onClick={() => setServiceCompleted(true)}
+              className={`px-6 py-3 rounded-lg font-semibold shadow-md border transition-all duration-300 ${
+                serviceCompleted === true
+                  ? "bg-emerald-700 text-white border-emerald-700"
+                  : "bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-50"
+              }`}
+            >
+              Yes, completed
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setServiceCompleted(false)}
+              className={`px-6 py-3 rounded-lg font-semibold shadow-md border transition-all duration-300 ${
+                serviceCompleted === false
+                  ? "bg-emerald-700 text-white border-emerald-700"
+                  : "bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-50"
+              }`}
+            >
+              Not yet
+            </button>
+          </div>
+
+          {serviceCompleted === true && (
+            <div className="mt-6 bg-emerald-50 border border-emerald-200 rounded-xl p-5">
+              <p className="text-emerald-900 font-semibold mb-3">
+                Want to leave a testimonial?
+              </p>
+
+              <button
+                type="button"
+                onClick={() => navigate("/testimonial-form")}
+                className="bg-gradient-to-r from-emerald-700 via-green-700 to-lime-600 hover:from-emerald-800 hover:via-green-800 hover:to-lime-700 text-white px-8 py-3 rounded-lg text-base sm:text-lg font-semibold shadow-lg transition-all duration-300"
+              >
+                Fill out Testimonials
+              </button>
+
+              <p className="text-sm text-emerald-800 mt-3">
+                You’ll be redirected to the Testimonials page to submit your review.
+              </p>
+            </div>
+          )}
         </div>
       )}
 

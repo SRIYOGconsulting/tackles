@@ -15,6 +15,7 @@ import Gallery from "./pages/Gallery.jsx";
 import Team from "./pages/Team.jsx";
 import Testimonials from "./pages/Testimonials.jsx";
 import FAQ from "./pages/FAQ.jsx";
+import Feedback from "./pages/Feedback.jsx"; // ✅ NEW
 
 // ⭐ NEW — Privacy Policy Page
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
@@ -22,9 +23,8 @@ import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 // ⭐ NEW — Terms of Service Page
 import Terms from "./pages/Terms.jsx";
 
-// ⭐ NEW — Disclaimer Page
+// ⭐ NEW — Disclaimer Page     
 import Disclaimer from "./pages/Disclaimer.jsx";
-
 
 // 🧭 Router setup
 const router = createBrowserRouter([
@@ -38,7 +38,9 @@ const router = createBrowserRouter([
       { path: "/book", element: <Book /> },
       { path: "/gallery", element: <Gallery /> },
       { path: "/team", element: <Team /> },
+
       { path: "/testimonials", element: <Testimonials /> },
+      { path: "/feedback", element: <Feedback /> }, // ✅ NEW
       { path: "/faq", element: <FAQ /> },
 
       // ⭐ NEW — Privacy Policy Route
