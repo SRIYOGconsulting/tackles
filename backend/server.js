@@ -1,12 +1,11 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-import bookingRoutes from './routes/booking.js';
-import testimonialRoutes from "./routes/testimonialRoutes.js";  // ✅ FIXED
+import bookingRoutes from "./routes/booking.js";
+import testimonialRoutes from "./routes/testimonialRoutes.js";
 import connectDB from "./config/db.js";
 
 // Fix __dirname in ES Modules
@@ -22,63 +21,85 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// =====================
 // Middleware
+// =====================
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ⭐ IMPORTANT: Make uploads folder accessible
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// =====================
+// Serve uploaded images (CRITICAL)
+// =====================
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "uploads"))
+);
 
+// =====================
 // Routes
-app.use('/api/bookings', bookingRoutes);
-app.use('/api/testimonials', testimonialRoutes); // <-- Now works
+// =====================
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/testimonials", testimonialRoutes);
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-    res.status(200).json({
-        status: 'OK',
-        message: 'Tackles Backend API is running',
-        timestamp: new Date().toISOString()
-    });
+// =====================
+// Health check
+// =====================
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "Tackles Backend API is running",
+    timestamp: new Date().toISOString(),
+  });
 });
 
+// =====================
 // Root endpoint
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Welcome to Tackles Backend API',
-        version: '1.0.0',
-        endpoints: {
-            health: '/api/health',
-            bookings: '/api/bookings',
-            testimonials: '/api/testimonials'
-        }
-    });
+// =====================
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to Tackles Backend API",
+    version: "1.0.0",
+    endpoints: {
+      health: "/api/health",
+      bookings: "/api/bookings",
+      testimonials: "/api/testimonials",
+    },
+  });
 });
 
+// =====================
 // 404 handler
+// =====================
 app.use((req, res) => {
-    res.status(404).json({
-        error: 'Not Found',
-        message: `Cannot ${req.method} ${req.url}`
-    });
+  res.status(404).json({
+    error: "Not Found",
+    message: `Cannot ${req.method} ${req.url}`,
+  });
 });
 
-// Error handling middleware
+// =====================
+// Error handler
+// =====================
 app.use((err, req, res, next) => {
-    console.error('Error:', err.stack);
-    res.status(500).json({
-        error: 'Internal Server Error',
-        message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
-    });
+  console.error("Error:", err.stack);
+  res.status(500).json({
+    error: "Internal Server Error",
+    message:
+      process.env.NODE_ENV === "development"
+        ? err.message
+        : "Something went wrong",
+  });
 });
 
+// =====================
 // Start server
+// =====================
 app.listen(PORT, () => {
-    console.log(`🚀 Server is running on http://localhost:${PORT}`);
-    console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`📂 Uploads served from: http://localhost:${PORT}/uploads`);
-    console.log(`✅ API endpoints available at http://localhost:${PORT}/api`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`📝 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`📂 Uploads served at http://localhost:${PORT}/uploads`);
+  console.log(`✅ API base: http://localhost:${PORT}/api`);
 });
 
 export default app;

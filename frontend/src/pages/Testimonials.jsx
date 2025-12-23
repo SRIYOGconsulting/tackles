@@ -163,12 +163,21 @@ export default function Testimonials() {
   useEffect(() => {
     document.title = "Testimonials | Tackles";
 
-    fetch("http://localhost:5000/api/testimonials")
+    fetch("http://localhost:5000/api/testimonials/approved")
       .then((res) => res.json())
       .then((data) => {
-        setNewTestimonials(data);
+        // ✅ FIX: guard against non-array responses
+        if (Array.isArray(data)) {
+          setNewTestimonials(data);
+        } else {
+          console.error("Expected array, got:", data);
+          setNewTestimonials([]);
+        }
       })
-      .catch((err) => console.log("Error fetching testimonials:", err));
+      .catch((err) => {
+        console.log("Error fetching testimonials:", err);
+        setNewTestimonials([]);
+      });
   }, []);
 
   return (
