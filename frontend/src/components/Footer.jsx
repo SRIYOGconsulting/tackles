@@ -54,7 +54,7 @@ export default function Footer() {
             <p>
               From AC servicing and electrical work to plumbing, painting, flooring, and routine 
               maintenance, we keep your space organised, safe, and comfortable with service you can 
-              depend on every single day.
+              depend on every single day at any time.
             </p>
           </div>
 

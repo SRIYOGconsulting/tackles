@@ -5,6 +5,9 @@ export default function Feedback() {
     document.title = "Share Your Feedback | Tackles";
   }, []);
 
+  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     country: "",
@@ -22,6 +25,8 @@ export default function Feedback() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsSubmitting(true);
+
     const data = new FormData();
     data.append("name", form.name);
     data.append("country", form.country);
@@ -37,7 +42,7 @@ export default function Feedback() {
       });
 
       if (res.ok) {
-        alert("Thank you for your feedback!");
+        setSubmitted(true);
         setForm({
           name: "",
           country: "",
@@ -52,6 +57,8 @@ export default function Feedback() {
     } catch (err) {
       console.error(err);
       alert("Server error while submitting feedback.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -66,6 +73,17 @@ export default function Feedback() {
           Tell us about your experience with our service.
         </p>
 
+        {submitted && (
+          <div className="mb-8 bg-emerald-50 border border-emerald-300 rounded-xl p-6 text-center">
+            <h2 className="text-2xl font-bold text-emerald-800">
+              Feedback Submitted
+            </h2>
+            <p className="text-gray-700 mt-2">
+              Thank you for sharing your experience.
+            </p>
+          </div>
+        )}
+
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 gap-6 bg-white p-8 rounded-2xl border border-emerald-300 shadow-sm"
@@ -78,9 +96,9 @@ export default function Feedback() {
             onChange={handleChange}
             className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
             required
+            disabled={submitted}
           />
 
-          {/* Country (type or select) */}
           <input
             list="countries"
             name="country"
@@ -89,6 +107,7 @@ export default function Feedback() {
             onChange={handleChange}
             className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
             required
+            disabled={submitted}
           />
           <datalist id="countries">
             <option value="UAE" />
@@ -96,7 +115,6 @@ export default function Feedback() {
             <option value="Australia" />
           </datalist>
 
-          {/* Place (type or select) */}
           <input
             list="places"
             name="place"
@@ -105,6 +123,7 @@ export default function Feedback() {
             onChange={handleChange}
             className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
             required
+            disabled={submitted}
           />
           <datalist id="places">
             <option value="Dubai" />
@@ -112,7 +131,6 @@ export default function Feedback() {
             <option value="Sydney" />
           </datalist>
 
-          {/* Work Done (type or select) */}
           <input
             list="services"
             name="workDone"
@@ -121,6 +139,7 @@ export default function Feedback() {
             onChange={handleChange}
             className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
             required
+            disabled={submitted}
           />
           <datalist id="services">
             <option value="AC Maintenance & Servicing" />
@@ -142,9 +161,9 @@ export default function Feedback() {
             className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
             rows="4"
             required
+            disabled={submitted}
           ></textarea>
 
-          {/* Custom file upload */}
           <label className="border-2 border-dashed border-emerald-300 rounded-lg p-4 text-center cursor-pointer hover:bg-emerald-50 transition">
             <span className="text-emerald-700 font-medium">
               Upload your headshot
@@ -156,14 +175,24 @@ export default function Feedback() {
               onChange={handleChange}
               className="hidden"
               required
+              disabled={submitted}
             />
           </label>
 
           <button
             type="submit"
-            className="bg-emerald-700 hover:bg-emerald-800 text-white p-3 rounded-lg font-semibold transition"
+            disabled={isSubmitting || submitted}
+            className={`p-3 rounded-lg font-semibold transition text-white ${
+              submitted
+                ? "bg-emerald-500 cursor-not-allowed"
+                : "bg-emerald-700 hover:bg-emerald-800"
+            }`}
           >
-            Submit Feedback
+            {isSubmitting
+              ? "Submitting..."
+              : submitted
+              ? "Submitted"
+              : "Submit Feedback"}
           </button>
         </form>
       </div>
