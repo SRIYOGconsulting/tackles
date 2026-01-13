@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+const API_URL = "http://localhost:5000/api/testimonials";
 
 export default function Feedback() {
   useEffect(() => {
-    document.title = "Share Your Feedback | Tackles";
+    document.title = "Share Your Feedback | Tackles Handyman Services";
   }, []);
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -19,44 +22,49 @@ export default function Feedback() {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setForm({ ...form, [name]: files ? files[0] : value });
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value,
+    }));
+  };
+
+  const resetForm = () => {
+    setForm({
+      name: "",
+      country: "",
+      place: "",
+      workDone: "",
+      message: "",
+      photo: null,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setError("");
     setIsSubmitting(true);
 
-    const data = new FormData();
-    data.append("name", form.name);
-    data.append("country", form.country);
-    data.append("place", form.place);
-    data.append("workDone", form.workDone);
-    data.append("message", form.message);
-    data.append("photo", form.photo);
+    const formData = new FormData();
+    Object.entries(form).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
 
     try {
-      const res = await fetch("http://localhost:5000/api/testimonials", {
+      const response = await fetch(API_URL, {
         method: "POST",
-        body: data,
+        body: formData,
       });
 
-      if (res.ok) {
-        setSubmitted(true);
-        setForm({
-          name: "",
-          country: "",
-          place: "",
-          workDone: "",
-          message: "",
-          photo: null,
-        });
-      } else {
-        alert("Error submitting feedback.");
+      if (!response.ok) {
+        throw new Error("Submission failed");
       }
+
+      setSubmitted(true);
+      resetForm();
     } catch (err) {
       console.error(err);
-      alert("Server error while submitting feedback.");
+      setError("Unable to submit feedback. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -65,124 +73,171 @@ export default function Feedback() {
   return (
     <section className="min-h-screen bg-white py-20 px-6">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-extrabold text-emerald-800 text-center mb-4">
-          Share Your Feedback
-        </h1>
+        {/* Header */}
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-extrabold text-emerald-800 mb-3">
+            Share Your Feedback
+          </h1>
+          <p className="text-gray-600">
+            We value your experience. Please take a moment to share your feedback.
+          </p>
+        </header>
 
-        <p className="text-center text-gray-700 mb-12">
-          Tell us about your experience with our service.
-        </p>
-
+        {/* Success Message */}
         {submitted && (
-          <div className="mb-8 bg-emerald-50 border border-emerald-300 rounded-xl p-6 text-center">
-            <h2 className="text-2xl font-bold text-emerald-800">
-              Feedback Submitted
+          <div className="mb-8 rounded-xl border border-emerald-300 bg-emerald-50 p-6 text-center">
+            <h2 className="text-xl font-semibold text-emerald-800">
+              Thank you for your feedback
             </h2>
             <p className="text-gray-700 mt-2">
-              Thank you for sharing your experience.
+              Your response has been successfully submitted.
             </p>
           </div>
         )}
 
+        {/* Error Message */}
+        {error && (
+          <div className="mb-8 rounded-xl border border-red-300 bg-red-50 p-4 text-red-700">
+            {error}
+          </div>
+        )}
+
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 gap-6 bg-white p-8 rounded-2xl border border-emerald-300 shadow-sm"
+          className="grid gap-6 rounded-2xl border border-emerald-300 bg-white p-8 shadow-sm"
+          noValidate
         >
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={form.name}
-            onChange={handleChange}
-            className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
-            required
-            disabled={submitted}
-          />
-
-          <input
-            list="countries"
-            name="country"
-            placeholder="Country"
-            value={form.country}
-            onChange={handleChange}
-            className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
-            required
-            disabled={submitted}
-          />
-          <datalist id="countries">
-            <option value="UAE" />
-            <option value="USA" />
-            <option value="Australia" />
-          </datalist>
-
-          <input
-            list="places"
-            name="place"
-            placeholder="Place (Dubai, San Francisco, Sydney)"
-            value={form.place}
-            onChange={handleChange}
-            className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
-            required
-            disabled={submitted}
-          />
-          <datalist id="places">
-            <option value="Dubai" />
-            <option value="San Francisco" />
-            <option value="Sydney" />
-          </datalist>
-
-          <input
-            list="services"
-            name="workDone"
-            placeholder="Work Done"
-            value={form.workDone}
-            onChange={handleChange}
-            className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
-            required
-            disabled={submitted}
-          />
-          <datalist id="services">
-            <option value="AC Maintenance & Servicing" />
-            <option value="Electrical Repairs" />
-            <option value="Plumbing" />
-            <option value="Painting & Decorating" />
-            <option value="Carpentry" />
-            <option value="Flooring & Surface Fixes" />
-            <option value="Gutter & Roof Cleaning" />
-            <option value="Pressure Washing" />
-            <option value="Smart Home & Fixture Installations" />
-          </datalist>
-
-          <textarea
-            name="message"
-            placeholder="Write your feedback"
-            value={form.message}
-            onChange={handleChange}
-            className="border p-3 rounded-lg focus:ring-2 focus:ring-emerald-500"
-            rows="4"
-            required
-            disabled={submitted}
-          ></textarea>
-
-          <label className="border-2 border-dashed border-emerald-300 rounded-lg p-4 text-center cursor-pointer hover:bg-emerald-50 transition">
-            <span className="text-emerald-700 font-medium">
-              Upload your headshot
-            </span>
+          {/* Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Full Name
+            </label>
             <input
-              type="file"
-              name="photo"
-              accept="image/*"
+              type="text"
+              name="name"
+              value={form.name}
               onChange={handleChange}
-              className="hidden"
               required
               disabled={submitted}
+              className="w-full rounded-lg border p-3 focus:ring-2 focus:ring-emerald-500"
             />
-          </label>
+          </div>
 
+          {/* Country */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Country
+            </label>
+            <input
+              list="countries"
+              name="country"
+              value={form.country}
+              onChange={handleChange}
+              required
+              disabled={submitted}
+              className="w-full rounded-lg border p-3 focus:ring-2 focus:ring-emerald-500"
+            />
+            <datalist id="countries">
+              <option value="UAE" />
+              <option value="USA" />
+              <option value="Australia" />
+            </datalist>
+          </div>
+
+          {/* Place */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              City / Place
+            </label>
+            <input
+              list="places"
+              name="place"
+              value={form.place}
+              onChange={handleChange}
+              required
+              disabled={submitted}
+              className="w-full rounded-lg border p-3 focus:ring-2 focus:ring-emerald-500"
+            />
+            <datalist id="places">
+              <option value="Dubai" />
+              <option value="San Francisco" />
+              <option value="Sydney" />
+            </datalist>
+          </div>
+
+          {/* Service */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Service Provided
+            </label>
+            <input
+              list="services"
+              name="workDone"
+              value={form.workDone}
+              onChange={handleChange}
+              required
+              disabled={submitted}
+              className="w-full rounded-lg border p-3 focus:ring-2 focus:ring-emerald-500"
+            />
+            <datalist id="services">
+              <option value="AC Maintenance & Servicing" />
+              <option value="Electrical Repairs" />
+              <option value="Plumbing" />
+              <option value="Painting & Decorating" />
+              <option value="Carpentry" />
+              <option value="Flooring & Surface Fixes" />
+              <option value="Gutter & Roof Cleaning" />
+              <option value="Pressure Washing" />
+              <option value="Smart Home & Fixture Installations" />
+            </datalist>
+          </div>
+
+          {/* Message */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Feedback
+            </label>
+            <textarea
+              name="message"
+              rows="4"
+              value={form.message}
+              onChange={handleChange}
+              required
+              disabled={submitted}
+              className="w-full rounded-lg border p-3 focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+
+          {/* Photo Upload */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Profile Photo
+            </label>
+            <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-emerald-300 p-5 text-center hover:bg-emerald-50 transition">
+              <span className="text-emerald-700 font-medium">
+                Click to upload image
+              </span>
+              <span className="text-xs text-gray-500 mt-1">
+                JPG, PNG — max 5MB
+              </span>
+              <input
+                type="file"
+                name="photo"
+                accept="image/*"
+                onChange={handleChange}
+                required
+                disabled={submitted}
+                className="hidden"
+              />
+            </label>
+          </div>
+
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting || submitted}
-            className={`p-3 rounded-lg font-semibold transition text-white ${
+            className={`rounded-lg p-3 font-semibold text-white transition ${
               submitted
                 ? "bg-emerald-500 cursor-not-allowed"
                 : "bg-emerald-700 hover:bg-emerald-800"

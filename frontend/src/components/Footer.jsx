@@ -2,11 +2,9 @@ import React from "react";
 import logo from "../assets/images/logo.png";
 
 // SVG Icons
-import iconX from "../assets/icons/x.svg";
 import iconFacebook from "../assets/icons/facebook.svg";
 import iconLinkedIn from "../assets/icons/linkedin.svg";
 import iconYouTube from "../assets/icons/youtube.svg";
-import iconTwitch from "../assets/icons/twitch.svg";
 import iconGithub from "../assets/icons/github.svg";
 
 export default function Footer() {
@@ -14,53 +12,54 @@ export default function Footer() {
     <footer className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-green-900 text-gray-200 pt-16 pb-12">
 
       {/* MAIN GRID */}
-      <div className="
+      <div
+        className="
         max-w-7xl mx-auto px-6 
         grid 
         lg:grid-cols-[1fr_1fr] 
         md:grid-cols-2 
         grid-cols-1 
         gap-10
-      ">
+      "
+      >
 
         {/* LEFT COLUMN */}
         <div className="flex flex-col justify-between">
 
-          {/* LOGO */}
+          {/* LOGO ONLY */}
           <div className="flex items-center gap-3 mb-6">
             <div className="bg-white p-2 rounded-md shadow-sm">
               <img src={logo} alt="Tackles Logo" className="h-12 w-auto" />
             </div>
-            <h3 className="text-3xl font-semibold tracking-wide text-white">
-              Tackles
-            </h3>
           </div>
 
-          {/* DESCRIPTION */}
-          <div className="
+          {/* SEO-OPTIMIZED DESCRIPTION */}
+          <div
+            className="
             text-[15px] 
             leading-relaxed 
             text-gray-300 
             max-w-lg 
             space-y-4 
             mb-6
-          ">
+          "
+          >
             <p>
-              Tackles provides reliable handyman and maintenance services for homes and workplaces. 
-              Our team focuses on clean work and steady support so your tasks feel easy to manage 
-              without unnecessary hassle or confusion.
+              Professional handyman and maintenance services designed for residential and commercial spaces. 
+              Skilled technicians deliver reliable repair solutions with clean execution, clear communication, 
+              and efficient service management for stress free property maintenance.
             </p>
 
             <p>
-              From AC servicing and electrical work to plumbing, painting, flooring, and routine 
-              maintenance, we keep your space organised, safe, and comfortable with service you can 
-              depend on every single day at any time.
+              Services include air conditioning maintenance, electrical repairs, plumbing solutions, painting, 
+              flooring, plastering, and routine upkeep. Every task is handled with safety, precision, and 
+              long term performance in mind.
             </p>
           </div>
 
-          {/* SOCIAL ICONS */}
+          {/* SOCIAL ICONS (UPDATED) */}
           <div className="flex items-center gap-4 flex-wrap">
-            {[iconX, iconFacebook, iconLinkedIn, iconYouTube, iconTwitch, iconGithub].map(
+            {[iconFacebook, iconLinkedIn, iconYouTube, iconGithub].map(
               (icon, i) => (
                 <a
                   key={i}
@@ -76,12 +75,14 @@ export default function Footer() {
         </div>
 
         {/* RIGHT GRID */}
-        <div className="
+        <div
+          className="
           grid 
           grid-cols-2 
           sm:grid-cols-2 
           gap-10
-        ">
+        "
+        >
 
           {/* BROWSE MORE */}
           <div>
@@ -141,7 +142,8 @@ export default function Footer() {
           </div>
 
           {/* SUBSCRIBE */}
-          <div className="
+          <div
+            className="
             col-span-2 
             mt-4 
             flex 
@@ -149,7 +151,8 @@ export default function Footer() {
             sm:flex-row 
             items-center 
             gap-3
-          ">
+          "
+          >
             <input
               type="email"
               placeholder="Enter your eMail address"
@@ -160,14 +163,16 @@ export default function Footer() {
                 outline-none
               "
             />
-            <button className="
+            <button
+              className="
               px-5 py-2 
               bg-white text-emerald-900 
               font-semibold rounded-md 
               hover:bg-emerald-100 
               transition
               w-full sm:w-auto
-            ">
+            "
+            >
               Subscribe
             </button>
           </div>
@@ -179,27 +184,24 @@ export default function Footer() {
       <div className="border-t border-emerald-800 mt-12 mb-6 mx-6 opacity-60"></div>
 
       {/* COPYRIGHT */}
-      <div className="
+      <div
+        className="
         max-w-6xl mx-auto px-6 
         flex flex-col sm:flex-row 
         justify-between items-center 
         text-sm text-gray-400 
         text-center sm:text-left
-      ">
+      "
+      >
         <p className="leading-relaxed">
-          © 2018 - 2024 Tackles Technical LLC. All Rights Reserved.
+          © 2018 - 2026 Tackles Technical. All Rights Reserved.
         </p>
 
         <p className="mt-2 sm:mt-0 leading-relaxed">
           Technology Partner:{" "}
-          <a
-            href="https://sriyognextjs.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-emerald-300 font-semibold tracking-wide hover:underline"
-          >
-            SRIYOG
-          </a>
+          <span className="text-emerald-300 font-semibold tracking-wide">
+            Broad Press
+          </span>
         </p>
       </div>
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 export default function Disclaimer() {
   useEffect(() => {
-    document.title = "Disclaimer | Tackles";
+    document.title = "Disclaimer | Tackles  Handyman Services";
   }, []);
 
   return (

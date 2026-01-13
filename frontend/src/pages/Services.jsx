@@ -51,21 +51,21 @@ export default function Services() {
           <ServiceCard
             image={acImg}
             title="AC Maintenance & Servicing"
-            desc="Filter cleaning, gas refilling, indoor/outdoor unit checks, and cooling efficiency testing."
+            desc="Complete air conditioner servicing including filter cleaning, cooling checks, and system performance inspection."
             extra={<BookButton />}
           />
 
           <ServiceCard
             image={electricalImg}
             title="Electrical Repairs"
-            desc="Switches, sockets, lighting fixtures, ceiling fans, and short-circuit safety checks."
+            desc="Safe electrical repair services covering wiring issues, lighting fixtures, switches, and power outlet maintenance."
             extra={<BookButton />}
           />
 
           <ServiceCard
             image={plumbingImg}
             title="Plumbing"
-            desc="Leaks, faucet and pipe fixes, shower or toilet repairs, and drain unclogging."
+            desc="Professional plumbing solutions for leak repairs, pipe fittings, drainage issues, and bathroom fixture maintenance."
             extra={<BookButton />}
           />
         </div>
@@ -83,21 +83,21 @@ export default function Services() {
           <ServiceCard
             image={paintingImg}
             title="Painting & Decorating"
-            desc="Interior and exterior painting, wall finishing, waterproof coating, and texture work."
+            desc="Interior and exterior painting services delivering smooth finishes, color precision, and long-lasting protection."
             extra={<BookButton />}
           />
 
           <ServiceCard
             image={carpentryImg}
             title="Carpentry"
-            desc="Doors, locks, hinges, shelves, and furniture repair or installation."
+            desc="Expert carpentry services including furniture repair, door fittings, shelving installation, and wood finishing."
             extra={<BookButton />}
           />
 
           <ServiceCard
             image={flooringImg}
             title="Flooring & Surface Fixes"
-            desc="Laminate or vinyl repairs, tile re-grouting, polishing, and surface restoration."
+            desc="Floor repair and surface restoration services covering tiles, laminates, polishing, and re-grouting work."
             extra={<BookButton />}
           />
         </div>
@@ -115,21 +115,21 @@ export default function Services() {
           <ServiceCard
             image={gutterImg}
             title="Gutter & Roof Cleaning"
-            desc="Debris clearing, leak sealing, and downspout inspection before monsoon or winter."
+            desc="Thorough gutter and roof cleaning services to prevent blockages, leaks, and weather-related damage."
             extra={<BookButton />}
           />
 
           <ServiceCard
             image={pressureImg}
             title="Pressure Washing"
-            desc="Driveways, patios, exterior walls, and tiled areas cleaned with high-pressure wash."
+            desc="High-pressure cleaning services for driveways, patios, walls, and outdoor tiled surface restoration."
             extra={<BookButton />}
           />
 
           <ServiceCard
             image={smartHomeImg}
             title="Smart Home & Fixture Installations"
-            desc="TV wall mounting, CCTV setup, smart switch installation, and minor wiring."
+            desc="Installation services for smart devices, televisions, CCTV systems, fixtures, and minor electrical fittings."
             extra={<BookButton />}
           />
         </div>

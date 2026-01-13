@@ -1,10 +1,16 @@
-import Airtable from "airtable";
+import base from "./airtableBase.js";
 
-Airtable.configure({
-  apiKey: process.env.AIRTABLE_API_KEY,
-});
+// ===== PUSH NEW TESTIMONIAL =====
+export const pushTestimonialToAirtable = async (testimonialData) => {
+  return await base("Testimonials").create([{ fields: testimonialData }]);
+};
 
-const base = Airtable.base(process.env.AIRTABLE_TESTIMONIALS_BASE_ID);
-
-export const testimonialsTable =
-  base(process.env.AIRTABLE_TESTIMONIALS_TABLE_NAME);
+// ===== GET APPROVED TESTIMONIALS =====
+export const getApprovedTestimonials = async () => {
+  const records = await base("Testimonials")
+    .select({
+      filterByFormula: `{Status} = "Approved"`, // Airtable field must exactly match "Approved"
+    })
+    .all();
+  return records;
+};

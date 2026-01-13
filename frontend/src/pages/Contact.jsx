@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import contactImg from "../assets/images/contact.png";
 
 // Placeholder SVG icons (you can replace these easily)
@@ -51,8 +52,41 @@ const CallIcon = () => (
 
 export default function Contact() {
   useEffect(() => {
-    document.title = "Contact | Tackles";
+    document.title = "Contact | Tackles Handyman Services ";
   }, []);
+
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    city: "",
+    message: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.fullName || !form.message) {
+      alert("Full Name and Message are required!");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await axios.post("http://localhost:5000/api/contact", form);
+      alert("Message sent successfully!");
+      setForm({ fullName: "", email: "", city: "", message: "" });
+    } catch (error) {
+      console.error(error);
+      alert("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="min-h-screen bg-white py-20 px-6 flex flex-col items-center text-gray-800">
@@ -83,19 +117,49 @@ export default function Contact() {
             Get in Touch
           </h2>
 
-          <form className="grid gap-5">
-            <input className="border border-emerald-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-600 shadow-inner" placeholder="Full Name" />
-            <input className="border border-emerald-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-600 shadow-inner" placeholder="Email Address" type="email" />
-            <input className="border border-emerald-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-600 shadow-inner" placeholder="City (Dubai / Sydney / San Francisco)" />
-            <textarea className="border border-emerald-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-600 shadow-inner" rows="4" placeholder="Service needed & message"></textarea>
+          <form className="grid gap-5" onSubmit={handleSubmit}>
+            <input
+              name="fullName"
+              value={form.fullName}
+              onChange={handleChange}
+              className="border border-emerald-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-600 shadow-inner"
+              placeholder="Full Name"
+              required
+            />
+            <input
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              type="email"
+              className="border border-emerald-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-600 shadow-inner"
+              placeholder="Email Address"
+            />
+            <input
+              name="city"
+              value={form.city}
+              onChange={handleChange}
+              className="border border-emerald-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-600 shadow-inner"
+              placeholder="City (Dubai / Sydney / San Francisco)"
+            />
+            <textarea
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+              className="border border-emerald-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-600 shadow-inner"
+              rows="4"
+              placeholder="Service needed & message"
+              required
+            />
 
             <button
               type="submit"
-              className="bg-gradient-to-r from-[#064E3B] via-[#047857] to-[#059669]
+              disabled={isSubmitting}
+              className={`bg-gradient-to-r from-[#064E3B] via-[#047857] to-[#059669]
               hover:from-[#036A48] hover:via-[#047B5A] hover:to-[#06A272]
-              text-white px-8 py-3 rounded-lg text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-500"
+              text-white px-8 py-3 rounded-lg text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-500
+              ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""}`}
             >
-              Send Message ✉️
+              {isSubmitting ? "Sending..." : "Send Message ✉️"}
             </button>
           </form>
         </div>

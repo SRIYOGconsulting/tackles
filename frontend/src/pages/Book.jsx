@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // ⭐ ADDED
+import axios from "axios";
 import bookingImg from "../assets/images/booking.png";
 
-
-// ⭐ FLAG ICONS
+// FLAG ICONS
 import flagUAE from "../assets/icons/flags/uae.svg";
 import flagUSA from "../assets/icons/flags/usa.svg";
 import flagAUS from "../assets/icons/flags/australia.svg";
 
-
 export default function Book() {
-
-
   const navigate = useNavigate();
 
   // Close dropdown when clicking outside
@@ -21,7 +17,7 @@ export default function Book() {
   const serviceRef = useRef();
 
   useEffect(() => {
-    document.title = "Book Appointment | Tackles";
+    document.title = "Book a Service | Tackles Handyman Services";
 
     const handleClickOutside = (e) => {
       if (locationRef.current && !locationRef.current.contains(e.target)) {
@@ -49,7 +45,7 @@ export default function Book() {
     location: "",
     requiredService: "",
     phone: "",
-    budgetCurrency: "AED", // ⭐ UPDATED
+    budgetCurrency: "AED",
     budget: "",
     description: "",
     locationFlag: flagUAE,
@@ -58,12 +54,7 @@ export default function Book() {
 
   const [loading, setLoading] = useState(false);
 
-  const [bookingSubmitted, setBookingSubmitted] = useState(false);  // added
-  const [serviceCompleted, setServiceCompleted] = useState(null); // ⭐ NEW
-
   const [showSuggestions, setShowSuggestions] = useState(false);
-
-  // ⭐ NEW — Dropdown toggles
   const [showLocationFlags, setShowLocationFlags] = useState(false);
   const [showPhoneFlags, setShowPhoneFlags] = useState(false);
 
@@ -73,7 +64,6 @@ export default function Book() {
     { name: "Australia", icon: flagAUS },
   ];
 
-  // ⭐ Currency options with symbols
   const currencyOptions = [
     { code: "AED", symbol: "د.إ" },
     { code: "USD", symbol: "$" },
@@ -106,7 +96,6 @@ export default function Book() {
     setShowSuggestions(false);
   };
 
-  // ⭐ UPDATED handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading("sending");
@@ -117,8 +106,6 @@ export default function Book() {
 
       alert("Appointment booked successfully!");
       setLoading("done");
-
-      setBookingSubmitted(true); // added
     } catch (err) {
       console.log(err);
       alert("Failed to submit. Check console.");
@@ -140,7 +127,7 @@ export default function Book() {
       <div className="flex flex-col sm:flex-row items-center justify-between w-full max-w-5xl mb-10">
         <div className="w-full sm:w-1/2 mb-6 sm:mb-0">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-wide leading-tight">
-            Book An Appointment
+            Book a Service
           </h1>
           <p className="text-emerald-100 text-sm sm:text-base mt-3 max-w-md">
             Schedule your service at your convenience, fast, reliable, and professional.
@@ -266,9 +253,7 @@ export default function Book() {
           {/* LOCATION WITH FLAG */}
           <div ref={locationRef}>
             <label className="block text-sm font-semibold text-emerald-900 mb-1">Location *</label>
-
             <div className="flex items-stretch gap-3 relative">
-              {/* Flag Button */}
               <button
                 type="button"
                 onClick={() => setShowLocationFlags(!showLocationFlags)}
@@ -285,7 +270,6 @@ export default function Book() {
                 </svg>
               </button>
 
-              {/* Dropdown */}
               {showLocationFlags && (
                 <div className="absolute top-12 left-0 z-30 bg-white border border-emerald-200 rounded-lg shadow-md w-40">
                   {flagOptions.map((item) => (
@@ -304,7 +288,6 @@ export default function Book() {
                 </div>
               )}
 
-              {/* Text Input */}
               <input
                 type="text"
                 name="location"
@@ -317,15 +300,10 @@ export default function Book() {
             </div>
           </div>
 
-          {/* ⭐ REQUIRED SERVICE WITH DROPDOWN BUTTON ADDED */}
+          {/* REQUIRED SERVICE */}
           <div className="relative" ref={serviceRef}>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">
-              Required Service *
-            </label>
-
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">Required Service *</label>
             <div className="flex items-center gap-3 relative">
-
-              {/* Input */}
               <input
                 type="text"
                 name="requiredService"
@@ -339,25 +317,17 @@ export default function Book() {
                 required
                 className="w-full border border-emerald-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500"
               />
-
-              {/* ⭐ NEW DROPDOWN BUTTON */}
               <button
                 type="button"
                 onClick={() => setShowSuggestions(!showSuggestions)}
                 className="border border-emerald-300 rounded-lg px-3 py-2 bg-white shadow-sm hover:bg-emerald-50"
               >
-                <svg
-                  className="w-4 h-4 text-emerald-700"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
             </div>
 
-            {/* Suggestions */}
             {showSuggestions && (
               <div className="absolute z-20 w-full bg-white border border-emerald-200 rounded-lg shadow-md mt-1 max-h-48 overflow-y-auto">
                 {filteredServices.map((service, i) =>
@@ -375,10 +345,7 @@ export default function Book() {
 
           {/* PHONE WITH FLAG */}
           <div ref={phoneRef}>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">
-              Phone Number *
-            </label>
-
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">Phone Number *</label>
             <div className="flex items-stretch gap-3 relative">
               <button
                 type="button"
@@ -386,12 +353,7 @@ export default function Book() {
                 className="border border-emerald-300 rounded-lg px-3 py-2.5 bg-white flex items-center justify-center gap-1.5 shadow-sm hover:bg-emerald-50 min-h-[42px]"
               >
                 <img src={form.phoneFlag} className="w-6 h-6" alt="Phone flag" />
-                <svg
-                  className="w-3.5 h-3.5 text-emerald-700"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-3.5 h-3.5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
@@ -426,14 +388,10 @@ export default function Book() {
             </div>
           </div>
 
-          {/* ⭐ UPDATED BUDGET WITH CURRENCY & SYMBOLS */}
+          {/* BUDGET */}
           <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">
-              Budget *
-            </label>
-
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">Budget *</label>
             <div className="flex gap-3">
-              {/* Currency Dropdown */}
               <select
                 name="budgetCurrency"
                 value={form.budgetCurrency}
@@ -447,7 +405,6 @@ export default function Book() {
                 ))}
               </select>
 
-              {/* Amount Input */}
               <input
                 type="text"
                 name="budget"
@@ -487,64 +444,6 @@ export default function Book() {
 
         </form>
       </div>
-    
-      {bookingSubmitted && (
-        <div className="max-w-5xl w-full bg-white/95 rounded-2xl shadow-xl p-8 border border-emerald-200 mt-10">
-          <h3 className="text-2xl font-semibold text-emerald-900 mb-2">
-            Is your service completed?
-          </h3>
-          <p className="text-emerald-800 mb-6">
-            If your service is completed, you can share your experience in the Testimonials page.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <button
-              type="button"
-              onClick={() => setServiceCompleted(true)}
-              className={`px-6 py-3 rounded-lg font-semibold shadow-md border transition-all duration-300 ${
-                serviceCompleted === true
-                  ? "bg-emerald-700 text-white border-emerald-700"
-                  : "bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-50"
-              }`}
-            >
-              Yes, completed
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setServiceCompleted(false)}
-              className={`px-6 py-3 rounded-lg font-semibold shadow-md border transition-all duration-300 ${
-                serviceCompleted === false
-                  ? "bg-emerald-700 text-white border-emerald-700"
-                  : "bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-50"
-              }`}
-            >
-              Not yet
-            </button>
-          </div>
-
-          {serviceCompleted === true && (
-            <div className="mt-6 bg-emerald-50 border border-emerald-200 rounded-xl p-5">
-              <p className="text-emerald-900 font-semibold mb-3">
-                Want to leave a testimonial?
-              </p>
-
-              <button
-                type="button"
-                onClick={() => navigate("/testimonial-form")}
-                className="bg-gradient-to-r from-emerald-700 via-green-700 to-lime-600 hover:from-emerald-800 hover:via-green-800 hover:to-lime-700 text-white px-8 py-3 rounded-lg text-base sm:text-lg font-semibold shadow-lg transition-all duration-300"
-              >
-                Fill out Testimonials
-              </button>
-
-              <p className="text-sm text-emerald-800 mt-3">
-                You’ll be redirected to the Testimonials page to submit your review.
-              </p>
-            </div>
-          )}
-        </div>
-      )}
-
-    </section>  
+    </section>
   );
 }

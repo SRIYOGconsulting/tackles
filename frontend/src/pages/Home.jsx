@@ -37,9 +37,7 @@ const Home = () => {
   const { location } = useLocation();
   const [activeSection, setActiveSection] = useState("about");
 
-  useEffect(() => {
-    document.title = "Home | Tackles";
-  }, []);
+ 
 
   const displayLocation =
     location === "San Francisco" ? "San Francisco" : location || "Dubai";
@@ -82,23 +80,19 @@ const Home = () => {
   const sections = {
     about: {
       title: "About Tackles",
-      desc:
-        "Tackles is a leading A-grade handyman company. Any repair or decoration work whether it be Plumbing, Painting, Air Conditioning, Floor and Wall fixing. Tackles is there for you.",
+      desc: "Tackles is a leading A-grade handyman company. Any repair or decoration work whether it be Plumbing, Painting, Air Conditioning, Floor and Wall fixing. Tackles is there for you.",
     },
     mission: {
       title: "Our Mission",
-      desc:
-        "We want to provide every repair, decoration, and design service so you don’t have to search different places for different needs.",
+      desc: "We want to provide every repair, decoration, and design service so you don’t have to search different places for different needs.",
     },
     goals: {
       title: "Our Goals",
-      desc:
-        "Tackles focuses on providing the best service possible to make clients’ lives convenient and comfortable. Any work related to plumbing, painting, plastering, or AC installation is our responsibility.",
+      desc: "Tackles focuses on providing the best service possible to make clients’ lives convenient and comfortable. Any work related to plumbing, painting, plastering, or AC installation is our responsibility.",
     },
     vision: {
       title: "Our Vision",
-      desc:
-        "To redefine home and commercial maintenance by creating a reliable, modern, and accessible service network that brings convenience and quality workmanship to every customer’s doorstep.",
+      desc: "To redefine home and commercial maintenance by creating a reliable, modern, and accessible service network that brings convenience and quality workmanship to every customer’s doorstep.",
     },
   };
 
@@ -140,7 +134,6 @@ const Home = () => {
       {/* 🌆 HERO SECTION */}
       <section className="w-full bg-white text-emerald-900">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 flex flex-col md:flex-row items-center gap-12 md:gap-16">
-          
           {/* LEFT */}
           <div className="w-full md:w-1/2 space-y-6">
             <p className="uppercase tracking-[0.25em] text-emerald-900 text-xs sm:text-sm">
@@ -156,7 +149,8 @@ const Home = () => {
             </p>
 
             <p className="text-sm sm:text-base text-gray-900 max-w-md">
-              From urgent repairs to planned upgrades, our verified professionals in{" "}
+              From urgent repairs to planned upgrades, our verified
+              professionals in{" "}
               <span className="font-semibold text-emerald-900">
                 {displayLocation}
               </span>{" "}
@@ -228,39 +222,53 @@ const Home = () => {
       </section>
 
       {/* ⭐ UPDATED APP DOWNLOAD SECTION */}
-      <div className="w-full bg-gradient-to-r from-emerald-50 via-white to-emerald-50 py-14 flex justify-center">
-        <div className="flex flex-wrap items-center gap-6 sm:gap-10 px-8 py-6 rounded-2xl 
-                        bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 
-                        shadow-lg hover:shadow-emerald-400/40 transition-all duration-300">
+      <div className="w-full bg-gradient-to-r from-emerald-50 via-white to-emerald-50 py-20 flex justify-center">
+        <div className="text-center">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-emerald-900 mb-3">
+            Download Our App
+          </h2>
 
-          {/* PLAY STORE IMAGE BUTTON */}
-          <a
-            href="#"
-            target="_blank"
-            className="rounded-xl border-2 border-emerald-700 bg-white overflow-hidden 
-                       shadow-md hover:shadow-lg hover:scale-[1.05] transition-all duration-300"
-          >
-            <img src={playstoreBtn} className="w-40 sm:w-48 h-auto object-contain" />
-          </a>
+          <p className="text-gray-700 mb-8 text-base sm:text-lg">
+            Book services faster, track professionals, and manage everything in
+            one place.
+          </p>
 
-          {/* APP STORE IMAGE BUTTON */}
-          <a
-            href="#"
-            target="_blank"
-            className="rounded-xl border-2 border-emerald-700 bg-white overflow-hidden 
-                       shadow-md hover:shadow-lg hover:scale-[1.05] transition-all duration-300"
-          >
-            <img src={appleBtn} className="w-40 sm:w-48 h-auto object-contain" />
-          </a>
+          <div className="flex flex-wrap justify-center items-center gap-8 px-10 py-8 rounded-3xl shadow-lg transition-all duration-300">
+            {/* PLAY STORE */}
+            <a
+              href="#"
+              target="_blank"
+              className="group bg-white p-3 rounded-[28px] shadow-md hover:scale-[1.06] hover:shadow-xl transition-all duration-300"
+            >
+              <img
+                src={playstoreBtn}
+                alt="Download on Play Store"
+                className="h-14 sm:h-16 w-auto rounded-[20px] ring-2 ring-emerald-300 group-hover:ring-emerald-500 transition-all duration-300"
+              />
+            </a>
 
+            {/* APP STORE */}
+            <a
+              href="#"
+              target="_blank"
+              className="group bg-white p-3 rounded-[28px] shadow-md hover:scale-[1.06] hover:shadow-xl transition-all duration-300"
+            >
+              <img
+                src={appleBtn}
+                alt="Download on App Store"
+                className="h-14 sm:h-16 w-auto rounded-[20px] ring-2 ring-emerald-300 group-hover:ring-emerald-500 transition-all duration-300"
+              />
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* SERVICES SECTION — UPDATED WITH BOOK BUTTON */}
+      {/* SERVICES SECTION — UPDATED WITH UNIFORM DESCRIPTIONS */}
       <section className="bg-white py-20 px-6 sm:px-12 lg:px-20 text-center">
         <h2 className="text-4xl font-extrabold text-emerald-900 mb-4">
           What Can We Do?
         </h2>
+
         <p className="text-gray-700 text-lg mb-12">
           Our top services : quick, professional, and trusted across everywhere.
         </p>
@@ -269,19 +277,21 @@ const Home = () => {
           <ServiceCard
             image={acImg}
             title="AC Maintenance & Servicing"
-            desc="Filter cleaning, gas refilling, indoor/outdoor unit checks, and cooling efficiency testing."
+            desc="Complete AC servicing including cleaning, gas refilling, and system performance checks."
             extra={<BookButton />}
           />
+
           <ServiceCard
             image={electricalImg}
             title="Electrical Repairs"
-            desc="Switches, sockets, lighting fixtures, ceiling fans, and short-circuit safety checks."
+            desc="Professional electrical repair covering switches, wiring, fixtures, and safety inspections."
             extra={<BookButton />}
           />
+
           <ServiceCard
             image={plumbingImg}
             title="Plumbing"
-            desc="Leaks, faucet fixes, drain repairs, and clog removal."
+            desc="Reliable plumbing service for leak repairs, pipe maintenance, and smooth water flow."
             extra={<BookButton />}
           />
         </div>
@@ -290,8 +300,8 @@ const Home = () => {
           <button
             onClick={() => navigate("/services")}
             className="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700
-            hover:via-emerald-900 text-white px-8 py-3 rounded-lg shadow-lg 
-            hover:shadow-emerald-400/40 transition-all duration-300 text-lg font-semibold"
+      hover:via-emerald-900 text-white px-8 py-3 rounded-lg shadow-lg 
+      hover:shadow-emerald-400/40 transition-all duration-300 text-lg font-semibold"
           >
             View All Services
           </button>
@@ -305,8 +315,9 @@ const Home = () => {
             All About Us
           </h1>
           <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
-            Hard labour works like plumbing, AC installation, and plastering require not only
-            strength but skill. That’s where our team comes in, to take your problems off your shoulders.
+            Hard labour works like plumbing, AC installation, and plastering
+            require not only strength but skill. That’s where our team comes in,
+            to take your problems off your shoulders.
           </p>
         </div>
 
@@ -363,7 +374,9 @@ const Home = () => {
               <div className="w-24 h-24 mb-4 rounded-full bg-gray-100 overflow-hidden shadow-md ring-4 ring-emerald-200">
                 <img src={t.image} className="w-full h-full object-cover" />
               </div>
-              <p className="text-gray-700 italic mb-4 leading-relaxed">“{t.feedback}”</p>
+              <p className="text-gray-700 italic mb-4 leading-relaxed">
+                “{t.feedback}”
+              </p>
               <h4 className="text-emerald-800 font-bold text-lg">{t.name}</h4>
             </div>
           ))}

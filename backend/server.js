@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 
 import bookingRoutes from "./routes/booking.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js";
-import connectDB from "./config/db.js";
+import contactRoutes from "./routes/contact.js"; // <-- new contact route
 
 // Fix __dirname in ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -14,9 +14,6 @@ const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
-
-// Connect to MongoDB
-connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -29,18 +26,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // =====================
-// Serve uploaded images (CRITICAL)
+// Serve uploaded images
 // =====================
-app.use(
-  "/uploads",
-  express.static(path.join(__dirname, "uploads"))
-);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // =====================
 // Routes
 // =====================
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/testimonials", testimonialRoutes);
+app.use("/api/contact", contactRoutes); // <-- contact endpoint
 
 // =====================
 // Health check
@@ -64,6 +59,7 @@ app.get("/", (req, res) => {
       health: "/api/health",
       bookings: "/api/bookings",
       testimonials: "/api/testimonials",
+      contact: "/api/contact", // <-- added info for docs
     },
   });
 });

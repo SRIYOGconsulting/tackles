@@ -3,7 +3,7 @@ import image1 from "../assets/gallery/image1.png";
 import image2 from "../assets/gallery/image2.png";
 import image3 from "../assets/gallery/image3.png";
 import image4 from "../assets/gallery/image4.png";
-// image5 removed
+import image5 from "../assets/gallery/image5.png"; // ✅ added
 import image6 from "../assets/gallery/image6.png";
 import image7 from "../assets/gallery/image7.png";
 import image8 from "../assets/gallery/image8.png";
@@ -13,12 +13,11 @@ import image11 from "../assets/gallery/image11.png";
 import image12 from "../assets/gallery/image12.png";
 
 export default function Gallery() {
-  
+
   // ⭐ Set tab title
-  useEffect(() => {   
+  useEffect(() => {
     document.title = "Gallery | Tackles";
-  }, []);  
-  
+  }, []);
 
   const images = [
     {
@@ -29,7 +28,7 @@ export default function Gallery() {
     {
       src: image2,
       desc:
-        "Premium indoor finishing with painted walls, sunlight, stylish ceiling, and clean flooring.",
+        "Professional plumbing services including pipe fitting, leakage repair, and sanitary installations.",
     },
     {
       src: image3,
@@ -42,8 +41,14 @@ export default function Gallery() {
         "Modern wooden kitchen with quality cabinetry, lighting design, and interior architecture.",
     },
     {
+      src: image5,
+      desc:
+        "Expert wall painting services delivering smooth finishes, clean edges, and long-lasting quality.",
+    },
+    {
       src: image6,
-      desc: "AC cleaning and servicing performed by trained professionals.",
+      desc:
+        "AC cleaning and servicing performed by trained professionals.",
     },
     {
       src: image7,
@@ -53,7 +58,7 @@ export default function Gallery() {
     {
       src: image8,
       desc:
-        "Luxury bedroom decor with stylish furniture, fragrant setups, and decorative installations.",
+        "Reliable electrician services including wiring, lighting installation, and electrical maintenance.",
     },
     {
       src: image9,
@@ -68,7 +73,7 @@ export default function Gallery() {
     {
       src: image11,
       desc:
-        "Bright sunlit room with elegant sofas and a simple white backdrop.",
+        "Skilled carpentry work including furniture making, wood finishing, and custom installations.",
     },
     {
       src: image12,
@@ -92,7 +97,7 @@ export default function Gallery() {
       </div>
 
       {/* Gallery Grid */}
-      <div className="max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
         {images.map((item, index) => (
           <div
             key={index}

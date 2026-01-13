@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function FAQ() {
   useEffect(() => {
-    document.title = "FAQ | Tackles";
+    document.title = "FAQ | Tackles Handyman Services";
   }, []);
 
   // All your FAQ data

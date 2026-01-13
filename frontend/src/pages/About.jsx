@@ -4,7 +4,7 @@ import { ShieldCheck, Users, Leaf, Handshake } from "lucide-react";
 
 export default function About() {
   useEffect(() => {
-    document.title = "About | Tackles";
+    document.title = "About Us | Tackles Handyman Services";
   }, []);
 
   const [activeSection, setActiveSection] = useState("about");
@@ -13,22 +13,22 @@ export default function About() {
     about: {
       title: "About Tackles",
       desc:
-        "Tackles is a leading A-grade handyman company. Any repair or decoration work whether it be Plumbing, Painting, Air Conditioning, Floor and Wall fixing. Tackles is there for you.",
+        "Tackles is an A-grade handyman service company delivering professional solutions for plumbing, painting, air conditioning, flooring, and wall repairs with consistent quality and dependable service standards.",
     },
     mission: {
       title: "Our Mission",
       desc:
-        "We want to provide every repair, decoration, and design service so you don’t have to search different places for different needs.",
+        "Our mission is to offer complete repair and maintenance services under one trusted platform, eliminating the need to search multiple providers for different household and commercial requirements.",
     },
     goals: {
       title: "Our Goals",
       desc:
-        "Tackles focuses on providing the best service possible to make clients’ lives convenient and comfortable. Any work related to plumbing, painting, plastering, or AC installation is our responsibility.",
+        "We aim to simplify everyday maintenance by delivering efficient plumbing, painting, plastering, and AC services that enhance comfort, reliability, and long-term value for every client.",
     },
     vision: {
       title: "Our Vision",
       desc:
-        "We aim to become the most trusted and accessible handyman brand by building long-term relationships and delivering services that feel professional, reliable, and effortless.",
+        "Our vision is to build a trusted handyman brand recognized for professionalism, accessibility, and service excellence through long-term client relationships and consistent work quality.",
     },
   };
 
@@ -54,7 +54,6 @@ export default function About() {
           {Object.keys(sections).map((key) => (
             <div key={key} className="relative">
 
-              {/* BUTTON */}
               <button
                 onMouseEnter={() => setActiveSection(key)}
                 onClick={() => setActiveSection(key)}
@@ -67,7 +66,6 @@ export default function About() {
                 {sections[key].title}
               </button>
 
-              {/* DESCRIPTION */}
               {activeSection === key && (
                 <div className="mt-3 ml-2 border-l-4 border-emerald-500 pl-4 bg-white rounded-r-xl shadow-sm py-3 px-2 animate-fadeIn">
                   <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
@@ -89,36 +87,58 @@ export default function About() {
         </div>
       </div>
 
-      {/* CERTIFICATIONS */}
+      {/* CERTIFICATIONS / VALUES */}
       <div className="max-w-6xl mx-auto mt-24 text-center">
         <h2 className="text-3xl font-bold text-emerald-800 mb-6">
           Internationally Trusted Certifications
         </h2>
-        <p className="text-gray-700 max-w-2xl mx-auto mb-10">
-          Tackles is certified for providing top-quality, safe, and sustainable services.
-          We’re trusted by clients for our integrity and craftsmanship.
+        <p className="text-gray-700 max-w-2xl mx-auto mb-12">
+          Tackles follows globally recognized standards to ensure safety, responsibility,
+          and professionalism in every service we deliver.
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-green-700 via-emerald-700 to-green-600 text-white rounded-xl shadow-lg py-6 hover:scale-105 transition-transform duration-300">
-            <ShieldCheck size={36} className="mb-2" />
-            <span className="font-semibold">Safety</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          {/* SAFETY */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 text-left hover:shadow-md transition">
+            <ShieldCheck size={32} className="text-emerald-700 mb-4" />
+            <h3 className="font-semibold text-lg text-gray-900 mb-2">Safety</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              All services are performed following strict safety protocols to protect clients,
+              technicians, and property while maintaining secure and well-organized work environments.
+            </p>
           </div>
 
-          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-emerald-700 via-green-700 to-lime-600 text-white rounded-xl shadow-lg py-6 hover:scale-105 transition-transform duration-300">
-            <Users size={36} className="mb-2" />
-            <span className="font-semibold">Community</span>
+          {/* COMMUNITY */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 text-left hover:shadow-md transition">
+            <Users size={32} className="text-emerald-700 mb-4" />
+            <h3 className="font-semibold text-lg text-gray-900 mb-2">Community</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              We support communities by providing honest services, generating employment opportunities,
+              and building strong relationships based on trust and mutual respect.
+            </p>
           </div>
 
-          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-green-600 via-emerald-700 to-lime-600 text-white rounded-xl shadow-lg py-6 hover:scale-105 transition-transform duration-300">
-            <Leaf size={36} className="mb-2" />
-            <span className="font-semibold">Sustainability</span>
+          {/* SUSTAINABILITY */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 text-left hover:shadow-md transition">
+            <Leaf size={32} className="text-emerald-700 mb-4" />
+            <h3 className="font-semibold text-lg text-gray-900 mb-2">Sustainability</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              Our work focuses on minimizing waste, extending material life, and applying responsible
+              practices that support environmental balance and long-term efficiency.
+            </p>
           </div>
 
-          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-emerald-800 via-green-700 to-lime-600 text-white rounded-xl shadow-lg py-6 hover:scale-105 transition-transform duration-300">
-            <Handshake size={36} className="mb-2" />
-            <span className="font-semibold">Integrity</span>
+          {/* INTEGRITY */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 text-left hover:shadow-md transition">
+            <Handshake size={32} className="text-emerald-700 mb-4" />
+            <h3 className="font-semibold text-lg text-gray-900 mb-2">Integrity</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              We operate with transparency and honesty, ensuring fair pricing, clear communication,
+              and ethical service delivery without compromises or hidden conditions.
+            </p>
           </div>
+
         </div>
       </div>
 
