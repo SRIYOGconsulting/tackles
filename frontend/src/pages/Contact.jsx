@@ -5,7 +5,7 @@ import contactImg from "../assets/images/contact.png";
 // Placeholder SVG icons (you can replace these easily)
 const VisitIcon = () => (
   <svg
-    width="26"
+    width="27"
     height="26"
     fill="none"
     stroke="#064E3B"
