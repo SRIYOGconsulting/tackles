@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import bookingImg from "../assets/images/booking.png";
+// Images from public folder
+const bookingImg = "/booking/booking.png";
 
-// FLAG ICONS
-import flagUAE from "../assets/icons/flags/uae.svg";
-import flagUSA from "../assets/icons/flags/usa.svg";
-import flagAUS from "../assets/icons/flags/australia.svg";
+// Flag icons from public/icons/flags
+const flagUAE = "/icons/flags/uae.svg";
+const flagUSA = "/icons/flags/usa.svg";
+const flagAUS = "/icons/flags/australia.svg";
+
 
 export default function Book() {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ export default function Book() {
   const currencyOptions = [
     { code: "AED", symbol: "د.إ" },
     { code: "USD", symbol: "$" },
-    { code: "AUD", symbol: "A$" }
+    { code: "AUD", symbol: "A$" },
   ];
 
   const servicesList = [
@@ -96,21 +97,43 @@ export default function Book() {
     setShowSuggestions(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading("sending");
 
-    try {
-      const res = await axios.post("http://localhost:5000/api/bookings", form);
-      console.log("Saved:", res.data);
-
-      alert("Appointment booked successfully!");
-      setLoading("done");
-    } catch (err) {
-      console.log(err);
-      alert("Failed to submit. Check console.");
-      setLoading(false);
+    if (
+      !form.fullName ||
+      !form.startDate ||
+      !form.endDate ||
+      !form.shifts ||
+      !form.priority ||
+      !form.location ||
+      !form.requiredService ||
+      !form.phone ||
+      !form.budget
+    ) {
+      alert("Please fill all required fields!");
+      return;
     }
+
+    alert("Thank you! Your booking has been noted.");
+    setForm({
+      fullName: "",
+      email: "",
+      startDate: "",
+      endDate: "",
+      shifts: "",
+      priority: "",
+      location: "",
+      requiredService: "",
+      phone: "",
+      budgetCurrency: "AED",
+      budget: "",
+      description: "",
+      locationFlag: flagUAE,
+      phoneFlag: flagUAE,
+    });
+
+    setLoading(false);
   };
 
   return (
@@ -130,7 +153,8 @@ export default function Book() {
             Book a Service
           </h1>
           <p className="text-emerald-100 text-sm sm:text-base mt-3 max-w-md">
-            Schedule your service at your convenience, fast, reliable, and professional.
+            Schedule your service at your convenience, fast, reliable, and
+            professional.
           </p>
         </div>
 
@@ -145,11 +169,15 @@ export default function Book() {
 
       {/* FORM */}
       <div className="max-w-5xl w-full bg-white/95 rounded-2xl shadow-2xl p-8 sm:p-10 border border-emerald-200 backdrop-blur-md">
-        <form className="grid grid-cols-1 sm:grid-cols-2 gap-6" onSubmit={handleSubmit}>
-
+        <form
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+          onSubmit={handleSubmit}
+        >
           {/* Full Name */}
           <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Full Name *</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Full Name *
+            </label>
             <input
               type="text"
               name="fullName"
@@ -163,7 +191,9 @@ export default function Book() {
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Email</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -176,7 +206,9 @@ export default function Book() {
 
           {/* Start Date */}
           <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Start Date *</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Start Date *
+            </label>
             <input
               type="date"
               name="startDate"
@@ -189,7 +221,9 @@ export default function Book() {
 
           {/* End Date */}
           <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">End Date *</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              End Date *
+            </label>
             <input
               type="date"
               name="endDate"
@@ -202,7 +236,9 @@ export default function Book() {
 
           {/* Shifts */}
           <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Shifts *</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Shifts *
+            </label>
             <select
               name="shifts"
               value={form.shifts}
@@ -227,7 +263,9 @@ export default function Book() {
 
           {/* Priority */}
           <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Priority *</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Priority *
+            </label>
             <select
               name="priority"
               value={form.priority}
@@ -252,21 +290,32 @@ export default function Book() {
 
           {/* LOCATION WITH FLAG */}
           <div ref={locationRef}>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Location *</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Location *
+            </label>
             <div className="flex items-stretch gap-3 relative">
               <button
                 type="button"
                 onClick={() => setShowLocationFlags(!showLocationFlags)}
                 className="border border-emerald-300 rounded-lg px-3 py-2.5 bg-white flex items-center justify-center gap-1.5 shadow-sm hover:bg-emerald-50 min-h-[42px]"
               >
-                <img src={form.locationFlag} className="w-6 h-6" alt="Location flag" />
+                <img
+                  src={form.locationFlag}
+                  className="w-6 h-6"
+                  alt="Location flag"
+                />
                 <svg
                   className="w-3.5 h-3.5 text-emerald-700"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2.5}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
 
@@ -302,7 +351,9 @@ export default function Book() {
 
           {/* REQUIRED SERVICE */}
           <div className="relative" ref={serviceRef}>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Required Service *</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Required Service *
+            </label>
             <div className="flex items-center gap-3 relative">
               <input
                 type="text"
@@ -322,15 +373,25 @@ export default function Book() {
                 onClick={() => setShowSuggestions(!showSuggestions)}
                 className="border border-emerald-300 rounded-lg px-3 py-2 bg-white shadow-sm hover:bg-emerald-50"
               >
-                <svg className="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                <svg
+                  className="w-4 h-4 text-emerald-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2.5}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
             </div>
 
             {showSuggestions && (
               <div className="absolute z-20 w-full bg-white border border-emerald-200 rounded-lg shadow-md mt-1 max-h-48 overflow-y-auto">
-                {filteredServices.map((service, i) =>
+                {filteredServices.map((service, i) => (
                   <div
                     key={i}
                     onMouseDown={() => selectService(service)}
@@ -338,23 +399,39 @@ export default function Book() {
                   >
                     {service}
                   </div>
-                )}
+                ))}
               </div>
             )}
           </div>
 
           {/* PHONE WITH FLAG */}
           <div ref={phoneRef}>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Phone Number *</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Phone Number *
+            </label>
             <div className="flex items-stretch gap-3 relative">
               <button
                 type="button"
                 onClick={() => setShowPhoneFlags(!showPhoneFlags)}
                 className="border border-emerald-300 rounded-lg px-3 py-2.5 bg-white flex items-center justify-center gap-1.5 shadow-sm hover:bg-emerald-50 min-h-[42px]"
               >
-                <img src={form.phoneFlag} className="w-6 h-6" alt="Phone flag" />
-                <svg className="w-3.5 h-3.5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                <img
+                  src={form.phoneFlag}
+                  className="w-6 h-6"
+                  alt="Phone flag"
+                />
+                <svg
+                  className="w-3.5 h-3.5 text-emerald-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2.5}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
 
@@ -390,7 +467,9 @@ export default function Book() {
 
           {/* BUDGET */}
           <div>
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Budget *</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Budget *
+            </label>
             <div className="flex gap-3">
               <select
                 name="budgetCurrency"
@@ -419,7 +498,9 @@ export default function Book() {
 
           {/* Description */}
           <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold text-emerald-900 mb-1">Description</label>
+            <label className="block text-sm font-semibold text-emerald-900 mb-1">
+              Description
+            </label>
             <textarea
               name="description"
               rows="4"
@@ -430,18 +511,16 @@ export default function Book() {
             ></textarea>
           </div>
 
+          
           {/* Submit */}
           <div className="sm:col-span-2 flex justify-center mt-4">
             <button
               type="submit"
               className="bg-gradient-to-r from-emerald-700 via-green-700 to-lime-600 hover:from-emerald-800 hover:via-green-800 hover:to-lime-700 text-white px-10 py-3 rounded-lg text-lg font-semibold shadow-lg transition-all duration-300"
             >
-              {loading === "sending" && "Submitting..."}
-              {loading === "done" && "Submitted ✓"}
-              {loading === false && "Submit"}
+              Submit
             </button>
           </div>
-
         </form>
       </div>
     </section>

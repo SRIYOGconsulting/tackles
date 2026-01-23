@@ -15,16 +15,18 @@ import Gallery from "./pages/Gallery.jsx";
 import Team from "./pages/Team.jsx";
 import Testimonials from "./pages/Testimonials.jsx";
 import FAQ from "./pages/FAQ.jsx";
-import Feedback from "./pages/Feedback.jsx"; // ✅ NEW
 
-// ⭐ NEW — Privacy Policy Page
-import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+// ⭐ NEW — Privacy Page
+import Privacy from "./pages/Privacy.jsx";
 
 // ⭐ NEW — Terms of Service Page
 import Terms from "./pages/Terms.jsx";
 
 // ⭐ NEW — Disclaimer Page     
 import Disclaimer from "./pages/Disclaimer.jsx";
+
+// ⭐ NEW — Feedback Page
+import Feedback from "./pages/Feedback.jsx";
 
 // 🧭 Router setup
 const router = createBrowserRouter([
@@ -40,17 +42,19 @@ const router = createBrowserRouter([
       { path: "/team", element: <Team /> },
 
       { path: "/testimonials", element: <Testimonials /> },
-      { path: "/feedback", element: <Feedback /> }, // ✅ NEW
       { path: "/faq", element: <FAQ /> },
 
-      // ⭐ NEW — Privacy Policy Route
-      { path: "/privacy-policy", element: <PrivacyPolicy /> },
+      // ⭐ NEW — Privacy Route
+      { path: "/privacy-policy", element: <Privacy /> },
 
       // ⭐ NEW — Terms of Service Route
       { path: "/terms", element: <Terms /> },
 
       // ⭐ NEW — Disclaimer Route
       { path: "/disclaimer", element: <Disclaimer /> },
+
+      // ⭐ NEW — Feedback Route
+      { path: "/feedback", element: <Feedback /> },
     ],
   },
 ]);

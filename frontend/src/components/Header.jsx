@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useLocation } from "../context/LocationContext.jsx";
-import logo from "../assets/images/logo.png";
+// Images from public folder
+const logo = "/logo/logo.png";
 
-// SVG icons
-import phoneIcon from "../assets/icons/phone.svg";
-import mailIcon from "../assets/icons/mail.svg";
+// SVG icons from public/icons
+const phoneIcon = "/icons/phone.svg";
+const mailIcon = "/icons/mail.svg";
+
 
 const link = ({ isActive }) =>
   `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
     isActive
       ? "text-white bg-gradient-to-r from-green-700 via-emerald-700 to-green-600 shadow-md"
-      : "text-emerald-900 hover:text-white hover:bg-gradient-to-r hover:from-green-700 hover:via-emerald-600 hover:to-green-500 hover:shadow-md"
+      : "text-emerald-900"
   }`;
 
 export default function Header() {
@@ -97,7 +99,7 @@ export default function Header() {
                 className={`px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
                   location === loc
                     ? "bg-white text-green-800 shadow-md"
-                    : "text-white hover:bg-white/20"
+                    : "text-white"
                 }`}
               >
                 {loc}
@@ -171,7 +173,19 @@ export default function Header() {
                     setMenuOpen(false);
                   }}
                 >
-                  About Us
+                  About
+                </NavLink>
+
+                {/* ✅ NEW Services BUTTON */}
+                <NavLink
+                  to="/services"
+                  className={link}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setMenuOpen(false);
+                  }}
+                >
+                  Services
                 </NavLink>
 
                 <NavLink

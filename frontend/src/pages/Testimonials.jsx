@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ Added for navigation
 
-// ⭐ Import PNG images
-import p1 from "../assets/testimonials/p1.png";
-import p2 from "../assets/testimonials/p2.png";
-import p3 from "../assets/testimonials/p3.png";
-import p4 from "../assets/testimonials/p4.png";
-import p5 from "../assets/testimonials/p5.png";
-import p6 from "../assets/testimonials/p6.png";
-import p7 from "../assets/testimonials/p7.png";
-import p8 from "../assets/testimonials/p8.png";
-import p9 from "../assets/testimonials/p9.png";
-import p10 from "../assets/testimonials/p10.png";
-import p11 from "../assets/testimonials/p11.png";
-import p12 from "../assets/testimonials/p12.png";
-import p13 from "../assets/testimonials/p13.png";
-import p14 from "../assets/testimonials/p14.png";
-import p15 from "../assets/testimonials/p15.png";
+// ⭐ Testimonial images (from public/testimonials)
+const p1 = "/testimonials/p1.png";
+const p2 = "/testimonials/p2.png";
+const p3 = "/testimonials/p3.png";
+const p4 = "/testimonials/p4.png";
+const p5 = "/testimonials/p5.png";
+const p6 = "/testimonials/p6.png";
+const p7 = "/testimonials/p7.png";
+const p8 = "/testimonials/p8.png";
+const p9 = "/testimonials/p9.png";
+const p10 = "/testimonials/p10.png";
+const p11 = "/testimonials/p11.png";
+const p12 = "/testimonials/p12.png";
+const p13 = "/testimonials/p13.png";
+const p14 = "/testimonials/p14.png";
+const p15 = "/testimonials/p15.png";
+
 
 const reviews = [
   {
@@ -157,28 +158,11 @@ const reviews = [
 ];
 
 export default function Testimonials() {
-  const [newTestimonials, setNewTestimonials] = useState([]);
-  const navigate = useNavigate();
-
   useEffect(() => {
     document.title = "Testimonials | Tackles";
-
-    fetch("http://localhost:5000/api/testimonials/approved")
-      .then((res) => res.json())
-      .then((data) => {
-        // ✅ FIX: guard against non-array responses
-        if (Array.isArray(data)) {
-          setNewTestimonials(data);
-        } else {
-          console.error("Expected array, got:", data);
-          setNewTestimonials([]);
-        }
-      })
-      .catch((err) => {
-        console.log("Error fetching testimonials:", err);
-        setNewTestimonials([]);
-      });
   }, []);
+
+  const navigate = useNavigate(); // ✅ Navigation hook
 
   return (
     <section className="bg-white min-h-screen py-20 px-6">
@@ -229,48 +213,13 @@ export default function Testimonials() {
             </div>
           ))}
 
-          {/* BACKEND TESTIMONIALS */}
-          {newTestimonials.map((t, i) => (
-            <div
-              key={`db-${i}`}
-              className="bg-white rounded-3xl p-8 shadow-xl border border-emerald-200 hover:shadow-emerald-300/50 hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="flex flex-col items-center mb-6">
-                <img
-                  src={`http://localhost:5000${t.photoUrl}`}
-                  alt={t.name}
-                  className="w-28 h-28 rounded-full object-cover ring-4 ring-emerald-600 shadow-md mb-4"
-                />
-                <h3 className="text-xl font-bold text-emerald-800">{t.name}</h3>
-                <p className="text-gray-500 text-sm">{t.country}</p>
-              </div>
-
-              <div className="w-full h-px bg-gray-200 my-5"></div>
-
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-emerald-800">Place:</span>{" "}
-                  {t.place}
-                </p>
-                <p className="text-sm text-gray-700 mt-1">
-                  <span className="font-semibold text-emerald-800">Work Done:</span>{" "}
-                  {t.workDone}
-                </p>
-              </div>
-
-              <p className="text-gray-800 text-center leading-relaxed italic">
-                “{t.message}”
-              </p>
-            </div>
-          ))}
-
         </div>
 
-        {/* Feedback button */}
+        {/* ✅ Feedback Button */}
         <div className="flex justify-center mt-16">
           <button
             onClick={() => navigate("/feedback")}
-            className="px-8 py-4 rounded-full bg-emerald-700 text-white font-semibold text-lg hover:bg-emerald-800 transition"
+            className="px-8 py-3 bg-green-700 text-white font-semibold rounded-full shadow-md hover:bg-green-800 hover:shadow-lg transition-all duration-300"
           >
             Give Your Feedback
           </button>

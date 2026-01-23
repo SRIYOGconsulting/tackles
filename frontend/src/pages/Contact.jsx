@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import contactImg from "../assets/images/contact.png";
+const contactImg = "/contact/contact.png";
 
-// Placeholder SVG icons (you can replace these easily)
+// Placeholder SVG icons
 const VisitIcon = () => (
   <svg
     width="27"
@@ -62,30 +61,21 @@ export default function Contact() {
     message: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  // FRONTEND-ONLY submit
+  const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!form.fullName || !form.message) {
       alert("Full Name and Message are required!");
       return;
     }
 
-    setIsSubmitting(true);
-    try {
-      await axios.post("http://localhost:5000/api/contact", form);
-      alert("Message sent successfully!");
-      setForm({ fullName: "", email: "", city: "", message: "" });
-    } catch (error) {
-      console.error(error);
-      alert("Failed to send message. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    alert("Thank you! Your message has been noted.");
+    setForm({ fullName: "", email: "", city: "", message: "" });
   };
 
   return (
@@ -96,12 +86,9 @@ export default function Contact() {
         <h1 className="text-5xl sm:text-6xl font-extrabold text-emerald-900 tracking-tight mb-3 drop-shadow-sm">
           Contact Us
         </h1>
-
         <p className="text-lg sm:text-xl text-gray-600 mb-6">
           Contact us, we're always here to help you out.
         </p>
-
-        {/* HORIZONTAL LINE */}
         <div className="w-full flex justify-center mb-10">
           <div className="w-full max-w-xl h-[3px] bg-emerald-300 rounded-full shadow-[0_0_12px_rgba(6,95,70,0.35)]"></div>
         </div>
@@ -153,20 +140,21 @@ export default function Contact() {
 
             <button
               type="submit"
-              disabled={isSubmitting}
-              className={`bg-gradient-to-r from-[#064E3B] via-[#047857] to-[#059669]
+              className="bg-gradient-to-r from-[#064E3B] via-[#047857] to-[#059669]
               hover:from-[#036A48] hover:via-[#047B5A] hover:to-[#06A272]
-              text-white px-8 py-3 rounded-lg text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-500
-              ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""}`}
+              text-white px-8 py-3 rounded-lg text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-500"
             >
-              {isSubmitting ? "Sending..." : "Send Message ✉️"}
+              Send Message ✉️
             </button>
           </form>
         </div>
 
         {/* IMAGE */}
         <div className="flex justify-center">
-          <img src={contactImg} className="w-full max-w-md object-contain drop-shadow-2xl hover:scale-105 transition-all duration-500" />
+          <img
+            src={contactImg}
+            className="w-full max-w-md object-contain drop-shadow-2xl hover:scale-105 transition-all duration-500"
+          />
         </div>
       </div>
 

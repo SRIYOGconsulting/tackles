@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:5000/api/testimonials";
-
 export default function Feedback() {
   useEffect(() => {
     document.title = "Share Your Feedback | Tackles Handyman Services";
@@ -40,34 +38,17 @@ export default function Feedback() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
     setIsSubmitting(true);
 
-    const formData = new FormData();
-    Object.entries(form).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Submission failed");
-      }
-
+    // Simulate frontend-only submission
+    setTimeout(() => {
       setSubmitted(true);
-      resetForm();
-    } catch (err) {
-      console.error(err);
-      setError("Unable to submit feedback. Please try again later.");
-    } finally {
       setIsSubmitting(false);
-    }
+      resetForm();
+    }, 1000);
   };
 
   return (
@@ -105,11 +86,11 @@ export default function Feedback() {
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="grid gap-6 rounded-2xl border border-emerald-300 bg-white p-8 shadow-sm"
+          className="grid gap-6 rounded-2xl border border-emerald-300 bg-white p-8 shadow-sm sm:grid-cols-2 sm:gap-6"
           noValidate
         >
           {/* Name */}
-          <div>
+          <div className="sm:col-span-1">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Full Name
             </label>
@@ -125,7 +106,7 @@ export default function Feedback() {
           </div>
 
           {/* Country */}
-          <div>
+          <div className="sm:col-span-1">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Country
             </label>
@@ -146,7 +127,7 @@ export default function Feedback() {
           </div>
 
           {/* Place */}
-          <div>
+          <div className="sm:col-span-1">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               City / Place
             </label>
@@ -167,7 +148,7 @@ export default function Feedback() {
           </div>
 
           {/* Service */}
-          <div>
+          <div className="sm:col-span-1">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Service Provided
             </label>
@@ -193,8 +174,8 @@ export default function Feedback() {
             </datalist>
           </div>
 
-          {/* Message */}
-          <div>
+          {/* Feedback Message */}
+          <div className="sm:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Feedback
             </label>
@@ -210,7 +191,7 @@ export default function Feedback() {
           </div>
 
           {/* Photo Upload */}
-          <div>
+          <div className="sm:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Profile Photo
             </label>
@@ -234,21 +215,23 @@ export default function Feedback() {
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isSubmitting || submitted}
-            className={`rounded-lg p-3 font-semibold text-white transition ${
-              submitted
-                ? "bg-emerald-500 cursor-not-allowed"
-                : "bg-emerald-700 hover:bg-emerald-800"
-            }`}
-          >
-            {isSubmitting
-              ? "Submitting..."
-              : submitted
-              ? "Submitted"
-              : "Submit Feedback"}
-          </button>
+          <div className="sm:col-span-2">
+            <button
+              type="submit"
+              disabled={isSubmitting || submitted}
+              className={`rounded-lg p-3 font-semibold text-white transition w-full ${
+                submitted
+                  ? "bg-emerald-500 cursor-not-allowed"
+                  : "bg-emerald-700 hover:bg-emerald-800"
+              }`}
+            >
+              {isSubmitting
+                ? "Submitting..."
+                : submitted
+                ? "Submitted"
+                : "Submit Feedback"}
+            </button>
+          </div>
         </form>
       </div>
     </section>

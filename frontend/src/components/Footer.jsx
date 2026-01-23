@@ -1,11 +1,12 @@
 import React from "react";
-import logo from "../assets/images/logo.png";
+// Images from public folder
+const logo = "/logo/logo.png";
 
-// SVG Icons
-import iconFacebook from "../assets/icons/facebook.svg";
-import iconLinkedIn from "../assets/icons/linkedin.svg";
-import iconYouTube from "../assets/icons/youtube.svg";
-import iconGithub from "../assets/icons/github.svg";
+// SVG Icons from public/icons
+const iconFacebook = "/icons/facebook.svg";
+const iconLinkedIn = "/icons/linkedin.svg";
+const iconYouTube = "/icons/youtube.svg";
+const iconGithub = "/icons/github.svg";
 
 export default function Footer() {
   return (
@@ -92,7 +93,7 @@ export default function Footer() {
                 { name: "Team", href: "/team" },
                 { name: "Testimonials", href: "/testimonials" },
                 { name: "FAQs", href: "/faq" },
-                { name: "Privacy Policy", href: "/privacy-policy" },
+                { name: "Privacy", href: "/privacy-policy" },
                 { name: "Terms of Service", href: "/terms" },
                 { name: "Disclaimer", href: "/disclaimer" },
               ].map((item) => (
@@ -198,9 +199,9 @@ export default function Footer() {
         </p>
 
         <p className="mt-2 sm:mt-0 leading-relaxed">
-          Technology Partner:{" "}
+          Built with :{" "}
           <span className="text-emerald-300 font-semibold tracking-wide">
-            Broad Press
+            BroadPress
           </span>
         </p>
       </div>

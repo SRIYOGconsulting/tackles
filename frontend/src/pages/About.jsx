@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import aboutImg from "../assets/images/about.png"; 
+const aboutImg = "/about/about.png";
+
 import { ShieldCheck, Users, Leaf, Handshake } from "lucide-react";
 
 export default function About() {
   useEffect(() => {
-    document.title = "About Us | Tackles Handyman Services";
+    document.title = "About | Tackles Handyman Services";
   }, []);
 
   const [activeSection, setActiveSection] = useState("about");

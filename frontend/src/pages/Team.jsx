@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 
 // 👉 Replace these with your actual images
-import raju from "../assets/images/team/raju.png";
-import pritambar from "../assets/images/team/pritambar.png";
-import gopak from "../assets/images/team/gopak.png";
-import dharma from "../assets/images/team/dharma.png";
-import rajendra from "../assets/images/team/rajendra.png";
-import tom from "../assets/images/team/tom.png";
-import bishnu from "../assets/images/team/bishnu.png";
-import quiyam from "../assets/images/team/quiyam.png";
-import sunil from "../assets/images/team/sunil.png";
+// 👥 Team images (from public/teams)
+const raju = "/team/raju.png";
+const pritambar = "/team/pritambar.png";
+const gopak = "/team/gopak.png";
+const dharma = "/team/dharma.png";
+const rajendra = "/team/rajendra.png";
+const tom = "/team/tom.png";
+const bishnu = "/team/bishnu.png";
+const quiyam = "/team/quiyam.png";
+const sunil = "/team/sunil.png";
+
 
 // Real icons
 const Facebook = () => (

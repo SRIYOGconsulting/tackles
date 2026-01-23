@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 export default function PrivacyPolicy() {
   useEffect(() => {
-    document.title = "Privacy Policy | Tackles";
+    document.title = "Privacy | Tackles";
   }, []);
 
   return (
@@ -12,7 +12,7 @@ export default function PrivacyPolicy() {
         {/* TITLE SECTION */}
         <div className="mb-12">
           <h1 className="text-4xl font-extrabold text-emerald-900 tracking-wide">
-            Privacy Policy
+            Privacy 
           </h1>
           <div className="h-1 w-full bg-emerald-700 rounded-full mt-3 shadow-sm"></div>
         </div>
