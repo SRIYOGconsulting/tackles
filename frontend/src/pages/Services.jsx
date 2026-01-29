@@ -1,15 +1,16 @@
 import ServiceCard from "../components/ServiceCard.jsx";
 import { useNavigate } from "react-router-dom";
 
-import acImg from "../assets/images/services/ac-service.png";
-import electricalImg from "../assets/images/services/electrical.png";
-import plumbingImg from "../assets/images/services/plumbing.png";
-import paintingImg from "../assets/images/services/painting.png";
-import carpentryImg from "../assets/images/services/carpentry.png";
-import flooringImg from "../assets/images/services/flooring.png";
-import gutterImg from "../assets/images/services/gutter.png";
-import pressureImg from "../assets/images/services/pressure.png";
-import smartHomeImg from "../assets/images/services/smart-home.png";
+// 🧰 Service images (from public/services)
+const acImg = "/services/ac-service.png";
+const electricalImg = "/services/electrical.png";
+const plumbingImg = "/services/plumbing.png";
+const paintingImg = "/services/painting.png";
+const carpentryImg = "/services/carpentry.png";
+const flooringImg = "/services/flooring.png";
+const gutterImg = "/services/gutter.png";
+const pressureImg = "/services/pressure.png";
+const smartHomeImg = "/services/smart-home.png";
 
 export default function Services() {
   const navigate = useNavigate();

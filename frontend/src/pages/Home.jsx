@@ -3,30 +3,30 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "../context/LocationContext";
 
 // 🌆 Background / section images
-import aboutImg from "../assets/images/about.png";
-import dubaiImg from "../assets/images/dubai.png";
-import sanfranciscoImg from "../assets/images/sanfrancisco.avif";
-import sydneyImg from "../assets/images/sydney.avif";
-import acBgImg from "../assets/images/ac.png";
-import paintImg from "../assets/images/paint.jpg";
+const aboutImg = "/about/about.png";
+const dubaiImg = "/animationpicture/dubai.png";
+const sanfranciscoImg = "/animationpicture/sanfrancisco.avif";
+const sydneyImg = "/animationpicture/sydney.avif";
+const acBgImg = "/animationpicture/ac.png";
+const paintImg = "/animationpicture/paint.jpg";
 
-// 🧰 Service images
-import acImg from "../assets/images/services/ac-service.png";
-import electricalImg from "../assets/images/services/electrical.png";
-import plumbingImg from "../assets/images/services/plumbing.png";
+// 🧰 Service images (from public/services)
+const acImg = "/services/ac-service.png";
+const electricalImg = "/services/electrical.png";
+const plumbingImg = "/services/plumbing.png";
 
-// 🌐 Icons
-import whatsappIcon from "../assets/images/whatsapp.png";
-import facebookIcon from "../assets/images/facebook.png";
+// 🌐 Icons (from public/floatingicons)
+const whatsappIcon = "/floatingicons/whatsapp.png";
+const facebookIcon = "/floatingicons/facebook.png";
 
-// ⭐ NEW REPLACEMENT PNG BUTTONS
-import playstoreBtn from "../assets/images/playstore.png";
-import appleBtn from "../assets/images/apple.png";
+// ⭐ NEW REPLACEMENT PNG BUTTONS (from public/appdownload)
+const playstoreBtn = "/appdownload/playstore.png";
+const appleBtn = "/appdownload/apple.png";
 
-// 👤 Testimonial images
-import sameerImg from "../assets/images/testimonials/sameer.png";
-import jaxonImg from "../assets/images/testimonials/jaxon.png";
-import joaoImg from "../assets/images/testimonials/joao.png";
+// 👤 Testimonial images (from public/hometestimonials)
+const sameerImg = "/hometestimonials/sameer.png";
+const jaxonImg = "/hometestimonials/jaxon.png";
+const joaoImg = "/hometestimonials/joao.png";
 
 // 🧱 Component
 import ServiceCard from "../components/ServiceCard.jsx";

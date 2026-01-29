@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
-import image1 from "../assets/gallery/image1.png";
-import image2 from "../assets/gallery/image2.png";
-import image3 from "../assets/gallery/image3.png";
-import image4 from "../assets/gallery/image4.png";
-import image5 from "../assets/gallery/image5.png"; // ✅ added
-import image6 from "../assets/gallery/image6.png";
-import image7 from "../assets/gallery/image7.png";
-import image8 from "../assets/gallery/image8.png";
-import image9 from "../assets/gallery/image9.png";
-import image10 from "../assets/gallery/image10.png";
-import image11 from "../assets/gallery/image11.png";
-import image12 from "../assets/gallery/image12.png";
+const image1 = "/gallery/image1.png";
+const image2 = "/gallery/image2.png";
+const image3 = "/gallery/image3.png";
+const image4 = "/gallery/image4.png";
+const image5 = "/gallery/image5.png";
+const image6 = "/gallery/image6.png";
+const image7 = "/gallery/image7.png";
+const image8 = "/gallery/image8.png";
+const image9 = "/gallery/image9.png";
+const image10 = "/gallery/image10.png";
+const image11 = "/gallery/image11.png";
+const image12 = "/gallery/image12.png";
+
 
 export default function Gallery() {
 
